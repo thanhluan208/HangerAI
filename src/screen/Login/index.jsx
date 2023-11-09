@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
-import CommonStyles from "../../components/CommonStyles";
-import { useTheme } from "@emotion/react";
-import { Field, Form, Formik } from "formik";
-import CustomFields from "../../components/CustomFields";
-import { Link } from "@mui/material";
-import CommonIcons from "../../components/CommonIcons";
-import { useAuthentication } from "../../providers/AuthenticationProvider";
+import React, { useEffect } from "react"
+import CommonStyles from "../../components/CommonStyles"
+import { useTheme } from "@emotion/react"
+import { Field, Form, Formik } from "formik"
+import CustomFields from "../../components/CustomFields"
+import { Link } from "@mui/material"
+import CommonIcons from "../../components/CommonIcons"
+import { useAuthentication } from "../../providers/AuthenticationProvider"
 
 const Login = () => {
   //! State
-  const theme = useTheme();
-  const { handleLogin } = useAuthentication();
+  const theme = useTheme()
+  const { handleLogin } = useAuthentication()
 
   //! Function
 
@@ -262,11 +262,11 @@ const Login = () => {
                 </CommonStyles.Box>
               </CommonStyles.Box>
             </Form>
-          );
+          )
         }}
       </Formik>
     </CommonStyles.Box>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

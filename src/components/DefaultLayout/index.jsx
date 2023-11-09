@@ -1,14 +1,14 @@
-import React from "react";
-import CommonStyles from "../CommonStyles";
-import CommonIcons from "../CommonIcons";
-import User from "./Components/User";
-import MenuItem from "./Components/MenuItem";
-import PerfectScrollbar from "react-perfect-scrollbar";
-import { useTheme } from "@emotion/react";
-import Brand from "./Components/Brand";
-import { useAuthentication } from "../../providers/AuthenticationProvider";
+import CommonStyles from "../CommonStyles"
+import CommonIcons from "../CommonIcons"
+import User from "./Components/User"
+import MenuItem from "./Components/MenuItem"
+import PerfectScrollbar from "react-perfect-scrollbar"
+import { useTheme } from "@emotion/react"
+import Brand from "./Components/Brand"
+import { useAuthentication } from "../../providers/AuthenticationProvider"
+import { Outlet } from "react-router-dom"
 
-export const nav = [
+const nav = [
   {
     content: "Virtual Dressing Room",
     path: "/virtual-try-on",
@@ -29,13 +29,14 @@ export const nav = [
     path: "/product-recommendation",
     icon: <CommonIcons.Recommend style={{ fontSize: "1.5rem" }} />,
   },
-];
+]
 
-const DefaultLayout = () => {
+const DefaultLayout = (props) => {
   //! State
-  const theme = useTheme();
-  const {handleLogout} = useAuthentication()
+  const theme = useTheme()
+  const { handleLogout } = useAuthentication()
 
+  console.log("children", props)
   //! Function
 
   //! Render
@@ -80,7 +81,7 @@ const DefaultLayout = () => {
             sizes="(max-width: 479px) 100vw, (max-width: 991px) 200px, (max-width: 1439px) 14vw, 200px"
             src="https://assets-global.website-files.com/625465cda3c9d02b8aadcec3/62546600cf41d9ae2da5c6ad_logo%20Veesual-02.png"
             alt=""
-            class="logo-image"
+            className="logo-image"
           />
         </CommonStyles.Box>
         <CommonStyles.Box
@@ -113,15 +114,22 @@ const DefaultLayout = () => {
                   path={item.path}
                   icon={item.icon}
                 />
-              );
+              )
             })}
           </PerfectScrollbar>
         </CommonStyles.Box>
         <CommonStyles.Box centered sx={{ flex: 1, cursor: "pointer" }}>
           <CommonStyles.Button
             variant="text"
-            sx={{ display: "flex", gap: "10px", width: "100%" , textTransform:'none'}}
-            onClick={handleLogout}
+            sx={{
+              display: "flex",
+              gap: "10px",
+              width: "100%",
+              textTransform: "none",
+            }}
+            onClick={() => {
+              handleLogout()
+            }}
           >
             <CommonIcons.LogoutIcon />
             <CommonStyles.Typography type="boldText">
@@ -140,6 +148,7 @@ const DefaultLayout = () => {
           margin: "20px 20px 20px 0",
           borderRadius: "20px",
           backdropFilter: "blur(2px)",
+          paddingTop: "60px",
           [theme.breakpoints.down("md")]: {
             margin: "20px ",
           },
@@ -147,9 +156,10 @@ const DefaultLayout = () => {
       >
         <Brand />
         <User />
+        <Outlet />
       </CommonStyles.Box>
     </CommonStyles.Box>
-  );
-};
+  )
+}
 
-export default DefaultLayout;
+export default DefaultLayout
