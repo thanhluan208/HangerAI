@@ -1,12 +1,12 @@
-import CommonStyles from "../CommonStyles"
-import CommonIcons from "../CommonIcons"
-import User from "./Components/User"
-import MenuItem from "./Components/MenuItem"
-import PerfectScrollbar from "react-perfect-scrollbar"
-import { useTheme } from "@emotion/react"
-import Brand from "./Components/Brand"
-import { useAuthentication } from "../../providers/AuthenticationProvider"
-import { Outlet } from "react-router-dom"
+import CommonStyles from "../CommonStyles";
+import CommonIcons from "../CommonIcons";
+import User from "./Components/User";
+import MenuItem from "./Components/MenuItem";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import { useTheme } from "@emotion/react";
+import Brand from "./Components/Brand";
+import { useAuthentication } from "../../providers/AuthenticationProvider";
+import { Outlet } from "react-router-dom";
 
 const nav = [
   {
@@ -29,14 +29,13 @@ const nav = [
     path: "/product-recommendation",
     icon: <CommonIcons.Recommend style={{ fontSize: "1.5rem" }} />,
   },
-]
+];
 
 const DefaultLayout = (props) => {
   //! State
-  const theme = useTheme()
-  const { handleLogout } = useAuthentication()
+  const theme = useTheme();
+  const { handleLogout } = useAuthentication();
 
-  console.log("children", props)
   //! Function
 
   //! Render
@@ -114,7 +113,7 @@ const DefaultLayout = (props) => {
                   path={item.path}
                   icon={item.icon}
                 />
-              )
+              );
             })}
           </PerfectScrollbar>
         </CommonStyles.Box>
@@ -128,7 +127,7 @@ const DefaultLayout = (props) => {
               textTransform: "none",
             }}
             onClick={() => {
-              handleLogout()
+              handleLogout();
             }}
           >
             <CommonIcons.LogoutIcon />
@@ -139,6 +138,7 @@ const DefaultLayout = (props) => {
         </CommonStyles.Box>
       </CommonStyles.Box>
       <CommonStyles.Box
+        id="containerLayout"
         sx={{
           position: "relative",
           zIndex: 2,
@@ -156,10 +156,16 @@ const DefaultLayout = (props) => {
       >
         <Brand />
         <User />
-        <Outlet />
+        <PerfectScrollbar
+          style={{
+            maxHeight: "calc(100vh - 200px)",
+          }}
+        >
+          <Outlet />
+        </PerfectScrollbar>
       </CommonStyles.Box>
     </CommonStyles.Box>
-  )
-}
+  );
+};
 
-export default DefaultLayout
+export default DefaultLayout;

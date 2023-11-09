@@ -25,7 +25,7 @@ const MenuItem = ({ path, content, icon }) => {
         borderBottomLeftRadius: "20px",
         position: "relative",
         cursor: "pointer",
-        gap:'15px',
+        gap: "15px",
         transition: "all 0.5s ease",
       }}
       onClick={handleClick}
