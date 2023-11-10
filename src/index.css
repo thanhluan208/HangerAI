@@ -1,4 +1,15 @@
+@font-face {
+  font-family: "GilroyBold";
+  src: local("GilroyBold"), url("./fonts/Gilroy-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: local("Gilroy") url("./fonts/Gilroy-Regular.ttf") format("truetype");
+}
+
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }

@@ -1,34 +1,38 @@
-import React, { useLayoutEffect, useRef } from "react";
-import CommonStyles from "../../components/CommonStyles";
-import CommonIcons from "../../components/CommonIcons";
-import ModelCard from "./components/ModelCard";
+import React, { Fragment } from "react"
+import CommonStyles from "../../components/CommonStyles"
+import CommonIcons from "../../components/CommonIcons"
 
 const tabs = [
   {
     title: "Models",
-    icon: <CommonIcons.People style={{ fontSize: "32px", color: "#fff" }} />,
+    icon: <CommonIcons.People style={{ fontSize: "32px", color: "#ccc" }} />,
     total: 55,
   },
   {
     title: "Products",
-    icon: <CommonIcons.Product style={{ fontSize: "32px", color: "#fff" }} />,
+    icon: <CommonIcons.Product style={{ fontSize: "32px", color: "#ccc" }} />,
     total: 24320,
   },
   {
     title: "Categories",
-    icon: <CommonIcons.Category style={{ fontSize: "32px", color: "#fff" }} />,
+    icon: <CommonIcons.Category style={{ fontSize: "32px", color: "#ccc" }} />,
     total: 25,
   },
-];
-
-const models = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  {
+    title: "Categories 2",
+    total: 26,
+  },
+  {
+    title: "Categories 3",
+    total: 234,
+  },
+]
 
 const VirtualTryOn = () => {
   //! State
-  const [currentTab, setCurrentTab] = React.useState("Dashboard");
+  const [currentTab, setCurrentTab] = React.useState("Dashboard")
 
   //! Function
-
   //! Render
   return (
     <CommonStyles.Box
@@ -36,7 +40,7 @@ const VirtualTryOn = () => {
         padding: "50px 30px",
       }}
     >
-      <CommonStyles.Box
+      {/* <CommonStyles.Box
         sx={{
           position: "absolute",
           top: "20px",
@@ -52,155 +56,349 @@ const VirtualTryOn = () => {
               active={currentTab === tab}
               key={tab}
               onClick={() => {
-                setCurrentTab(tab);
+                setCurrentTab(tab)
               }}
             />
-          );
+          )
         })}
-      </CommonStyles.Box>
-      <CommonStyles.Box>
-        {/* Header content */}
+      </CommonStyles.Box> */}
+
+      <CommonStyles.Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "0 ",
+        }}
+      >
         <CommonStyles.Box
           centered
           sx={{
-            justifyContent: "space-between",
+            flexDirection: "column",
+            alignItems: "start",
           }}
         >
-          <CommonStyles.Typography type="boldText24" sx={{ color: "#a04aff" }}>
-            Virtual Dressing Room Dashboard
+          <CommonStyles.Typography
+            sx={{
+              fontSize: "60px",
+              color: "#5c3883",
+            }}
+          >
+            Welcome!
           </CommonStyles.Typography>
+          <CommonStyles.Typography
+            sx={{
+              fontSize: "24px",
+              opacity: ".75",
+            }}
+          >
+            Visualize and style products on models.
+          </CommonStyles.Typography>
+        </CommonStyles.Box>
+
+        <CommonStyles.Box
+          centered
+          sx={{
+            gap: "20px",
+          }}
+        >
+          {["Dashboard", "Studio"].map((elm) => {
+            const isActive = currentTab === elm
+
+            return (
+              <CommonStyles.Box
+                key={elm}
+                sx={{
+                  background: isActive ? "#5c3883" : "transparent",
+                  borderRadius: "12px",
+                  cursor: "pointer",
+                  transition: "all .3s ease-in-out",
+                }}
+              >
+                <CommonStyles.Button
+                  variant="text"
+                  sx={{
+                    width: "200px",
+                    height: "60px",
+                    borderRadius: "12px",
+                    textTransform: "none",
+                  }}
+                  onClick={() => {
+                    setCurrentTab(elm)
+                  }}
+                >
+                  <CommonStyles.Typography
+                    type="boldText"
+                    sx={{ color: isActive ? "#fff" : "#000" }}
+                  >
+                    {elm}
+                  </CommonStyles.Typography>
+                </CommonStyles.Button>
+              </CommonStyles.Box>
+            )
+          })}
           <CommonStyles.Box
             centered
             sx={{
-              gap: "32px",
+              background: "#fff",
+              borderRadius: "8px",
             }}
           >
-            <CommonStyles.Box
-              centered
+            <CommonStyles.Button
+              variant="text"
               sx={{
-                gap: "8px",
+                height: "60px",
+                width: "60px",
+                borderRadius: "8px",
               }}
             >
-              <CommonIcons.Gender
-                style={{ fontSize: "16px", color: "#a04aff" }}
+              <CommonIcons.More
+                style={{ fontSize: "30px", color: "#5c3883" }}
               />
-              <CommonStyles.Typography type="body18">
-                All genders
-              </CommonStyles.Typography>
-            </CommonStyles.Box>
-            <CommonStyles.Box
-              centered
-              sx={{
-                gap: "8px",
-              }}
-            >
-              <CommonIcons.Size
-                style={{ fontSize: "24px", color: "#a04aff" }}
-              />
-              <CommonStyles.Typography type="body18">
-                All sizes
-              </CommonStyles.Typography>
-            </CommonStyles.Box>
-            <CommonStyles.Box
-              centered
-              sx={{
-                gap: "8px",
-              }}
-            >
-              <CommonIcons.Calendar
-                style={{ fontSize: "16px", color: "#a04aff" }}
-              />
-              <CommonStyles.Typography type="body18">
-                Last 30 days
-              </CommonStyles.Typography>
-            </CommonStyles.Box>
+            </CommonStyles.Button>
           </CommonStyles.Box>
         </CommonStyles.Box>
+      </CommonStyles.Box>
 
-        {/* Summary */}
+      <CommonStyles.Box
+        centered
+        sx={{
+          padding: "20px 0",
+          marginTop: "50px",
+        }}
+      >
         <CommonStyles.Box
           sx={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, calc((100% - 30px * 3) / 4))",
-            gap: "30px",
-            marginTop: "20px",
+            width: "calc(100% - 60px)",
+            aspectRatio: "8/2",
+            borderRadius: "20px",
+            backgroundColor: "#5c3883",
+            borderBottomRightRadius: "150px",
+            borderBottomLeftRadius: "150px",
+            paddingTop: "40px",
           }}
         >
-          {tabs.map((item) => {
-            return (
-              <CommonStyles.Box
-                key={item.title}
-                sx={{
-                  background: "#fff",
-                  boxShadow: "0 3px 6px rgba(0,0,0,0.2)",
-                  borderRadius: "8px",
-                  padding: "20px 20px",
-                  display: "flex",
-                  gap: "20px",
-                }}
-              >
+          <CommonStyles.Box centered sx={{ gap: "80px" }}>
+            {tabs.map((tab) => {
+              return (
+                <CommonStyles.Box key={tab.title}>
+                  <CommonStyles.Typography
+                    type="body18"
+                    sx={{ color: "#fff", opacity: ".7" }}
+                  >
+                    {tab.title}
+                  </CommonStyles.Typography>
+                  <CommonStyles.Box
+                    sx={{
+                      position: "relative",
+                      minWidth: "150px",
+                      paddingLeft: "15px",
+                      marginTop: "10px",
+                      display: "flex",
+                      alignItems: "center",
+                      "&:before": {
+                        content: '""',
+                        position: "absolute",
+                        top: "0",
+                        left: "0",
+                        height: "100%",
+                        width: "5px",
+                        borderRadius: "5px",
+                        backgroundColor: "#f7d46e",
+                      },
+                    }}
+                  >
+                    <CommonStyles.Box
+                      // type="boldText28"
+                      sx={{
+                        color: "#f7d46e",
+                        lineHeight: "unset",
+                        fontSize: "30px",
+                        fontWeight: "bold",
+                        fontFamily: "GilroyBold",
+                      }}
+                    >
+                      {tab.total}
+                    </CommonStyles.Box>
+                  </CommonStyles.Box>
+                </CommonStyles.Box>
+              )
+            })}
+          </CommonStyles.Box>
+        </CommonStyles.Box>
+      </CommonStyles.Box>
+
+      <CommonStyles.Box
+        sx={{
+          flexWrap: "wrap",
+          display: "flex",
+          gap: "100px",
+          padding: "0 100px",
+          marginTop: "-150px",
+        }}
+      >
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((elm) => {
+          return (
+            <CommonStyles.Box
+              key={elm}
+              sx={{
+                width: "calc((100%  - 100px * 3) / 4)",
+                borderRadius: "12px",
+                backgroundColor: "#fff",
+                padding: "5px",
+              }}
+            >
+              {elm === 12 ? (
                 <CommonStyles.Box
                   centered
                   sx={{
-                    width: "50px",
-                    height: "50px",
-                    borderRadius: "50%",
-                    opacity: 0.8,
-                    background: "#a04aff",
+                    height: "280px",
+                    background: "#f7d46e",
+                    borderRadius: "10px",
                   }}
                 >
-                  {item.icon}
+                  Add new models +
                 </CommonStyles.Box>
-                <CommonStyles.Box>
-                  <CommonStyles.Typography
-                    type="body18"
-                    sx={{ opacity: "0.7" }}
+              ) : (
+                <Fragment>
+                  <CommonStyles.Box
+                    centered
+                    sx={{
+                      height: "280px",
+                      background: "#f7d46e",
+                      borderRadius: "10px",
+                    }}
                   >
-                    {item.title}
-                  </CommonStyles.Typography>
-                  <CommonStyles.Typography type="boldText24">
-                    {item.total}
-                  </CommonStyles.Typography>
-                </CommonStyles.Box>
-              </CommonStyles.Box>
-            );
-          })}
-        </CommonStyles.Box>
+                    This is image
+                  </CommonStyles.Box>
+                  <CommonStyles.Box centered sx={{ marginTop: "20px" }}>
+                    <CommonStyles.Typography type="boldText">
+                      Model name: {elm}
+                    </CommonStyles.Typography>
+                  </CommonStyles.Box>
+                </Fragment>
+              )}
+            </CommonStyles.Box>
+          )
+        })}
+      </CommonStyles.Box>
 
+      {/* <CommonStyles.Box
+        centered
+        sx={{
+          justifyContent: "space-between",
+        }}
+      >
         <CommonStyles.Box
           centered
           sx={{
-            justifyContent: "space-between",
-            marginTop: "35px",
+            gap: "32px",
           }}
         >
-          <CommonStyles.Typography type="boldText24" sx={{ color: "#a04aff" }}>
-            Top 12 models
-          </CommonStyles.Typography>
-
-          <CommonStyles.Box>
-            <CommonStyles.Typography type="body14" sx={{ color: "#a04aff" }}>
-              View all models
+          <CommonStyles.Box
+            centered
+            sx={{
+              gap: "8px",
+            }}
+          >
+            <CommonIcons.Gender
+              style={{ fontSize: "16px", color: "#5c3883" }}
+            />
+            <CommonStyles.Typography type="body18">
+              All genders
+            </CommonStyles.Typography>
+          </CommonStyles.Box>
+          <CommonStyles.Box
+            centered
+            sx={{
+              gap: "8px",
+            }}
+          >
+            <CommonIcons.Size style={{ fontSize: "24px", color: "#5c3883" }} />
+            <CommonStyles.Typography type="body18">
+              All genders
+            </CommonStyles.Typography>
+          </CommonStyles.Box>
+          <CommonStyles.Box
+            centered
+            sx={{
+              gap: "8px",
+            }}
+          >
+            <CommonIcons.Calendar
+              style={{ fontSize: "16px", color: "#5c3883" }}
+            />
+            <CommonStyles.Typography type="body18">
+              All genders
             </CommonStyles.Typography>
           </CommonStyles.Box>
         </CommonStyles.Box>
-
-        <CommonStyles.Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: "30px",
-            padding: "20px 30px",
-          }}
-        >
-          {models.map((item) => {
-            return <ModelCard key={item} item={item} />;
-          })}
-        </CommonStyles.Box>
       </CommonStyles.Box>
-    </CommonStyles.Box>
-  );
-};
 
-export default VirtualTryOn;
+      <CommonStyles.Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, calc((100% - 30px * 2) / 3))",
+          gap: "30px",
+          marginTop: "20px",
+        }}
+      >
+        {tabs.map((item) => {
+          return (
+            <CommonStyles.Box
+              key={item.title}
+              sx={{
+                background: "#fff",
+                boxShadow: "0 3px 6px rgba(0,0,0,0.2)",
+                borderRadius: "8px",
+                padding: "20px 20px",
+                display: "flex",
+                gap: "20px",
+              }}
+            >
+              <CommonStyles.Box
+                centered
+                sx={{
+                  width: "50px",
+                  height: "50px",
+                  borderRadius: "50%",
+                  background: "#000",
+                }}
+              >
+                {item.icon}
+              </CommonStyles.Box>
+              <CommonStyles.Box>
+                <CommonStyles.Typography type="body18">
+                  {item.title}
+                </CommonStyles.Typography>
+                <CommonStyles.Typography type="boldText24">
+                  {item.total}
+                </CommonStyles.Typography>
+              </CommonStyles.Box>
+            </CommonStyles.Box>
+          )
+        })}
+      </CommonStyles.Box>
+
+      <CommonStyles.Box
+        centered
+        sx={{
+          justifyContent: "space-between",
+          marginTop: "25px",
+        }}
+      >
+        <CommonStyles.Typography type="boldText24" sx={{ color: "#5c3883" }}>
+          Top 12 models
+        </CommonStyles.Typography>
+
+        <CommonStyles.Box>
+          <CommonStyles.Typography type="body14" sx={{ color: "#5c3883" }}>
+            View all models
+          </CommonStyles.Typography>
+        </CommonStyles.Box>
+      </CommonStyles.Box> */}
+    </CommonStyles.Box>
+  )
+}
+
+export default VirtualTryOn

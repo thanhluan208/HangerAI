@@ -8,11 +8,20 @@ const Typography = (props) => {
   const sxCustomize = useMemo(() => {
     const styles = new Map()
 
+    styles.set("boldText28", {
+      fontSize: "28px",
+      fontWeight: 700,
+      lineHeight: "28px",
+      color: "#000000",
+      fontFamily: "GilroyBold",
+    })
+
     styles.set("boldText24", {
       fontSize: "24px",
       fontWeight: 700,
       lineHeight: "28px",
       color: "#000000",
+      fontFamily: "GilroyBold",
     })
 
     styles.set("boldText20", {
@@ -20,6 +29,7 @@ const Typography = (props) => {
       fontWeight: 700,
       lineHeight: "28px",
       color: "#000000",
+      fontFamily: "GilroyBold",
     })
 
     styles.set("boldText", {
@@ -27,6 +37,7 @@ const Typography = (props) => {
       fontWeight: 700,
       lineHeight: "28px",
       color: "#000000",
+      fontFamily: "GilroyBold",
     })
 
     styles.set("boldText14", {
@@ -34,6 +45,7 @@ const Typography = (props) => {
       fontWeight: 700,
       lineHeight: "28px",
       color: "#000",
+      fontFamily: "GilroyBold",
     })
 
     styles.set("body14", {
@@ -42,6 +54,7 @@ const Typography = (props) => {
       lineHeight: "28px",
       color: "#000",
       letterSpacing: "0.5px",
+      fontFamily: "GilroyBold",
     })
 
     styles.set("body18", {
@@ -50,6 +63,16 @@ const Typography = (props) => {
       lineHeight: "28px",
       color: "#000",
       letterSpacing: "0.5px",
+      fontFamily: "GilroyBold",
+    })
+
+    styles.set("body24", {
+      fontSize: "24px",
+      fontWeight: 400,
+      lineHeight: "28px",
+      color: "#000",
+      letterSpacing: "0.5px",
+      fontFamily: "GilroyBold",
     })
 
     return styles.get(type)

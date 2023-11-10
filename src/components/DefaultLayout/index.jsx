@@ -1,12 +1,12 @@
-import CommonStyles from "../CommonStyles";
-import CommonIcons from "../CommonIcons";
-import User from "./Components/User";
-import MenuItem from "./Components/MenuItem";
-import PerfectScrollbar from "react-perfect-scrollbar";
-import { useTheme } from "@emotion/react";
-import Brand from "./Components/Brand";
-import { useAuthentication } from "../../providers/AuthenticationProvider";
-import { Outlet } from "react-router-dom";
+import CommonStyles from "../CommonStyles"
+import CommonIcons from "../CommonIcons"
+import User from "./Components/User"
+import MenuItem from "./Components/MenuItem"
+import PerfectScrollbar from "react-perfect-scrollbar"
+import { useTheme } from "@emotion/react"
+import Brand from "./Components/Brand"
+import { useAuthentication } from "../../providers/AuthenticationProvider"
+import { Outlet } from "react-router-dom"
 
 const nav = [
   {
@@ -29,12 +29,16 @@ const nav = [
     path: "/product-recommendation",
     icon: <CommonIcons.Recommend style={{ fontSize: "1.5rem" }} />,
   },
-];
+]
 
 const DefaultLayout = (props) => {
   //! State
-  const theme = useTheme();
-  const { handleLogout } = useAuthentication();
+  const theme = useTheme()
+  const { handleLogout } = useAuthentication()
+  const currentContent =
+    nav.find((elm) => {
+      return window.location.pathname === elm.path
+    })?.content || "Path not found"
 
   //! Function
 
@@ -44,20 +48,20 @@ const DefaultLayout = (props) => {
       sx={{
         height: "100vh",
         width: "100vw",
-        background: "#eec0c6",
-        backgroundImage: "linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%)",
+        background: "#fff",
+        // backgroundImage: "linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%)",
         position: "relative",
         display: "flex",
-        "&:before": {
-          content: '""',
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          background: "rgba(255,255,255,0.4)",
-          backdropFilter: "blur(2px)",
-        },
+        // "&:before": {
+        //   content: '""',
+        //   position: "absolute",
+        //   top: 0,
+        //   left: 0,
+        //   width: "100%",
+        //   height: "100%",
+        //   background: "rgba(255,255,255,0.4)",
+        //   backdropFilter: "blur(2px)",
+        // },
       }}
     >
       <CommonStyles.Box
@@ -113,7 +117,7 @@ const DefaultLayout = (props) => {
                   path={item.path}
                   icon={item.icon}
                 />
-              );
+              )
             })}
           </PerfectScrollbar>
         </CommonStyles.Box>
@@ -127,7 +131,7 @@ const DefaultLayout = (props) => {
               textTransform: "none",
             }}
             onClick={() => {
-              handleLogout();
+              handleLogout()
             }}
           >
             <CommonIcons.LogoutIcon />
@@ -144,7 +148,7 @@ const DefaultLayout = (props) => {
           zIndex: 2,
           width: "100%",
           height: "calc(100vh - 40px)",
-          background: "rgba(255,255,255,0.6)",
+          background: "#f6f7fb",
           margin: "20px 20px 20px 0",
           borderRadius: "20px",
           backdropFilter: "blur(2px)",
@@ -156,6 +160,17 @@ const DefaultLayout = (props) => {
       >
         <Brand />
         <User />
+        <CommonStyles.Box
+          sx={{
+            position: "absolute",
+            top: "20px",
+            left: "30px",
+          }}
+        >
+          <CommonStyles.Typography type="boldText24" sx={{ color: "#5c3883" }}>
+            {currentContent}
+          </CommonStyles.Typography>
+        </CommonStyles.Box>
         <PerfectScrollbar
           style={{
             maxHeight: "calc(100vh - 200px)",
@@ -165,7 +180,7 @@ const DefaultLayout = (props) => {
         </PerfectScrollbar>
       </CommonStyles.Box>
     </CommonStyles.Box>
-  );
-};
+  )
+}
 
-export default DefaultLayout;
+export default DefaultLayout

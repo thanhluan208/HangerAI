@@ -1,5 +1,5 @@
 import LogoutIcon from "@mui/icons-material/Logout"
-import { MdMeetingRoom, MdRecommend } from "react-icons/md"
+import { MdMeetingRoom, MdRecommend, MdOutlineMoreHoriz } from "react-icons/md"
 import { SiObsstudio } from "react-icons/si"
 import {
   BsFillTagFill,
@@ -31,6 +31,7 @@ const CommonIcons = {
   People: BsPeopleFill,
   Category: BiSolidCategoryAlt,
   Product: RiStackFill,
+  More: MdOutlineMoreHoriz,
 }
 
 export default CommonIcons

@@ -1,22 +1,22 @@
-import React from "react";
-import CommonStyles from "../../CommonStyles";
-import { useNavigate } from "react-router-dom";
+import React from "react"
+import CommonStyles from "../../CommonStyles"
+import { useNavigate } from "react-router-dom"
 
 const MenuItem = ({ path, content, icon }) => {
   //! State
-  const navigate = useNavigate();
-  const isActive = window.location.pathname === path;
+  const navigate = useNavigate()
+  const isActive = window.location.pathname === path
 
   //! Function
   const handleClick = () => {
-    navigate(path);
-  };
+    navigate(path)
+  }
   //! Render
   return (
     <CommonStyles.Box
       centered
       sx={{
-        background: isActive ? "rgba(255,255,255,0.6)" : "transparent",
+        background: isActive ? "#f6f7fb" : "transparent",
         width: "90%",
         padding: "15px 15px 15px 30px",
         display: "flex",
@@ -37,7 +37,7 @@ const MenuItem = ({ path, content, icon }) => {
           height: "35px",
           left: "0",
           top: "-35px",
-          background: "rgba(255,255,255,0.6)",
+          background: "#f6f7fb",
           opacity: isActive ? 1 : 0,
           transition: "all 0.5s ease",
           "&:before": {
@@ -47,7 +47,7 @@ const MenuItem = ({ path, content, icon }) => {
             height: "100%",
             left: "0",
             top: "0",
-            background: "#b2f1fc",
+            background: "#fff",
             borderBottomRightRadius: "30px",
           },
         }}
@@ -59,7 +59,7 @@ const MenuItem = ({ path, content, icon }) => {
           height: "35px",
           left: "0",
           bottom: "-35px",
-          background: "rgba(255,255,255,0.6)",
+          background: "#f6f7fb",
           opacity: isActive ? 1 : 0,
           transition: "all 0.5s ease",
 
@@ -70,17 +70,34 @@ const MenuItem = ({ path, content, icon }) => {
             height: "100%",
             left: "0",
             top: "0",
-            background: "#b2f1fc",
+            background: "#fff",
             borderTopRightRadius: "30px",
           },
         }}
       />
-      {icon}
-      <CommonStyles.Typography type="boldText">
+      <CommonStyles.Box
+        sx={
+          isActive && {
+            svg: {
+              color: "#5c3883",
+            },
+          }
+        }
+      >
+        {icon}
+      </CommonStyles.Box>
+      <CommonStyles.Typography
+        type="boldText"
+        sx={
+          isActive && {
+            color: "#5c3883",
+          }
+        }
+      >
         {content}
       </CommonStyles.Typography>
     </CommonStyles.Box>
-  );
-};
+  )
+}
 
-export default MenuItem;
+export default MenuItem
