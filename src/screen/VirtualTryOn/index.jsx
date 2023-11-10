@@ -1,6 +1,7 @@
 import React, { Fragment } from "react"
 import CommonStyles from "../../components/CommonStyles"
 import CommonIcons from "../../components/CommonIcons"
+import ModelsList from "./components/ModelsList"
 
 const tabs = [
   {
@@ -170,12 +171,10 @@ const VirtualTryOn = () => {
         <CommonStyles.Box
           sx={{
             width: "calc(100% - 60px)",
-            aspectRatio: "8/2",
             borderRadius: "20px",
             backgroundColor: "#5c3883",
-            borderBottomRightRadius: "150px",
-            borderBottomLeftRadius: "150px",
             paddingTop: "40px",
+            paddingBottom: "200px",
           }}
         >
           <CommonStyles.Box centered sx={{ gap: "80px" }}>
@@ -228,60 +227,7 @@ const VirtualTryOn = () => {
         </CommonStyles.Box>
       </CommonStyles.Box>
 
-      <CommonStyles.Box
-        sx={{
-          flexWrap: "wrap",
-          display: "flex",
-          gap: "100px",
-          padding: "0 100px",
-          marginTop: "-150px",
-        }}
-      >
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((elm) => {
-          return (
-            <CommonStyles.Box
-              key={elm}
-              sx={{
-                width: "calc((100%  - 100px * 3) / 4)",
-                borderRadius: "12px",
-                backgroundColor: "#fff",
-                padding: "5px",
-              }}
-            >
-              {elm === 12 ? (
-                <CommonStyles.Box
-                  centered
-                  sx={{
-                    height: "280px",
-                    background: "#f7d46e",
-                    borderRadius: "10px",
-                  }}
-                >
-                  Add new models +
-                </CommonStyles.Box>
-              ) : (
-                <Fragment>
-                  <CommonStyles.Box
-                    centered
-                    sx={{
-                      height: "280px",
-                      background: "#f7d46e",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    This is image
-                  </CommonStyles.Box>
-                  <CommonStyles.Box centered sx={{ marginTop: "20px" }}>
-                    <CommonStyles.Typography type="boldText">
-                      Model name: {elm}
-                    </CommonStyles.Typography>
-                  </CommonStyles.Box>
-                </Fragment>
-              )}
-            </CommonStyles.Box>
-          )
-        })}
-      </CommonStyles.Box>
+      <ModelsList />
 
       {/* <CommonStyles.Box
         centered
