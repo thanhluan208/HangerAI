@@ -1,78 +1,249 @@
-import React, { Fragment } from "react"
-import CommonStyles from "../../../components/CommonStyles"
+import React from "react";
+import CommonStyles from "../../../components/CommonStyles";
+import PerfectScrollbar from "react-perfect-scrollbar";
+
+const modelLists = [
+  {
+    name: "Emily",
+    image:
+      "https://i.pinimg.com/originals/f3/aa/3e/f3aa3e9f655bc2777ae7bf64560c31f1.jpg",
+    height: 170,
+    weight: 50,
+    bust: 80,
+    waist: 60,
+    hip: 90,
+    hairColor: "Brown",
+  },
+  {
+    name: "Melissa",
+    image:
+      "https://i.pinimg.com/originals/6f/2d/a2/6f2da214b8ecbb9e95980b71aaf6854d.jpg",
+    height: 180,
+    weight: 60,
+    bust: 90,
+    waist: 70,
+    hip: 100,
+    hairColor: "Brown",
+  },
+  {
+    name: "Charlotte",
+    image:
+      "https://i.pinimg.com/originals/fb/35/a9/fb35a93cb47063ee8c74008925270917.jpg",
+    height: 175,
+    weight: 55,
+    bust: 85,
+    waist: 65,
+    hip: 95,
+    hairColor: "Brown",
+  },
+  {
+    name: "Ciara",
+    image:
+      "https://i.pinimg.com/564x/1f/39/ef/1f39eff872bab70cdc5a0281a37c3930.jpg",
+    height: 175,
+    weight: 55,
+    bust: 85,
+    waist: 65,
+    hip: 95,
+    hairColor: "Brown",
+  },
+  {
+    name: "Samantha",
+    image:
+      "https://i.pinimg.com/originals/e5/98/5e/e5985efac51eb4cdad2c0705ce2105c0.jpg",
+    height: 175,
+    weight: 55,
+    bust: 85,
+    waist: 65,
+    hip: 95,
+    hairColor: "Brown",
+  },
+];
 
 const ModelsList = () => {
-  //! State
-  const [selectedModel, setSelectedModel] = React.useState(5)
-
-  //! Function
-
-  //! Render
   return (
     <CommonStyles.Box
       sx={{
-        flexWrap: "wrap",
-        display: "flex",
-        gap: "100px",
-        padding: "0 100px",
-        marginTop: "-150px",
+        position: "relative",
+        marginTop: "50px",
+        "&:before": {
+          content: '""',
+          position: "absolute",
+          width: "100%",
+          height: "85px",
+          background: "#f6f7fb",
+          left: "0",
+          top: "-43px",
+          zIndex: "2",
+          borderRadius: "50%",
+        },
+        "&:after": {
+          content: '""',
+          position: "absolute",
+          width: "100%",
+          height: "85px",
+          background: "#f6f7fb",
+          left: "0",
+          bottom: "-40px",
+          zIndex: "2",
+          borderRadius: "50%",
+        },
       }}
     >
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((elm) => {
-        const isActive = selectedModel === elm
-        return (
-          <CommonStyles.Box
-            key={elm}
-            sx={{
-              width: "calc((100%  - 100px * 3) / 4)",
-              borderRadius: "12px",
-              backgroundColor: "#fff",
-              padding: "5px",
-              transition: "all 0.5s ease-in-out",
-              cursor: "pointer",
-              "&:hover": {
-                boxShadow: "0 5px 10px rgba(0,0,0,0.5)",
-              },
-            }}
-            onClick={() => {
-              setSelectedModel(elm)
-            }}
-          >
-            {elm === 12 ? (
-              <CommonStyles.Box
-                centered
-                sx={{
-                  height: "280px",
-                  background: "#f7d46e",
-                  borderRadius: "10px",
-                }}
-              >
-                Add new models +
-              </CommonStyles.Box>
-            ) : (
-              <Fragment>
+      <PerfectScrollbar
+        style={{
+          maxWidth: "calc(100vw - 300px - 40px)",
+        }}
+      >
+        <CommonStyles.Box
+          sx={{
+            display: "flex",
+            cursor: "pointer",
+          }}
+        >
+          {[...modelLists, ...modelLists, ...modelLists].map((model) => {
+            return (
+              <CommonStyles.Box key={model.name} sx={{}}>
                 <CommonStyles.Box
-                  centered
                   sx={{
-                    height: "280px",
-                    background: isActive ? "#f7d46e" : "#fff",
-                    borderRadius: "10px",
+                    width: "300px",
+                    height: "450px",
+                    backgroundImage: `url(${model.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "50% 50%",
+                    backgroundRepeat: "no-repeat",
+                    position: "relative",
+                    "&:hover": {
+                      "& .model-info": {
+                        height: "100%",
+                        opacity: "1",
+                      },
+                    },
                   }}
                 >
-                  This is image
-                </CommonStyles.Box>
-                <CommonStyles.Box centered sx={{ marginTop: "20px" }}>
-                  <CommonStyles.Typography type="boldText">
-                    Model name: {elm}
-                  </CommonStyles.Typography>
-                </CommonStyles.Box>
-              </Fragment>
-            )}
-          </CommonStyles.Box>
-        )
-      })}
-    </CommonStyles.Box>
-  )
-}
+                  <CommonStyles.Box
+                    className="model-info"
+                    sx={{
+                      position: "absolute",
+                      bottom: "0%",
+                      opacity: "0",
+                      left: "0",
+                      width: "100%",
+                      height: "0%",
+                      background:
+                        "linear-gradient(0deg, #000000 8%, transparent 85%)",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "flex-end",
+                      padding: "0 15px 65px 15px",
+                      gap: "15px",
+                      color: "#fff",
+                      transition: "all .3s ease",
+                    }}
+                  >
+                    <CommonStyles.Typography
+                      type="boldText20"
+                      sx={{ color: "#fff" }}
+                    >
+                      {model.name}
+                    </CommonStyles.Typography>
+                    <CommonStyles.Box
+                      sx={{
+                        display: "grid",
+                        gridTemplateColumns: "50% 50%",
+                        gridGap: "10px",
+                      }}
+                    >
+                      <CommonStyles.Typography
+                        type="body12"
+                        sx={{
+                          color: "#ffffff9c",
+                          display: "grid",
+                          gridTemplateColumns: "50% 50%",
+                        }}
+                      >
+                        Height:{" "}
+                        <CommonStyles.Typography
+                          sx={{ color: "#f7d46e", fontWeight: "700" }}
+                        >
+                          {model.height}
+                        </CommonStyles.Typography>
+                      </CommonStyles.Typography>
 
-export default ModelsList
+                      <CommonStyles.Typography
+                        type="body12"
+                        sx={{
+                          color: "#ffffff9c",
+                          display: "grid",
+                          gridTemplateColumns: "50% 50%",
+                        }}
+                      >
+                        Weight:{" "}
+                        <CommonStyles.Typography
+                          sx={{ color: "#f7d46e", fontWeight: "700" }}
+                        >
+                          {model.weight}
+                        </CommonStyles.Typography>
+                      </CommonStyles.Typography>
+
+                      <CommonStyles.Typography
+                        type="body12"
+                        sx={{
+                          color: "#ffffff9c",
+                          display: "grid",
+                          gridTemplateColumns: "50% 50%",
+                        }}
+                      >
+                        Hip:{" "}
+                        <CommonStyles.Typography
+                          sx={{ color: "#f7d46e", fontWeight: "700" }}
+                        >
+                          {model.hip}
+                        </CommonStyles.Typography>
+                      </CommonStyles.Typography>
+
+                      <CommonStyles.Typography
+                        type="body12"
+                        sx={{
+                          color: "#ffffff9c",
+                          display: "grid",
+                          gridTemplateColumns: "50% 50%",
+                        }}
+                      >
+                        Waist:{" "}
+                        <CommonStyles.Typography
+                          sx={{ color: "#f7d46e", fontWeight: "700" }}
+                        >
+                          {model.waist}
+                        </CommonStyles.Typography>
+                      </CommonStyles.Typography>
+
+                      <CommonStyles.Typography
+                        type="body12"
+                        sx={{
+                          color: "#ffffff9c",
+                          display: "grid",
+                          gridTemplateColumns: "50% 50%",
+                        }}
+                      >
+                        Bust:{" "}
+                        <CommonStyles.Typography
+                          sx={{ color: "#f7d46e", fontWeight: "700" }}
+                        >
+                          {model.bust}
+                        </CommonStyles.Typography>
+                      </CommonStyles.Typography>
+                    </CommonStyles.Box>
+                  </CommonStyles.Box>
+                </CommonStyles.Box>
+                {/* <img src={model.image} alt="" style={{ width: "300px" }} /> */}
+              </CommonStyles.Box>
+            );
+          })}
+        </CommonStyles.Box>
+      </PerfectScrollbar>
+    </CommonStyles.Box>
+  );
+};
+
+export default ModelsList;

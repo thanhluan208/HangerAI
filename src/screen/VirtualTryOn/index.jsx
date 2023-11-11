@@ -1,7 +1,8 @@
-import React, { Fragment } from "react"
-import CommonStyles from "../../components/CommonStyles"
-import CommonIcons from "../../components/CommonIcons"
-import ModelsList from "./components/ModelsList"
+import React, { Fragment } from "react";
+import CommonStyles from "../../components/CommonStyles";
+import CommonIcons from "../../components/CommonIcons";
+import ModelsList from "./components/ModelsList";
+import { useTheme } from "@emotion/react";
 
 const tabs = [
   {
@@ -27,11 +28,14 @@ const tabs = [
     title: "Categories 3",
     total: 234,
   },
-]
+];
 
 const VirtualTryOn = () => {
   //! State
-  const [currentTab, setCurrentTab] = React.useState("Dashboard")
+  const [currentTab, setCurrentTab] = React.useState("Dashboard");
+  const theme = useTheme();
+
+  console.log("theme", theme);
 
   //! Function
   //! Render
@@ -104,7 +108,7 @@ const VirtualTryOn = () => {
           }}
         >
           {["Dashboard", "Studio"].map((elm) => {
-            const isActive = currentTab === elm
+            const isActive = currentTab === elm;
 
             return (
               <CommonStyles.Box
@@ -125,7 +129,7 @@ const VirtualTryOn = () => {
                     textTransform: "none",
                   }}
                   onClick={() => {
-                    setCurrentTab(elm)
+                    setCurrentTab(elm);
                   }}
                 >
                   <CommonStyles.Typography
@@ -136,7 +140,7 @@ const VirtualTryOn = () => {
                   </CommonStyles.Typography>
                 </CommonStyles.Button>
               </CommonStyles.Box>
-            )
+            );
           })}
           <CommonStyles.Box
             centered
@@ -174,10 +178,18 @@ const VirtualTryOn = () => {
             borderRadius: "20px",
             backgroundColor: "#5c3883",
             paddingTop: "40px",
-            paddingBottom: "200px",
+            paddingBottom: "60px",
           }}
         >
-          <CommonStyles.Box centered sx={{ gap: "80px" }}>
+          <CommonStyles.Box
+            centered
+            sx={{
+              gap: "80px",
+              [theme.breakpoints.down("xl")]: {
+                gap: "40px",
+              },
+            }}
+          >
             {tabs.map((tab) => {
               return (
                 <CommonStyles.Box key={tab.title}>
@@ -221,130 +233,26 @@ const VirtualTryOn = () => {
                     </CommonStyles.Box>
                   </CommonStyles.Box>
                 </CommonStyles.Box>
-              )
+              );
             })}
           </CommonStyles.Box>
         </CommonStyles.Box>
       </CommonStyles.Box>
 
-      <ModelsList />
-
-      {/* <CommonStyles.Box
-        centered
-        sx={{
-          justifyContent: "space-between",
-        }}
-      >
-        <CommonStyles.Box
-          centered
-          sx={{
-            gap: "32px",
-          }}
-        >
-          <CommonStyles.Box
-            centered
-            sx={{
-              gap: "8px",
-            }}
-          >
-            <CommonIcons.Gender
-              style={{ fontSize: "16px", color: "#5c3883" }}
-            />
-            <CommonStyles.Typography type="body18">
-              All genders
-            </CommonStyles.Typography>
-          </CommonStyles.Box>
-          <CommonStyles.Box
-            centered
-            sx={{
-              gap: "8px",
-            }}
-          >
-            <CommonIcons.Size style={{ fontSize: "24px", color: "#5c3883" }} />
-            <CommonStyles.Typography type="body18">
-              All genders
-            </CommonStyles.Typography>
-          </CommonStyles.Box>
-          <CommonStyles.Box
-            centered
-            sx={{
-              gap: "8px",
-            }}
-          >
-            <CommonIcons.Calendar
-              style={{ fontSize: "16px", color: "#5c3883" }}
-            />
-            <CommonStyles.Typography type="body18">
-              All genders
-            </CommonStyles.Typography>
-          </CommonStyles.Box>
-        </CommonStyles.Box>
-      </CommonStyles.Box>
-
-      <CommonStyles.Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, calc((100% - 30px * 2) / 3))",
-          gap: "30px",
-          marginTop: "20px",
-        }}
-      >
-        {tabs.map((item) => {
-          return (
-            <CommonStyles.Box
-              key={item.title}
-              sx={{
-                background: "#fff",
-                boxShadow: "0 3px 6px rgba(0,0,0,0.2)",
-                borderRadius: "8px",
-                padding: "20px 20px",
-                display: "flex",
-                gap: "20px",
-              }}
-            >
-              <CommonStyles.Box
-                centered
-                sx={{
-                  width: "50px",
-                  height: "50px",
-                  borderRadius: "50%",
-                  background: "#000",
-                }}
-              >
-                {item.icon}
-              </CommonStyles.Box>
-              <CommonStyles.Box>
-                <CommonStyles.Typography type="body18">
-                  {item.title}
-                </CommonStyles.Typography>
-                <CommonStyles.Typography type="boldText24">
-                  {item.total}
-                </CommonStyles.Typography>
-              </CommonStyles.Box>
-            </CommonStyles.Box>
-          )
-        })}
-      </CommonStyles.Box>
-
       <CommonStyles.Box
         centered
         sx={{
-          justifyContent: "space-between",
-          marginTop: "25px",
+          marginTop: "30px",
         }}
       >
-        <CommonStyles.Typography type="boldText24" sx={{ color: "#5c3883" }}>
-          Top 12 models
+        <CommonStyles.Typography type="boldText24">
+          Top 10 models
         </CommonStyles.Typography>
+      </CommonStyles.Box>
 
-        <CommonStyles.Box>
-          <CommonStyles.Typography type="body14" sx={{ color: "#5c3883" }}>
-            View all models
-          </CommonStyles.Typography>
-        </CommonStyles.Box>
-      </CommonStyles.Box> */}
+      <ModelsList />
     </CommonStyles.Box>
-  )
-}
+  );
+};
 
-export default VirtualTryOn
+export default VirtualTryOn;

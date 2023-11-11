@@ -1,12 +1,12 @@
-import CommonStyles from "../CommonStyles"
-import CommonIcons from "../CommonIcons"
-import User from "./Components/User"
-import MenuItem from "./Components/MenuItem"
-import PerfectScrollbar from "react-perfect-scrollbar"
-import { useTheme } from "@emotion/react"
-import Brand from "./Components/Brand"
-import { useAuthentication } from "../../providers/AuthenticationProvider"
-import { Outlet } from "react-router-dom"
+import CommonStyles from "../CommonStyles";
+import CommonIcons from "../CommonIcons";
+import User from "./Components/User";
+import MenuItem from "./Components/MenuItem";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import { useTheme } from "@emotion/react";
+import Brand from "./Components/Brand";
+import { useAuthentication } from "../../providers/AuthenticationProvider";
+import { Outlet } from "react-router-dom";
 
 const nav = [
   {
@@ -29,16 +29,16 @@ const nav = [
     path: "/product-recommendation",
     icon: <CommonIcons.Recommend style={{ fontSize: "1.5rem" }} />,
   },
-]
+];
 
 const DefaultLayout = (props) => {
   //! State
-  const theme = useTheme()
-  const { handleLogout } = useAuthentication()
+  const theme = useTheme();
+  const { handleLogout } = useAuthentication();
   const currentContent =
     nav.find((elm) => {
-      return window.location.pathname === elm.path
-    })?.content || "Path not found"
+      return window.location.pathname === elm.path;
+    })?.content || "Path not found";
 
   //! Function
 
@@ -71,7 +71,7 @@ const DefaultLayout = (props) => {
           display: "flex",
           height: "calc(100% - 40px)",
           flexDirection: "column",
-          width: "20%",
+          width: "300px",
           padding: "20px 0",
           [theme.breakpoints.down("md")]: {
             display: "none",
@@ -117,7 +117,7 @@ const DefaultLayout = (props) => {
                   path={item.path}
                   icon={item.icon}
                 />
-              )
+              );
             })}
           </PerfectScrollbar>
         </CommonStyles.Box>
@@ -131,7 +131,7 @@ const DefaultLayout = (props) => {
               textTransform: "none",
             }}
             onClick={() => {
-              handleLogout()
+              handleLogout();
             }}
           >
             <CommonIcons.LogoutIcon />
@@ -180,7 +180,7 @@ const DefaultLayout = (props) => {
         </PerfectScrollbar>
       </CommonStyles.Box>
     </CommonStyles.Box>
-  )
-}
+  );
+};
 
-export default DefaultLayout
+export default DefaultLayout;
