@@ -1,6 +1,6 @@
-import LogoutIcon from "@mui/icons-material/Logout"
-import { MdMeetingRoom, MdRecommend, MdOutlineMoreHoriz } from "react-icons/md"
-import { SiObsstudio } from "react-icons/si"
+import LogoutIcon from "@mui/icons-material/Logout";
+import { MdMeetingRoom, MdRecommend, MdOutlineMoreHoriz } from "react-icons/md";
+import { SiObsstudio } from "react-icons/si";
 import {
   BsFillTagFill,
   BsGoogle,
@@ -9,11 +9,12 @@ import {
   BsGenderTrans,
   BsFillCalendar2EventFill,
   BsPeopleFill,
-} from "react-icons/bs"
-import { AiOutlineClose } from "react-icons/ai"
-import { CgSize } from "react-icons/cg"
-import { BiSolidCategoryAlt } from "react-icons/bi"
-import { RiStackFill } from "react-icons/ri"
+} from "react-icons/bs";
+import { AiOutlineClose } from "react-icons/ai";
+import { CgSize } from "react-icons/cg";
+import { BiSolidCategoryAlt } from "react-icons/bi";
+import { RiStackFill } from "react-icons/ri";
+import { GrLinkNext } from "react-icons/gr";
 
 const CommonIcons = {
   LogoutIcon,
@@ -32,6 +33,7 @@ const CommonIcons = {
   Category: BiSolidCategoryAlt,
   Product: RiStackFill,
   More: MdOutlineMoreHoriz,
-}
+  Next: GrLinkNext,
+};
 
-export default CommonIcons
+export default CommonIcons;

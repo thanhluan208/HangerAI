@@ -1,0 +1,75 @@
+import React from "react";
+import CommonStyles from "../../../components/CommonStyles";
+import { useTheme } from "@emotion/react";
+
+const VirtualSection = () => {
+  //! State
+  const theme = useTheme();
+  //! Function
+
+  //! Render
+  return (
+    <CommonStyles.Box
+      sx={{
+        maxWidth: "1200px",
+        width: "1500px",
+        [theme.breakpoints.down("xl")]: {
+          maxWidth: "1000px",
+        },
+      }}
+    >
+      <CommonStyles.Box
+        sx={{
+          display: "flex",
+        }}
+      >
+        <CommonStyles.Box
+          sx={{
+            position: "relative",
+            overflow: "hidden",
+            background: "linear-gradient(0deg, #000 -55%, transparent 35%)",
+          }}
+        >
+          <CommonStyles.Box
+            centered
+            sx={{
+              color: "#000",
+              opacity: ".8",
+              fontSize: "2rem",
+              letterSpacing: "8px",
+              textAlign: "center",
+              fontFamily: "GilroyBold",
+              marginBottom: "-12px",
+            }}
+          >
+            Virtual Try-on
+          </CommonStyles.Box>
+        </CommonStyles.Box>
+      </CommonStyles.Box>
+
+      <CommonStyles.Box
+        sx={{
+          marginTop: "40px",
+          padding: "0 20px",
+          display: "flex",
+        }}
+      >
+        <CommonStyles.Box
+          sx={{
+            background: "#5c3883",
+            borderRadius: "8px",
+          }}
+        >
+          <img
+            src="https://assets-global.website-files.com/625465cda3c9d02b8aadcec3/63bed79bd2865b81b70b4235_visuel%201ere%20de%20couv%20flyer.png"
+            style={{
+              width: "300px",
+            }}
+          />
+        </CommonStyles.Box>
+      </CommonStyles.Box>
+    </CommonStyles.Box>
+  );
+};
+
+export default VirtualSection;

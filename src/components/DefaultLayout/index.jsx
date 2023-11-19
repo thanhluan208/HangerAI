@@ -6,28 +6,29 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import { useTheme } from "@emotion/react";
 import Brand from "./Components/Brand";
 import { useAuthentication } from "../../providers/AuthenticationProvider";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useMemo } from "react";
 
 const nav = [
   {
     content: "Virtual Dressing Room",
     path: "/virtual-try-on",
-    icon: <CommonIcons.Room style={{ fontSize: "1.5rem" }} />,
+    icon: <CommonIcons.Room style={{ fontSize: "1rem" }} />,
   },
   {
     content: "Virtual Photoshoot Studio",
     path: "/virtual-photoshoot-studio",
-    icon: <CommonIcons.Studio style={{ fontSize: "1.5rem" }} />,
+    icon: <CommonIcons.Studio style={{ fontSize: "1rem" }} />,
   },
   {
     content: "Product Tagging",
     path: "/product-tagging",
-    icon: <CommonIcons.Tag style={{ fontSize: "1.5rem" }} />,
+    icon: <CommonIcons.Tag style={{ fontSize: "1rem" }} />,
   },
   {
     content: "Product Recommendation",
     path: "/product-recommendation",
-    icon: <CommonIcons.Recommend style={{ fontSize: "1.5rem" }} />,
+    icon: <CommonIcons.Recommend style={{ fontSize: "1rem" }} />,
   },
 ];
 
@@ -35,10 +36,17 @@ const DefaultLayout = (props) => {
   //! State
   const theme = useTheme();
   const { handleLogout } = useAuthentication();
-  const currentContent =
-    nav.find((elm) => {
-      return window.location.pathname === elm.path;
-    })?.content || "Path not found";
+  const location = useLocation();
+  const navigate = useNavigate();
+  const currentContent = useMemo(() => {
+    if (location.pathname === "/") return "Welcome, Thanh Luan";
+
+    return (
+      nav.find((elm) => {
+        return location.pathname === elm.path;
+      })?.content || "Path not found"
+    );
+  }, [location]);
 
   //! Function
 
@@ -71,14 +79,20 @@ const DefaultLayout = (props) => {
           display: "flex",
           height: "calc(100% - 40px)",
           flexDirection: "column",
-          width: "300px",
+          width: "280px",
           padding: "20px 0",
           [theme.breakpoints.down("md")]: {
             display: "none",
           },
         }}
       >
-        <CommonStyles.Box centered sx={{ flex: 1, cursor: "pointer" }}>
+        <CommonStyles.Box
+          centered
+          sx={{ flex: 1, cursor: "pointer" }}
+          onClick={() => {
+            navigate("/ ");
+          }}
+        >
           <img
             width="180"
             sizes="(max-width: 479px) 100vw, (max-width: 991px) 200px, (max-width: 1439px) 14vw, 200px"

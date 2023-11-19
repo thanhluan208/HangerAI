@@ -1,12 +1,20 @@
-import TypographyMui from "@mui/material/Typography"
-import { useMemo } from "react"
+import TypographyMui from "@mui/material/Typography";
+import { useMemo } from "react";
 
 const Typography = (props) => {
   //! State
-  const { type = "normal", sx, ...restProps } = props
+  const { type = "normal", sx, ...restProps } = props;
 
   const sxCustomize = useMemo(() => {
-    const styles = new Map()
+    const styles = new Map();
+
+    styles.set("boldText32", {
+      fontSize: "32px",
+      fontWeight: 700,
+      lineHeight: "28px",
+      color: "#000000",
+      fontFamily: "GilroyBold",
+    });
 
     styles.set("boldText28", {
       fontSize: "28px",
@@ -14,7 +22,7 @@ const Typography = (props) => {
       lineHeight: "28px",
       color: "#000000",
       fontFamily: "GilroyBold",
-    })
+    });
 
     styles.set("boldText24", {
       fontSize: "24px",
@@ -22,7 +30,7 @@ const Typography = (props) => {
       lineHeight: "28px",
       color: "#000000",
       fontFamily: "GilroyBold",
-    })
+    });
 
     styles.set("boldText20", {
       fontSize: "20px",
@@ -30,7 +38,7 @@ const Typography = (props) => {
       lineHeight: "28px",
       color: "#000000",
       fontFamily: "GilroyBold",
-    })
+    });
 
     styles.set("boldText", {
       fontSize: "16px",
@@ -38,15 +46,14 @@ const Typography = (props) => {
       lineHeight: "28px",
       color: "#000000",
       fontFamily: "GilroyBold",
-    })
+    });
 
     styles.set("boldText14", {
       fontSize: "14px",
       fontWeight: 700,
-      lineHeight: "28px",
       color: "#000",
       fontFamily: "GilroyBold",
-    })
+    });
 
     styles.set("body14", {
       fontSize: "14px",
@@ -55,7 +62,7 @@ const Typography = (props) => {
       color: "#000",
       letterSpacing: "0.5px",
       fontFamily: "GilroyBold",
-    })
+    });
 
     styles.set("body18", {
       fontSize: "18px",
@@ -64,7 +71,7 @@ const Typography = (props) => {
       color: "#000",
       letterSpacing: "0.5px",
       fontFamily: "GilroyBold",
-    })
+    });
 
     styles.set("body24", {
       fontSize: "24px",
@@ -73,10 +80,10 @@ const Typography = (props) => {
       color: "#000",
       letterSpacing: "0.5px",
       fontFamily: "GilroyBold",
-    })
+    });
 
-    return styles.get(type)
-  }, [type])
+    return styles.get(type);
+  }, [type]);
 
   //! Render
   return (
@@ -89,7 +96,7 @@ const Typography = (props) => {
     >
       {props.children}
     </TypographyMui>
-  )
-}
+  );
+};
 
-export default Typography
+export default Typography;
