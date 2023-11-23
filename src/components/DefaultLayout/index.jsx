@@ -1,13 +1,13 @@
-import CommonStyles from "../CommonStyles";
-import CommonIcons from "../CommonIcons";
-import User from "./Components/User";
-import MenuItem from "./Components/MenuItem";
-import PerfectScrollbar from "react-perfect-scrollbar";
-import { useTheme } from "@emotion/react";
-import Brand from "./Components/Brand";
-import { useAuthentication } from "../../providers/AuthenticationProvider";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { useMemo } from "react";
+import CommonStyles from "../CommonStyles"
+import CommonIcons from "../CommonIcons"
+import User from "./Components/User"
+import MenuItem from "./Components/MenuItem"
+import PerfectScrollbar from "react-perfect-scrollbar"
+import { useTheme } from "@emotion/react"
+import Brand from "./Components/Brand"
+import { useAuthentication } from "../../providers/AuthenticationProvider"
+import { Outlet, useLocation, useNavigate } from "react-router-dom"
+import { useMemo, useState } from "react"
 
 const nav = [
   {
@@ -30,23 +30,24 @@ const nav = [
     path: "/product-recommendation",
     icon: <CommonIcons.Recommend style={{ fontSize: "1rem" }} />,
   },
-];
+]
 
 const DefaultLayout = (props) => {
   //! State
-  const theme = useTheme();
-  const { handleLogout } = useAuthentication();
-  const location = useLocation();
-  const navigate = useNavigate();
+  const theme = useTheme()
+  const [open, setOpen] = useState(true)
+  const { handleLogout } = useAuthentication()
+  const location = useLocation()
+  const navigate = useNavigate()
   const currentContent = useMemo(() => {
-    if (location.pathname === "/") return "Welcome, Thanh Luan";
+    if (location.pathname === "/") return "Welcome, Thanh Luan"
 
     return (
       nav.find((elm) => {
-        return location.pathname === elm.path;
+        return location.pathname === elm.path
       })?.content || "Path not found"
-    );
-  }, [location]);
+    )
+  }, [location])
 
   //! Function
 
@@ -57,19 +58,9 @@ const DefaultLayout = (props) => {
         height: "100vh",
         width: "100vw",
         background: "#fff",
-        // backgroundImage: "linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%)",
         position: "relative",
         display: "flex",
-        // "&:before": {
-        //   content: '""',
-        //   position: "absolute",
-        //   top: 0,
-        //   left: 0,
-        //   width: "100%",
-        //   height: "100%",
-        //   background: "rgba(255,255,255,0.4)",
-        //   backdropFilter: "blur(2px)",
-        // },
+        padding: open ? "0" : "0 30px",
       }}
     >
       <CommonStyles.Box
@@ -79,27 +70,34 @@ const DefaultLayout = (props) => {
           display: "flex",
           height: "calc(100% - 40px)",
           flexDirection: "column",
-          width: "280px",
+          width: open ? "280px" : "0",
+          opacity: open ? "1" : "0",
           padding: "20px 0",
+          transition: "all .2s ease-in-out",
           [theme.breakpoints.down("md")]: {
             display: "none",
           },
         }}
       >
-        <CommonStyles.Box
-          centered
-          sx={{ flex: 1, cursor: "pointer" }}
-          onClick={() => {
-            navigate("/ ");
-          }}
-        >
+        <CommonStyles.Box centered sx={{ flex: 1, gap: "20px" }}>
           <img
             width="180"
             sizes="(max-width: 479px) 100vw, (max-width: 991px) 200px, (max-width: 1439px) 14vw, 200px"
             src="https://assets-global.website-files.com/625465cda3c9d02b8aadcec3/62546600cf41d9ae2da5c6ad_logo%20Veesual-02.png"
             alt=""
             className="logo-image"
+            onClick={() => {
+              navigate("/ ")
+            }}
+            style={{ cursor: "pointer" }}
           />
+
+          <CommonStyles.Box
+            sx={{ cursor: "pointer" }}
+            onClick={() => setOpen(false)}
+          >
+            <CommonIcons.Close />
+          </CommonStyles.Box>
         </CommonStyles.Box>
         <CommonStyles.Box
           sx={{
@@ -131,7 +129,7 @@ const DefaultLayout = (props) => {
                   path={item.path}
                   icon={item.icon}
                 />
-              );
+              )
             })}
           </PerfectScrollbar>
         </CommonStyles.Box>
@@ -145,7 +143,7 @@ const DefaultLayout = (props) => {
               textTransform: "none",
             }}
             onClick={() => {
-              handleLogout();
+              handleLogout()
             }}
           >
             <CommonIcons.LogoutIcon />
@@ -175,12 +173,25 @@ const DefaultLayout = (props) => {
         <Brand />
         <User />
         <CommonStyles.Box
+          centered
           sx={{
             position: "absolute",
             top: "20px",
             left: "30px",
+            gap: "20px",
           }}
         >
+          {!open && (
+            <CommonStyles.Box
+              centered
+              sx={{ cursor: "pointer" }}
+              onClick={() => {
+                setOpen(true)
+              }}
+            >
+              <CommonIcons.Menu />
+            </CommonStyles.Box>
+          )}
           <CommonStyles.Typography type="boldText24" sx={{ color: "#5c3883" }}>
             {currentContent}
           </CommonStyles.Typography>
@@ -190,11 +201,13 @@ const DefaultLayout = (props) => {
             maxHeight: "calc(100vh - 200px)",
           }}
         >
-          <Outlet />
+          <CommonStyles.Box sx={{ paddingBottom: "50px" }}>
+            <Outlet />
+          </CommonStyles.Box>
         </PerfectScrollbar>
       </CommonStyles.Box>
     </CommonStyles.Box>
-  );
-};
+  )
+}
 
-export default DefaultLayout;
+export default DefaultLayout

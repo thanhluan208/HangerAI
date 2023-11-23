@@ -1,5 +1,5 @@
-import MuiBox from "@mui/material/Box";
-import React from "react";
+import MuiBox from "@mui/material/Box"
+import React from "react"
 
 const Box = ({ centered, children, ...otherProps }) => {
   //! State
@@ -9,20 +9,22 @@ const Box = ({ centered, children, ...otherProps }) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-      };
+      }
     }
-    return {};
-  }, [centered]);
-
+    return {}
+  }, [centered])
 
   //! Function
 
   //! Render
   return (
-    <MuiBox {...otherProps} sx={{ ...style, ...otherProps.sx }}>
+    <MuiBox
+      {...otherProps}
+      sx={{ transition: "all .5s ease", ...style, ...otherProps.sx }}
+    >
       {children}
     </MuiBox>
-  );
-};
+  )
+}
 
-export default Box;
+export default Box
