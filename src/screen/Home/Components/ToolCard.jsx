@@ -19,8 +19,9 @@ const ToolCard = ({ item }) => {
     >
       <CommonStyles.Box
         sx={{
-          display: "flex",
-          gap: "40px",
+          display: "grid",
+          gridGap: "40px",
+          gridTemplateColumns: "30% calc(70% - 40px)",
           padding: "10px 20px 30px",
           borderRadius: "12px",
           background: "#fff",
@@ -86,7 +87,10 @@ const ToolCard = ({ item }) => {
               {description}
             </CommonStyles.Typography>
           </CommonStyles.Box>
-          <CommonStyles.Box centered sx={{ justifyContent: "space-between" }}>
+          <CommonStyles.Box
+            centered
+            sx={{ justifyContent: "space-between", alignItems: "end" }}
+          >
             <CommonStyles.Box
               centered
               sx={{

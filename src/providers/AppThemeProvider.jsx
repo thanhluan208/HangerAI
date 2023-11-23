@@ -34,6 +34,12 @@ const lightTheme = createTheme({
       xxl: 1920,
     },
   },
+  palette: {
+    mode: "light",
+    primary: {
+      main: "#5c3883",
+    },
+  },
   colors: {
     custom: {
       textGrey: grey["textGrey"],
