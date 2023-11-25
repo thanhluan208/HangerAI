@@ -1,10 +1,10 @@
-import React from "react"
-import CommonStyles from ".."
-import { useTheme } from "@emotion/react"
+import React from "react";
+import CommonStyles from "..";
+import { useTheme } from "@emotion/react";
 
 const Chip = ({ content, active, onClick }) => {
   //! State
-  const theme = useTheme()
+  const theme = useTheme();
 
   return (
     <CommonStyles.Box
@@ -16,7 +16,7 @@ const Chip = ({ content, active, onClick }) => {
         cursor: "pointer",
         transition: "all .15s ease-in",
       }}
-      onClick={onClick}
+      onClick={onClick && onClick}
     >
       <CommonStyles.Typography
         type="boldText14"
@@ -25,7 +25,7 @@ const Chip = ({ content, active, onClick }) => {
         {content}
       </CommonStyles.Typography>
     </CommonStyles.Box>
-  )
-}
+  );
+};
 
-export default Chip
+export default Chip;

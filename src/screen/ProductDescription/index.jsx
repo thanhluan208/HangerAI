@@ -78,6 +78,7 @@ const ProductDescription = () => {
       tone: "Funny",
       template: "advertisement",
       language: "english",
+      image: "",
     };
   }, []);
 
@@ -384,6 +385,8 @@ const ProductDescription = () => {
         validationSchema={validationSchema}
       >
         {(formikProps) => {
+          const { values } = formikProps;
+          const { image } = values;
           return (
             <Form>
               <CommonStyles.Box

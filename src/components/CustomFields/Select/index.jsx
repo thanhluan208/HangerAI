@@ -143,7 +143,11 @@ const SelectField = ({
   return (
     <CommonStyles.Box
       className="select-field"
-      sx={{ minWidth: 120, ...sxContainer }}
+      sx={{
+        minWidth: 120,
+        ...sxContainer,
+        width: props?.fullWidth ? "100%" : "auto",
+      }}
     >
       <FormControl
         fullWidth={props.fullWidth}
@@ -207,6 +211,7 @@ const SelectField = ({
           }}
           disabled={loading || disabled}
           {...props}
+          fullWidth
         >
           {placeholder && (
             <MenuItem disabled value="">
