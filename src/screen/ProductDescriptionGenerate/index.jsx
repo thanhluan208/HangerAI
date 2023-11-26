@@ -2,6 +2,7 @@ import React from "react";
 import CommonStyles from "../../components/CommonStyles";
 import SetupOptions from "./Components/SetupOptions";
 import PerfectScrollBar from "react-perfect-scrollbar";
+import ItemsList from "./Components/ItemsList";
 
 const ProductDescriptionGenerate = () => {
   //! State
@@ -34,6 +35,10 @@ const ProductDescriptionGenerate = () => {
           <SetupOptions />
         </PerfectScrollBar>
       </CommonStyles.Box>
+
+      <ItemsList type="Example" />
+
+      <ItemsList type="Uploaded" />
     </CommonStyles.Box>
   );
 };

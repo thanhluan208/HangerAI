@@ -80,7 +80,7 @@ const ToolCard = ({ item }) => {
               sx={{
                 maxWidth: "400px",
                 marginTop: "15px",
-                fontFamily: "Gilroy",
+                fontFamily: "SuisseIntl",
                 opacity: ".6",
               }}
             >

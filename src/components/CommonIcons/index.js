@@ -19,6 +19,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { IoImageOutline } from "react-icons/io5";
 import { AiFillEdit } from "react-icons/ai";
 import { IoArrowBack, IoArrowForward } from "react-icons/io5";
+import { IoIosArrowUp } from "react-icons/io";
 
 const CommonIcons = {
   LogoutIcon,
@@ -42,6 +43,7 @@ const CommonIcons = {
   Image: IoImageOutline,
   Edit: AiFillEdit,
   Back: IoArrowBack,
+  Up: IoIosArrowUp,
 };
 
 export default CommonIcons;

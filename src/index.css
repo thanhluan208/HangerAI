@@ -9,6 +9,12 @@
   src: local("Gilroy") url("./fonts/Gilroy-Regular.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "SuisseIntl";
+  src: local("SuisseIntl"),
+    url("./fonts/SuisseIntl-Regular.ttf") format("truetype");
+}
+
 body {
   margin: 0;
   padding: 0;

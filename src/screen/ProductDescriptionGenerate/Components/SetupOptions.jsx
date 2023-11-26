@@ -7,6 +7,7 @@ import CustomFields from "../../../components/CustomFields";
 import { useGet, useSave } from "../../../stores/useStores";
 import cachedKeys from "../../../constants/cachedKeys";
 import { isEmpty } from "lodash";
+import * as Yup from "yup";
 
 const writingToneOptions = [
   {
@@ -121,7 +122,14 @@ const SetupOptions = () => {
       language: "english",
       tone: "Funny",
       template: "advertisement",
+      selectedItem: "",
     };
+  }, []);
+
+  const validationSchema = React.useMemo(() => {
+    return Yup.object().shape({
+      selectedItem: Yup.string().required("Please select an item"),
+    });
   }, []);
 
   //! Function
@@ -136,8 +144,19 @@ const SetupOptions = () => {
         padding: "0 20px  20px",
       }}
     >
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
-        {(formikProps) => {
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+        validateOnBlur
+        validateOnChange
+      >
+        {({ values }) => {
+          const { image, selectedItem } = values;
+
+          const disabledTagGenerate = !image;
+          const disabledGenerateContent = !image || !selectedItem;
+
           return (
             <Form>
               <CommonStyles.Box
@@ -151,7 +170,10 @@ const SetupOptions = () => {
               >
                 <FastField name="image" component={Dropzone} />
 
-                <CommonStyles.Button type="button">
+                <CommonStyles.Button
+                  type="button"
+                  disabled={disabledTagGenerate}
+                >
                   Tag and Description
                 </CommonStyles.Button>
               </CommonStyles.Box>
@@ -253,7 +275,10 @@ const SetupOptions = () => {
               </CommonStyles.Box>
 
               <CommonStyles.Box centered sx={{ margin: "20px 0" }}>
-                <CommonStyles.Button>
+                <CommonStyles.Button
+                  type="submit"
+                  disabled={disabledGenerateContent}
+                >
                   Generate Product Description
                 </CommonStyles.Button>
               </CommonStyles.Box>

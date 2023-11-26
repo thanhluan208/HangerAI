@@ -38,7 +38,7 @@ const VirtualSection = () => {
               fontSize: "2rem",
               letterSpacing: "8px",
               textAlign: "center",
-              fontFamily: "GilroyBold",
+              fontFamily: "SuisseIntl",
               marginBottom: "-12px",
             }}
           >

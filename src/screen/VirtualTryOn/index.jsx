@@ -226,7 +226,7 @@ const VirtualTryOn = () => {
                         lineHeight: "unset",
                         fontSize: "30px",
                         fontWeight: "bold",
-                        fontFamily: "GilroyBold",
+                        fontFamily: "SuisseIntl",
                       }}
                     >
                       {tab.total}

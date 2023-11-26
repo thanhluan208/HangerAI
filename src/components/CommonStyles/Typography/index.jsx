@@ -13,7 +13,7 @@ const Typography = (props) => {
       fontWeight: 700,
       lineHeight: "28px",
       color: "#000000",
-      fontFamily: "GilroyBold",
+      fontFamily: "SuisseIntl",
     });
 
     styles.set("boldText28", {
@@ -21,7 +21,7 @@ const Typography = (props) => {
       fontWeight: 700,
       lineHeight: "28px",
       color: "#000000",
-      fontFamily: "GilroyBold",
+      fontFamily: "SuisseIntl",
     });
 
     styles.set("boldText24", {
@@ -29,7 +29,7 @@ const Typography = (props) => {
       fontWeight: 700,
       lineHeight: "28px",
       color: "#000000",
-      fontFamily: "GilroyBold",
+      fontFamily: "SuisseIntl",
     });
 
     styles.set("boldText20", {
@@ -37,7 +37,7 @@ const Typography = (props) => {
       fontWeight: 700,
       lineHeight: "28px",
       color: "#000000",
-      fontFamily: "GilroyBold",
+      fontFamily: "SuisseIntl",
     });
 
     styles.set("boldText", {
@@ -45,14 +45,14 @@ const Typography = (props) => {
       fontWeight: 700,
       lineHeight: "28px",
       color: "#000000",
-      fontFamily: "GilroyBold",
+      fontFamily: "SuisseIntl",
     });
 
     styles.set("boldText14", {
       fontSize: "14px",
       fontWeight: 700,
       color: "#000",
-      fontFamily: "GilroyBold",
+      fontFamily: "SuisseIntl",
     });
 
     styles.set("body14", {
@@ -61,7 +61,7 @@ const Typography = (props) => {
       lineHeight: "28px",
       color: "#000",
       letterSpacing: "0.5px",
-      fontFamily: "GilroyBold",
+      fontFamily: "SuisseIntl",
     });
 
     styles.set("body18", {
@@ -70,7 +70,7 @@ const Typography = (props) => {
       lineHeight: "28px",
       color: "#000",
       letterSpacing: "0.5px",
-      fontFamily: "GilroyBold",
+      fontFamily: "SuisseIntl",
     });
 
     styles.set("body24", {
@@ -79,7 +79,7 @@ const Typography = (props) => {
       lineHeight: "28px",
       color: "#000",
       letterSpacing: "0.5px",
-      fontFamily: "GilroyBold",
+      fontFamily: "SuisseIntl",
     });
 
     return styles.get(type);
