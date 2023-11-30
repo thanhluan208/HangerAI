@@ -1,16 +1,16 @@
-import React from "react";
-import CommonStyles from "../../CommonStyles";
-import { useNavigate } from "react-router-dom";
+import React from "react"
+import CommonStyles from "../../CommonStyles"
+import { useNavigate } from "react-router-dom"
 
 const MenuItem = ({ path, content, icon }) => {
   //! State
-  const navigate = useNavigate();
-  const isActive = window.location.pathname === path;
+  const navigate = useNavigate()
+  const isActive = window.location.pathname === path
 
   //! Function
   const handleClick = () => {
-    navigate(path);
-  };
+    navigate(path)
+  }
   //! Render
   return (
     <CommonStyles.Box
@@ -18,7 +18,7 @@ const MenuItem = ({ path, content, icon }) => {
       sx={{
         background: isActive ? "#f6f7fb" : "transparent",
         width: "90%",
-        padding: "15px 15px 15px 30px",
+        padding: "5px 15px 5px 30px",
         display: "flex",
         justifyContent: "start",
         borderTopLeftRadius: "20px",
@@ -100,7 +100,7 @@ const MenuItem = ({ path, content, icon }) => {
         {content}
       </CommonStyles.Typography>
     </CommonStyles.Box>
-  );
-};
+  )
+}
 
-export default MenuItem;
+export default MenuItem

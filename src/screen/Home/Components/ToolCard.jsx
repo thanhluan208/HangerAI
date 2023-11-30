@@ -1,134 +1,100 @@
-import React from "react";
-import CommonStyles from "../../../components/CommonStyles";
-import CommonIcons from "../../../components/CommonIcons";
+import React from "react"
+import CommonStyles from "../../../components/CommonStyles"
+import CommonIcons from "../../../components/CommonIcons"
+import { Paper } from "@mui/material"
+import { isEmpty } from "lodash"
 
 const ToolCard = ({ item }) => {
   //! State
-  const { tag, title, description, imgSrc } = item;
+  const { tag, title, description, imgSrc, isPremium, isNew } = item
 
   //! Function
 
   //! Render
   return (
-    <CommonStyles.Box
+    <Paper
       sx={{
-        marginTop: "40px",
-        padding: "0 20px",
-        display: "flex",
+        padding: "20px 25px",
+        cursor: "pointer",
       }}
     >
       <CommonStyles.Box
+        centered
         sx={{
-          display: "grid",
-          gridGap: "40px",
-          gridTemplateColumns: "30% calc(70% - 40px)",
-          padding: "10px 20px 30px",
-          borderRadius: "12px",
-          background: "#fff",
-          minWidth: "1000px",
+          gap: "15px",
+          justifyContent: "start",
+          flexWrap: "wrap",
+        }}
+      >
+        <img
+          src={imgSrc}
+          alt="icon"
+          style={{
+            height: "35px",
+            width: "35px",
+            borderRadius: "50%",
+          }}
+        />
+
+        <CommonStyles.Typography type="boldText">
+          {title}
+        </CommonStyles.Typography>
+
+        {isPremium && (
+          <CommonStyles.Chip
+            content="Premium"
+            activeBackground="#f7bb6a"
+            active
+          />
+        )}
+
+        {isNew && (
+          <CommonStyles.Chip content="New" activeBackground="#4edffd" active />
+        )}
+      </CommonStyles.Box>
+
+      <CommonStyles.Typography
+        variant="body1"
+        sx={{
+          margin: "20px 0",
+        }}
+      >
+        {description}
+      </CommonStyles.Typography>
+
+      <CommonStyles.Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginTop: "20px",
         }}
       >
         <CommonStyles.Box
           sx={{
-            position: "relative",
-            height: "227px",
-          }}
-        >
-          <CommonStyles.Box
-            sx={{
-              background: "#5c3883",
-              borderRadius: "8px",
-              zIndex: 1000,
-              position: "relative",
-              height: "227px",
-              overflow: "hidden",
-            }}
-          >
-            <img
-              src={imgSrc || "https://via.placeholder.com/250"}
-              style={{
-                width: "250px",
-                height: "227px",
-              }}
-            />
-          </CommonStyles.Box>
-          <CommonStyles.Box
-            sx={{
-              width: "100%",
-              height: "100%",
-              position: "absolute",
-              bottom: "-10px",
-              right: "-10px",
-              backgroundColor: "#ccc",
-              borderRadius: "8px",
-            }}
-          ></CommonStyles.Box>
-        </CommonStyles.Box>
-        <CommonStyles.Box
-          sx={{
+            flexWrap: " wrap",
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
+            gap: "10px",
+            width: "80%",
           }}
         >
-          <CommonStyles.Box>
-            <CommonStyles.Typography type="boldText24">
-              {title}
-            </CommonStyles.Typography>
-            <CommonStyles.Typography
-              type="body18"
-              sx={{
-                maxWidth: "400px",
-                marginTop: "15px",
-                fontFamily: "SuisseIntl",
-                opacity: ".6",
-              }}
-            >
-              {description}
-            </CommonStyles.Typography>
-          </CommonStyles.Box>
-          <CommonStyles.Box
-            centered
-            sx={{ justifyContent: "space-between", alignItems: "end" }}
-          >
-            <CommonStyles.Box
-              centered
-              sx={{
-                gap: "10px",
-                maxWidth: "600px",
-                flexWrap: "wrap",
-                justifyContent: "flex-start",
-              }}
-            >
-              {!!tag &&
-                tag.map((item) => {
-                  return (
-                    <CommonStyles.Box
-                      key={item}
-                      centered
-                      sx={{
-                        padding: "5px 10px",
-                        borderRadius: "8px",
-                        backgroundColor: "#6310bd",
-                        color: "#fff",
-                      }}
-                    >
-                      {item}
-                    </CommonStyles.Box>
-                  );
-                })}
-            </CommonStyles.Box>
-
-            <CommonStyles.Box>
-              <CommonStyles.Button variant="text">
-                <CommonIcons.Next />
-              </CommonStyles.Button>
-            </CommonStyles.Box>
-          </CommonStyles.Box>
+          {!isEmpty(tag) &&
+            tag.map((item) => {
+              const key = Math.random() * 100000 + new Date().valueOf()
+              return (
+                <CommonStyles.Typography
+                  variant="body1"
+                  key={key}
+                  sx={{ opacity: ".6" }}
+                >
+                  {item}
+                </CommonStyles.Typography>
+              )
+            })}
         </CommonStyles.Box>
       </CommonStyles.Box>
-    </CommonStyles.Box>
-  );
-};
+    </Paper>
+  )
+}
 
-export default ToolCard;
+export default ToolCard

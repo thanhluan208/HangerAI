@@ -117,7 +117,7 @@ const DefaultLayout = (props) => {
               display: "flex",
               flexDirection: "column",
               alignItems: "end",
-              gap: "20px",
+              gap: "25px",
               maxHeight: "55vh",
             }}
           >
@@ -192,7 +192,7 @@ const DefaultLayout = (props) => {
               <CommonIcons.Menu />
             </CommonStyles.Box>
           )}
-          <CommonStyles.Typography type="boldText24" sx={{ color: "#5c3883" }}>
+          <CommonStyles.Typography type="boldText" sx={{ color: "#5c3883" }}>
             {currentContent}
           </CommonStyles.Typography>
         </CommonStyles.Box>
