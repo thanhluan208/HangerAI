@@ -113,6 +113,10 @@ const TableContent = ({
         gridTemplateColumns: calculateTemplate,
         background: isOdd ? "#f2f4f7" : "#fff",
         cursor: "pointer",
+        transition: "all .3s ease-in-out",
+        "&:hover": {
+          background: "#e7e7e7",
+        },
       }}
     >
       {hasCheckbox && (
@@ -188,6 +192,15 @@ const Table = ({ hasCheckbox, filters, handleChangeSort }) => {
               ? "rotate(180deg)"
               : "rotate(0deg)",
           transition: "all .15s ease-in",
+          animation: "fade-in-sort 0.5s ease-out forwards",
+          "@keyframes fade-in-sort": {
+            "0%": {
+              opacity: 0,
+            },
+            "100%": {
+              opacity: 1,
+            },
+          },
         }}
       />
     )
