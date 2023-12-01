@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CommonStyles from "../../components/CommonStyles";
 import SetupOptions from "./Components/SetupOptions";
 import PerfectScrollBar from "react-perfect-scrollbar";
 import ItemsList from "./Components/ItemsList";
+import cachedKeys from "../../constants/cachedKeys";
+import { useSave } from "../../stores/useStores";
 
 const ProductDescriptionGenerate = () => {
   //! State
@@ -30,6 +32,7 @@ const ProductDescriptionGenerate = () => {
           init={{
             height: "70vh",
           }}
+          editorKey={cachedKeys.productRecommendEditorKey}
         />
         <PerfectScrollBar style={{ maxHeight: "70vh" }}>
           <SetupOptions />

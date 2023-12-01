@@ -1,6 +1,6 @@
-import { Divider, Paper } from "@mui/material";
+import { Collapse, Divider, Paper } from "@mui/material";
 import { FastField, Form, Formik, useFormikContext } from "formik";
-import React, { Fragment, useCallback } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import Dropzone from "./Dropzone";
 import CommonStyles from "../../../components/CommonStyles";
 import CustomFields from "../../../components/CustomFields";
@@ -8,6 +8,9 @@ import { useGet, useSave } from "../../../stores/useStores";
 import cachedKeys from "../../../constants/cachedKeys";
 import { isEmpty } from "lodash";
 import * as Yup from "yup";
+import CommonIcons from "../../../components/CommonIcons";
+import productRecomendationModel from "../../../models/productRecomendationModel";
+import productRecomendationServices from "../../../services/productRecomendationServices";
 
 const writingToneOptions = [
   {
@@ -68,7 +71,6 @@ const ListItemFromPic = () => {
 
   //! Function
   const handleClick = useCallback((item) => {
-    save(cachedKeys.currentSelectedItem, item);
     setFieldValue("selectedItem", item);
   }, []);
 
@@ -114,8 +116,17 @@ const ListItemFromPic = () => {
   );
 };
 
+const fakeResponse =
+  "Introducing the HangerMiracle shorts, a perfect combination of style and comfort. These symmetrical shorts feature a regular fit, ensuring a flattering and relaxed silhouette. With an above-the-knee length, they offer a trendy and versatile look suitable for various occasions. The fly opening type adds convenience and functionality to the design. Made with high-quality materials, these shorts feature a plain pattern textile, adding a touch of sophistication to your outfit. From casual outings to semi-formal events, the HangerMiracle shorts are a must-have addition to any fashion-forward individual's wardrobe.";
+
 const SetupOptions = () => {
   //! State
+  const [open, setOpen] = useState(false);
+  const intervalRef = useRef();
+  const setValueEditor = useGet(cachedKeys.setValueEditor);
+  const productRecommendEditorKey = useGet(
+    cachedKeys.productRecommendEditorKey
+  );
   const initialValues = React.useMemo(() => {
     return {
       image: "",
@@ -123,17 +134,64 @@ const SetupOptions = () => {
       tone: "Funny",
       template: "advertisement",
       selectedItem: "",
+      companyName: "",
+      brandName: "",
+      productName: "",
+      promotion: "",
     };
   }, []);
 
   const validationSchema = React.useMemo(() => {
     return Yup.object().shape({
-      selectedItem: Yup.string().required("Please select an item"),
+      selectedItem: Yup.object().required("Please select item"),
     });
   }, []);
 
   //! Function
-  const onSubmit = React.useCallback((values) => {}, []);
+  const onSubmit = React.useCallback(
+    async (values, { setSubmitting }) => {
+      try {
+        setSubmitting(true);
+
+        const uuid = Math.random() * 100000000;
+        setValueEditor((prev) => prev + `<p id="content_${uuid}"></p>`);
+
+        let contentContainer;
+        await new Promise((res) => {
+          setTimeout(() => {
+            contentContainer = productRecommendEditorKey.current.editor.dom.get(
+              `content_${uuid}`
+            );
+            res();
+          }, 1);
+        });
+
+        const payload = productRecomendationModel.generateContent(values);
+        const response = await productRecomendationServices.generateContent(
+          payload
+        );
+
+        const content = response?.data?.content;
+
+        if (intervalRef?.current) {
+          clearInterval(intervalRef.current);
+        }
+
+        contentContainer.innerHTML = content[0];
+        let count = 1;
+        intervalRef.current = setInterval(() => {
+          contentContainer.innerHTML += content[count++];
+          if (count >= content.length) {
+            clearInterval(intervalRef.current);
+            setSubmitting(false);
+          }
+        }, 20);
+      } catch (error) {
+        console.log("err", error);
+      }
+    },
+    [setValueEditor, intervalRef, productRecommendEditorKey]
+  );
 
   //! Render
 
@@ -151,10 +209,8 @@ const SetupOptions = () => {
         validateOnBlur
         validateOnChange
       >
-        {({ values }) => {
+        {({ values, errors, isSubmitting }) => {
           const { image, selectedItem } = values;
-
-          const disabledTagGenerate = !image;
           const disabledGenerateContent = !image || !selectedItem;
 
           return (
@@ -169,13 +225,6 @@ const SetupOptions = () => {
                 }}
               >
                 <FastField name="image" component={Dropzone} />
-
-                <CommonStyles.Button
-                  type="button"
-                  disabled={disabledTagGenerate}
-                >
-                  Tag and Description
-                </CommonStyles.Button>
               </CommonStyles.Box>
 
               <ListItemFromPic />
@@ -192,7 +241,6 @@ const SetupOptions = () => {
                   marginTop: "20px",
                 }}
               />
-
               <CommonStyles.Box
                 centered
                 sx={{
@@ -220,66 +268,99 @@ const SetupOptions = () => {
                 />
               </CommonStyles.Box>
 
+              {/* <CommonStyles.Box
+                centered
+                sx={{
+                  margin: "20px 0",
+                }}
+              >
+                <CommonStyles.Button
+                  type="button"
+                  disabled={disabledTagGenerate}
+                >
+                  Tag and Description
+                </CommonStyles.Button>
+              </CommonStyles.Box> */}
+
               <Divider />
 
               <CommonStyles.Box
                 sx={{
+                  margin: "20px 0",
                   display: "flex",
-                  flexDirection: "column",
-                  gap: "20px",
-                  marginTop: "25px",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  cursor: "pointer",
                 }}
+                onClick={() => setOpen((prev) => !prev)}
               >
-                <CommonStyles.Box>
-                  <FastField
-                    name="companyName"
-                    label="Company Name"
-                    component={CustomFields.TextField}
-                    placeholder="Miracle Hanger"
-                    fullWidth
-                  />
-                </CommonStyles.Box>
+                <CommonStyles.Typography>Option:</CommonStyles.Typography>
 
                 <CommonStyles.Box>
-                  <FastField
-                    name="brandName"
-                    label="Brand Name"
-                    component={CustomFields.TextField}
-                    placeholder="Vanity Royals"
-                    fullWidth
-                  />
-                </CommonStyles.Box>
-
-                <CommonStyles.Box>
-                  <FastField
-                    name="productName"
-                    label="Product Name"
-                    component={CustomFields.TextField}
-                    placeholder="Nike air max"
-                    fullWidth
-                  />
-                </CommonStyles.Box>
-
-                <CommonStyles.Box>
-                  <FastField
-                    name="promotion"
-                    label="Promotion"
-                    component={CustomFields.TextField}
-                    placeholder="Nike air max"
-                    fullWidth
-                    multiline
-                    minRows="4"
-                    maxRows="6"
-                  />
+                  <CommonIcons.More />
                 </CommonStyles.Box>
               </CommonStyles.Box>
+              <Collapse in={open}>
+                <CommonStyles.Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "20px",
+                    marginTop: "25px",
+                  }}
+                >
+                  <CommonStyles.Box>
+                    <FastField
+                      name="companyName"
+                      label="Company Name"
+                      component={CustomFields.TextField}
+                      placeholder="Miracle Hanger"
+                      fullWidth
+                    />
+                  </CommonStyles.Box>
+
+                  <CommonStyles.Box>
+                    <FastField
+                      name="brandName"
+                      label="Brand Name"
+                      component={CustomFields.TextField}
+                      placeholder="Vanity Royals"
+                      fullWidth
+                    />
+                  </CommonStyles.Box>
+
+                  <CommonStyles.Box>
+                    <FastField
+                      name="productName"
+                      label="Product Name"
+                      component={CustomFields.TextField}
+                      placeholder="Nike air max"
+                      fullWidth
+                    />
+                  </CommonStyles.Box>
+
+                  <CommonStyles.Box>
+                    <FastField
+                      name="promotion"
+                      label="Promotion"
+                      component={CustomFields.TextField}
+                      placeholder="Nike air max"
+                      fullWidth
+                      multiline
+                      minRows="4"
+                      maxRows="6"
+                    />
+                  </CommonStyles.Box>
+                </CommonStyles.Box>
+              </Collapse>
 
               <CommonStyles.Box centered sx={{ margin: "20px 0" }}>
                 <CommonStyles.Button
                   type="submit"
                   disabled={disabledGenerateContent}
+                  loading={isSubmitting}
                 >
-                  Generate Product Description
+                  Generate
                 </CommonStyles.Button>
               </CommonStyles.Box>
             </Form>

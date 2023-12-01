@@ -1,34 +1,21 @@
-import React from "react"
-import CommonStyles from "../../../components/CommonStyles"
-import { isEmpty } from "lodash"
-import { Paper } from "@mui/material"
-import CommonIcons from "../../../components/CommonIcons"
-import useFilter from "../../../hooks/useFilter"
+import React from "react";
+import CommonStyles from "../../../components/CommonStyles";
+import { isEmpty } from "lodash";
+import { Paper } from "@mui/material";
+import CommonIcons from "../../../components/CommonIcons";
+import useFilter from "../../../hooks/useFilter";
 
 const Documents = () => {
   //! State
-  const document = [
-    {
-      name: "Welcome to hanger.ai",
-      type: "General",
-      created: new Date(),
-      lastEdited: new Date(),
-      wordCount: 542,
-    },
-    {
-      name: "Welcome to hanger.ai 2",
-      type: "General",
-      created: new Date(),
-      lastEdited: new Date(),
-      wordCount: 234,
-    },
-  ]
 
-  const { filters, handleChangeSort } = useFilter({
+  const { filters, handleChangeSort, handleSelectRow } = useFilter({
     sortBy: "wordCount",
     sortDirection: "asc",
     page: 1,
-  })
+    selectedRows: [],
+  });
+
+  console.log("filter", filters);
 
   //! Function
 
@@ -141,10 +128,12 @@ const Documents = () => {
           hasCheckbox
           filters={filters}
           handleChangeSort={handleChangeSort}
+          disabledCheckboxHeader
+          handleSelectRow={handleSelectRow}
         />
       </CommonStyles.Box>
     </CommonStyles.Box>
-  )
-}
+  );
+};
 
-export default Documents
+export default Documents;

@@ -1,65 +1,75 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import CommonStyles from "../../../components/CommonStyles";
 import CommonIcons from "../../../components/CommonIcons";
 import { useGet, useSave } from "../../../stores/useStores";
 import cachedKeys from "../../../constants/cachedKeys";
 import ItemImage from "./ItemImage";
+import productRecomendationServices from "../../../services/productRecomendationServices";
+import axios from "axios";
 
-const dataItems = [
-  {
-    name: "Hoodie",
-    coordinate: [
-      {
-        x: 60,
-        y: 0,
+const response = {
+  image: [
+    {
+      bbox: [147, 351, 383, 683],
+      name: "pants",
+      supercategory: "lowerbody",
+      attribute_info: {
+        silhouette: ["symmetrical", "regular (fit)"],
+        length: ["maxi (length)"],
+        "opening type": ["fly (opening)"],
+        "textile pattern": ["plain (pattern)"],
+        pocket: [],
       },
-      {
-        x: 190,
-        y: 162,
+    },
+    {
+      bbox: [111, 0, 404, 356],
+      name: "hoodie",
+      supercategory: "upperbody",
+      attribute_info: {
+        silhouette: ["symmetrical", "regular (fit)", "loose (fit)"],
+        length: ["above-the-hip (length)"],
+        "textile pattern": ["plain (pattern)"],
+        sleeve: ["wrist-length", "dropped-shoulder sleeve"],
+        hood: [],
       },
-    ],
-  },
-  {
-    name: "Pants",
-    coordinate: [
-      {
-        x: 76,
-        y: 170,
+    },
+    {
+      bbox: [160, 328, 368, 370],
+      name: "classic t-shirt",
+      supercategory: "upperbody",
+      attribute_info: {
+        silhouette: ["symmetrical", "regular (fit)"],
+        length: ["above-the-hip (length)", "hip (length)"],
+        "textile pattern": ["plain (pattern)"],
       },
-      {
-        x: 172,
-        y: 320,
-      },
-    ],
-  },
-  {
-    name: "Left Shoe",
-    coordinate: [
-      {
-        x: 71,
-        y: 331,
-      },
-      {
-        x: 101,
-        y: 380,
-      },
-    ],
-  },
-  {
-    name: "Right Shoe",
-    coordinate: [
-      {
-        x: 134,
-        y: 317,
-      },
-      {
-        x: 189,
-        y: 367,
-      },
-    ],
-  },
-];
+    },
+    {
+      bbox: [290, 675, 399, 791],
+      name: "shoe",
+      supercategory: "legs and feet",
+      attribute_info: {},
+    },
+    {
+      bbox: [147, 700, 220, 817],
+      name: "shoe",
+      supercategory: "legs and feet",
+      attribute_info: {},
+    },
+    {
+      bbox: [162, 675, 203, 718],
+      name: "sock",
+      supercategory: "legs and feet",
+      attribute_info: {},
+    },
+    {
+      bbox: [300, 656, 339, 708],
+      name: "sock",
+      supercategory: "legs and feet",
+      attribute_info: {},
+    },
+  ],
+};
 
 const Dropzone = ({ form, field }) => {
   //! State
@@ -71,16 +81,40 @@ const Dropzone = ({ form, field }) => {
   const onDrop = useCallback(
     (acceptedFiles) => {
       const file = acceptedFiles[0];
+      const img = new Image();
+      const objectURL = URL.createObjectURL(file);
+
+      img.onload = function () {
+        save(cachedKeys.currentSizeSelectedItem, {
+          width: this.width,
+          height: this.height,
+        });
+        URL.revokeObjectURL(objectURL);
+      };
+
+      img.src = objectURL;
+
       const fileReader = new FileReader();
+
       fileReader.onload = async (e) => {
         const { result } = e.target;
         setFieldValue(name, result);
 
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        save(cachedKeys.listItems, dataItems);
-        setValueEditor((prev) => {
-          return prev + `<p><img src="${result}" alt="file" /></p>`;
-        });
+        try {
+          // const response = await axios(config);
+          const imgBase64 = result.split(",")[1];
+          const response =
+            await productRecomendationServices.extractItemFromImage(imgBase64);
+
+          console.log("asdasd", response);
+
+          save(cachedKeys.listItems, response?.data?.infos?.image);
+          setValueEditor((prev) => {
+            return prev + `<p><img src="${result}" alt="file" /></p>`;
+          });
+        } catch (error) {
+          console.log("err", error);
+        }
       };
 
       fileReader.readAsDataURL(file);
@@ -89,7 +123,7 @@ const Dropzone = ({ form, field }) => {
   );
 
   const { getRootProps, getInputProps } = useDropzone({
-    accept: [".png", ".jpeg", ".jpg"],
+    accept: ["image/*"],
     onDropAccepted: onDrop,
   });
 

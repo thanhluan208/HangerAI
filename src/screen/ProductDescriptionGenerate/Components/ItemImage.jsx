@@ -2,29 +2,36 @@ import React, { useMemo } from "react";
 import CommonStyles from "../../../components/CommonStyles";
 import { useGet } from "../../../stores/useStores";
 import cachedKeys from "../../../constants/cachedKeys";
+import { useFormikContext } from "formik";
 
 const ItemImage = ({ src }) => {
-  const currentSelectedItem = useGet(cachedKeys.currentSelectedItem);
+  const formikProps = useFormikContext();
+  const { values } = formikProps || {};
+
+  const { selectedItem: currentSelectedItem } = values || {};
+
+  const currentSizeSelectedItem = useGet(cachedKeys.currentSizeSelectedItem);
 
   const maskInfo = useMemo(() => {
-    const { coordinate } = currentSelectedItem || {};
-    const rootWidth = document.getElementById("root_image")?.width;
+    const { bbox: coordinate } = currentSelectedItem || {};
 
-    console.log("rootWidth", rootWidth);
+    const currentWidth = document.getElementById("root_image")?.width;
+    const currentHeight = document.getElementById("root_image")?.height;
+    const { width: rootWidth, height: rootHeight } = currentSizeSelectedItem;
 
     if (!coordinate) return null;
 
-    const width = coordinate[1].x - coordinate[0].x;
-    const height = coordinate[1].y - coordinate[0].y;
-    const top = coordinate[0].y;
-    const left = coordinate[0].x;
+    const width = coordinate[2] - coordinate[0];
+    const height = coordinate[3] - coordinate[1];
+    const top = coordinate[1];
+    const left = coordinate[0];
 
     return {
-      width,
-      height,
-      top,
-      left,
-      rootWidth,
+      width: width * (currentWidth / rootWidth),
+      height: height * (currentHeight / rootHeight),
+      top: top * (currentHeight / rootHeight),
+      left: left * (currentWidth / rootWidth),
+      currentWidth,
     };
   }, [currentSelectedItem]);
 
@@ -65,7 +72,7 @@ const ItemImage = ({ src }) => {
             top: maskInfo?.top,
             left: maskInfo?.left,
             overflow: "hidden",
-            borderRadius: "10px",
+            borderRadius: "4px",
             transition: "all .1s ease-in",
           }}
         >
@@ -73,7 +80,7 @@ const ItemImage = ({ src }) => {
             src={src}
             alt="item"
             style={{
-              width: maskInfo?.rootWidth,
+              width: maskInfo?.currentWidth,
               transform: `translateX(-${maskInfo?.left}px) translateY(-${maskInfo?.top}px)`,
             }}
           />

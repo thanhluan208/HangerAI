@@ -1,7 +1,9 @@
-import React, { useCallback, useMemo } from "react"
-import CommonStyles from ".."
-import CommonIcons from "../../CommonIcons"
-import { Checkbox } from "@mui/material"
+import React, { useCallback, useMemo } from "react";
+import CommonStyles from "..";
+import CommonIcons from "../../CommonIcons";
+import { Checkbox } from "@mui/material";
+import PerfectScrollBar from "react-perfect-scrollbar";
+import { isArray } from "lodash";
 
 const columns = [
   {
@@ -23,13 +25,13 @@ const columns = [
         >
           {props.type}
         </CommonStyles.Box>
-      )
+      );
     },
   },
   {
     id: "dateCreated",
     renderTitle: (props) => {
-      return <CommonStyles.Box>Date created</CommonStyles.Box>
+      return <CommonStyles.Box>Date created</CommonStyles.Box>;
     },
     isTextOverFlow: true,
     sortable: true,
@@ -53,11 +55,11 @@ const columns = [
 
           <CommonStyles.Typography>{props.wordCount}</CommonStyles.Typography>
         </CommonStyles.Box>
-      )
+      );
     },
     sortable: true,
   },
-]
+];
 
 const data = [
   {
@@ -92,7 +94,7 @@ const data = [
     lastEdited: new Date().toString(),
     wordCount: 435,
   },
-]
+];
 
 const TableContent = ({
   rowData,
@@ -100,10 +102,26 @@ const TableContent = ({
   columns,
   hasCheckbox,
   isOdd,
+  selectedRows,
+  handleSelectRow,
 }) => {
   //! State
+  const isSelected = useMemo(() => {
+    if (!selectedRows) return false;
+
+    if (isArray(selectedRows)) {
+      for (const row of selectedRows) {
+        if (row?.id === rowData?.id) return true;
+      }
+    }
+
+    return false;
+  }, [selectedRows, rowData]);
 
   //! Function
+  const onSelectRow = useCallback(() => {
+    handleSelectRow(rowData);
+  }, [handleSelectRow, rowData]);
 
   //! Render
   return (
@@ -121,7 +139,11 @@ const TableContent = ({
     >
       {hasCheckbox && (
         <CommonStyles.Box centered sx={{ padding: "16px" }}>
-          <Checkbox sx={{ padding: "0" }} />
+          <Checkbox
+            sx={{ padding: "0" }}
+            checked={isSelected}
+            onClick={onSelectRow}
+          />
         </CommonStyles.Box>
       )}
       {columns.map((column) => {
@@ -138,7 +160,7 @@ const TableContent = ({
             >
               {column.renderContent(rowData)}
             </CommonStyles.Box>
-          )
+          );
 
         return (
           <CommonStyles.Box
@@ -155,34 +177,43 @@ const TableContent = ({
           >
             {rowData[column.id]}
           </CommonStyles.Box>
-        )
+        );
       })}
     </CommonStyles.Box>
-  )
-}
+  );
+};
 
-const Table = ({ hasCheckbox, filters, handleChangeSort }) => {
+const Table = ({
+  hasCheckbox,
+  disabledCheckboxHeader,
+  filters,
+  handleChangeSort,
+  tableWidth,
+  maxHeight = "600px",
+  maxWidth,
+  handleSelectRow,
+}) => {
   //! State
-  const { sortBy, sortDirection, page } = filters || {}
+  const { sortBy, sortDirection, page, selectedRows } = filters || {};
   const calculateTemplate = useMemo(() => {
-    let template = hasCheckbox ? "80px" : ""
+    let template = hasCheckbox ? "80px" : "";
 
     columns.forEach((item) => {
       if (item.width && item.width > 0) {
-        template += " " + item.width + "px"
+        template += " " + item.width + "px";
       } else {
-        template += " 1fr"
+        template += " 1fr";
       }
-    })
+    });
 
-    return template
-  }, [columns, hasCheckbox])
+    return template;
+  }, [columns, hasCheckbox]);
 
   //! Function
 
   //! Render
   const renderSort = useCallback(() => {
-    if (!sortBy || !sortDirection) return null
+    if (!sortBy || !sortDirection) return null;
 
     return (
       <CommonIcons.Up
@@ -203,79 +234,98 @@ const Table = ({ hasCheckbox, filters, handleChangeSort }) => {
           },
         }}
       />
-    )
-  }, [sortBy, sortDirection])
+    );
+  }, [sortBy, sortDirection]);
+
+  const renderCheckboxHeader = useCallback(() => {
+    if (hasCheckbox) {
+      if (disabledCheckboxHeader)
+        return <CommonStyles.Box sx={{ padding: "16px" }}></CommonStyles.Box>;
+
+      return (
+        <CommonStyles.Box centered sx={{ padding: "16px" }}>
+          <Checkbox sx={{ padding: "0" }} />
+        </CommonStyles.Box>
+      );
+    }
+  }, [hasCheckbox, disabledCheckboxHeader]);
 
   return (
-    <CommonStyles.Box
-      sx={{
-        width: "100%",
-      }}
-    >
+    <PerfectScrollBar style={{ maxWidth: maxWidth }}>
       <CommonStyles.Box
         sx={{
-          display: "grid",
-          gridTemplateColumns: calculateTemplate,
-          borderRadius: "8px",
-          background: "#fff",
-          marginBottom: "15px",
-          boxShadow: "0px 2px 6px rgba(100, 116, 139, 0.12)",
-          border: "1px solid #EAECF0",
+          width: !!tableWidth ? tableWidth : "100%",
         }}
       >
-        {hasCheckbox && (
-          <CommonStyles.Box centered sx={{ padding: "16px" }}>
-            <Checkbox sx={{ padding: "0" }} />
+        <CommonStyles.Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: calculateTemplate,
+            borderRadius: "8px",
+            background: "#fff",
+            marginBottom: "15px",
+            boxShadow: "0px 2px 6px rgba(100, 116, 139, 0.12)",
+            border: "1px solid #EAECF0",
+          }}
+        >
+          {renderCheckboxHeader()}
+          {columns.map((item) => {
+            return (
+              <CommonStyles.Box
+                key={item.id}
+                sx={{
+                  padding: "16px",
+                  gap: "10px",
+                  display: "flex",
+                  alignItems: "center",
+                  cursor: item?.sortable ? "pointer" : "",
+                }}
+                onClick={() => {
+                  if (item?.sortable) {
+                    handleChangeSort(item.id);
+                  }
+                }}
+              >
+                {item?.renderTitle ? item.renderTitle(item, data) : item.title}
+
+                {sortBy === item.id && renderSort()}
+              </CommonStyles.Box>
+            );
+          })}
+        </CommonStyles.Box>
+
+        <PerfectScrollBar
+          style={{
+            maxHeight: maxHeight,
+          }}
+        >
+          <CommonStyles.Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              boxShadow: "0px 2px 6px rgba(100, 116, 139, 0.12)",
+              border: "1px solid #EAECF0",
+            }}
+          >
+            {data.map((rowData, index) => {
+              return (
+                <TableContent
+                  rowData={rowData}
+                  calculateTemplate={calculateTemplate}
+                  key={rowData.id}
+                  columns={columns}
+                  hasCheckbox={hasCheckbox}
+                  isOdd={index % 2 === 1}
+                  selectedRows={selectedRows}
+                  handleSelectRow={handleSelectRow}
+                />
+              );
+            })}
           </CommonStyles.Box>
-        )}
-        {columns.map((item) => {
-          return (
-            <CommonStyles.Box
-              key={item.id}
-              sx={{
-                padding: "16px",
-                gap: "10px",
-                display: "flex",
-                alignItems: "center",
-                cursor: item?.sortable ? "pointer" : "",
-              }}
-              onClick={() => {
-                if (item?.sortable) {
-                  handleChangeSort(item.id)
-                }
-              }}
-            >
-              {item?.renderTitle ? item.renderTitle(item, data) : item.title}
-
-              {sortBy === item.id && renderSort()}
-            </CommonStyles.Box>
-          )
-        })}
+        </PerfectScrollBar>
       </CommonStyles.Box>
+    </PerfectScrollBar>
+  );
+};
 
-      <CommonStyles.Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          boxShadow: "0px 2px 6px rgba(100, 116, 139, 0.12)",
-          border: "1px solid #EAECF0",
-        }}
-      >
-        {data.map((rowData, index) => {
-          return (
-            <TableContent
-              rowData={rowData}
-              calculateTemplate={calculateTemplate}
-              key={rowData.id}
-              columns={columns}
-              hasCheckbox={hasCheckbox}
-              isOdd={index % 2 === 1}
-            />
-          )
-        })}
-      </CommonStyles.Box>
-    </CommonStyles.Box>
-  )
-}
-
-export default Table
+export default Table;
