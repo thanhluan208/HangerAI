@@ -86,8 +86,8 @@ const Dropzone = ({ form, field }) => {
 
       img.onload = function () {
         save(cachedKeys.currentSizeSelectedItem, {
-          width: this.width,
-          height: this.height,
+          width: this?.width || 0,
+          height: this?.height || 0,
         });
         URL.revokeObjectURL(objectURL);
       };
@@ -105,8 +105,6 @@ const Dropzone = ({ form, field }) => {
           const imgBase64 = result.split(",")[1];
           const response =
             await productRecomendationServices.extractItemFromImage(imgBase64);
-
-          console.log("asdasd", response);
 
           save(cachedKeys.listItems, response?.data?.infos?.image);
           setValueEditor((prev) => {

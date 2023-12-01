@@ -17,7 +17,8 @@ const ItemImage = ({ src }) => {
 
     const currentWidth = document.getElementById("root_image")?.width;
     const currentHeight = document.getElementById("root_image")?.height;
-    const { width: rootWidth, height: rootHeight } = currentSizeSelectedItem;
+    const { width: rootWidth, height: rootHeight } =
+      currentSizeSelectedItem || {};
 
     if (!coordinate) return null;
 
