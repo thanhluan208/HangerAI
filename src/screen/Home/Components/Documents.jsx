@@ -5,6 +5,282 @@ import { Paper } from "@mui/material";
 import CommonIcons from "../../../components/CommonIcons";
 import useFilter from "../../../hooks/useFilter";
 
+const columns = [
+  {
+    id: "title",
+    title: "Title",
+    width: 1000,
+    childrens: [
+      {
+        id: "title_1",
+        title: "Title 1",
+        childrens: [
+          {
+            id: "title_1_1",
+            title: "Title 1.1",
+          },
+          {
+            id: "title_1_2",
+            title: "Title 1.2",
+          },
+        ],
+      },
+      {
+        id: "title_2",
+        title: "Title 2",
+      },
+    ],
+  },
+  {
+    id: "type",
+    title: "Type",
+    width: 600,
+    childrens: [
+      {
+        id: "type_1",
+        title: "Type 1",
+        renderContent: (props) => {
+          return (
+            <CommonStyles.Box
+              sx={{
+                padding: "5px 15px",
+                borderRadius: "8px",
+                border: "solid .5px #ccc",
+              }}
+            >
+              {props.type_1}
+            </CommonStyles.Box>
+          );
+        },
+      },
+      {
+        id: "type_2",
+        title: "Type 2",
+        renderContent: (props) => {
+          return (
+            <CommonStyles.Box
+              sx={{
+                padding: "5px 15px",
+                borderRadius: "8px",
+                border: "solid .5px #ccc",
+              }}
+            >
+              {props.type_2}
+            </CommonStyles.Box>
+          );
+        },
+      },
+      {
+        id: "type_3",
+        title: "Type 3",
+        renderContent: (props) => {
+          return (
+            <CommonStyles.Box
+              sx={{
+                padding: "5px 15px",
+                borderRadius: "8px",
+                border: "solid .5px #ccc",
+              }}
+            >
+              {props.type_3}
+            </CommonStyles.Box>
+          );
+        },
+      },
+    ],
+  },
+  {
+    id: "dateCreated",
+    renderTitle: (props) => {
+      return <CommonStyles.Box>Date created</CommonStyles.Box>;
+    },
+    isTextOverFlow: true,
+    sortable: true,
+  },
+  {
+    id: "lastEdited",
+    title: "Last edited",
+    isTextOverFlow: true,
+    sortable: true,
+  },
+  {
+    id: "wordCount",
+    title: "Word count",
+    renderContent: (props) => {
+      return (
+        <CommonStyles.Box
+          centered
+          sx={{ gap: "10px", justifyContent: "start" }}
+        >
+          <CommonIcons.Stats />
+
+          <CommonStyles.Typography>{props.wordCount}</CommonStyles.Typography>
+        </CommonStyles.Box>
+      );
+    },
+    sortable: true,
+  },
+];
+
+const data = [
+  {
+    id: Math.random() * 1000000,
+    title_1_1: "Welcome ",
+    title_1_2: "To ",
+    title_2: "The HangerAI",
+    type_1: "Document",
+    type_2: "Template",
+    type_3: "Folder",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title_1_1: "Welcome ",
+    title_1_2: "To ",
+    title_2: "The HangerAI",
+    type_1: "Document",
+    type_2: "Template",
+    type_3: "Folder",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title_1_1: "Welcome ",
+    title_1_2: "To ",
+    title_2: "The HangerAI",
+    type_1: "Document",
+    type_2: "Template",
+    type_3: "Folder",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title_1_1: "Welcome ",
+    title_1_2: "To ",
+    title_2: "The HangerAI",
+    type_1: "Document",
+    type_2: "Template",
+    type_3: "Folder",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title_1_1: "Welcome ",
+    title_1_2: "To ",
+    title_2: "The HangerAI",
+    type_1: "Document",
+    type_2: "Template",
+    type_3: "Folder",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title_1_1: "Welcome ",
+    title_1_2: "To ",
+    title_2: "The HangerAI",
+    type_1: "Document",
+    type_2: "Template",
+    type_3: "Folder",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title_1_1: "Welcome ",
+    title_1_2: "To ",
+    title_2: "The HangerAI",
+    type_1: "Document",
+    type_2: "Template",
+    type_3: "Folder",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title_1_1: "Welcome ",
+    title_1_2: "To ",
+    title_2: "The HangerAI",
+    type_1: "Document",
+    type_2: "Template",
+    type_3: "Folder",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title_1_1: "Welcome ",
+    title_1_2: "To ",
+    title_2: "The HangerAI",
+    type_1: "Document",
+    type_2: "Template",
+    type_3: "Folder",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title_1_1: "Welcome ",
+    title_1_2: "To ",
+    title_2: "The HangerAI",
+    type_1: "Document",
+    type_2: "Template",
+    type_3: "Folder",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title_1_1: "Welcome ",
+    title_1_2: "To ",
+    title_2: "The HangerAI",
+    type_1: "Document",
+    type_2: "Template",
+    type_3: "Folder",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title_1_1: "Welcome ",
+    title_1_2: "To ",
+    title_2: "The HangerAI",
+    type_1: "Document",
+    type_2: "Template",
+    type_3: "Folder",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title_1_1: "Welcome ",
+    title_1_2: "To ",
+    title_2: "The HangerAI",
+    type_1: "Document",
+    type_2: "Template",
+    type_3: "Folder",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+];
+
 const Documents = () => {
   //! State
 
@@ -14,8 +290,6 @@ const Documents = () => {
     page: 1,
     selectedRows: [],
   });
-
-  console.log("filter", filters);
 
   //! Function
 
@@ -130,6 +404,10 @@ const Documents = () => {
           handleChangeSort={handleChangeSort}
           disabledCheckboxHeader
           handleSelectRow={handleSelectRow}
+          tableWidth={2600}
+          data={data}
+          columns={columns}
+          headerLevel={3}
         />
       </CommonStyles.Box>
     </CommonStyles.Box>
