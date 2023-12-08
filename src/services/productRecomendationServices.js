@@ -1,4 +1,8 @@
-import { extractItemFromImage, generateContent } from "../constants/api";
+import {
+  extractItemFromImage,
+  generateContent,
+  switchStatus,
+} from "../constants/api";
 import httpService from "./httpServices";
 
 const test = {
@@ -20,6 +24,9 @@ class productRecommendationServices {
   }
   generateContent(body) {
     return httpService.axios.post(generateContent, body);
+  }
+  switchStatus(body) {
+    return httpService.axios.post(switchStatus, body);
   }
 }
 

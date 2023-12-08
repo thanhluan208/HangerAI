@@ -40,11 +40,13 @@ const useFilter = (initialFilter) => {
   }, []);
 
   const handleSelectRow = useCallback((row) => {
+    console.log("asdasd", row);
     setFilters((prev) => {
       const prevSelectedRows = prev?.selectedRows;
       if (!prevSelectedRows || !isArray(prevSelectedRows)) {
         throw new Error("selectedRows must be an array");
       } else {
+        console.log("prevSelectedRows", prevSelectedRows);
         const index = prevSelectedRows.findIndex(
           (item) => item?.id === row?.id
         );
@@ -55,10 +57,11 @@ const useFilter = (initialFilter) => {
             selectedRows: [...prevSelectedRows, row],
           };
         } else {
-          cloneDeep(prevSelectedRows).splice(index, 1);
+          const nextPrevSelectedRows = cloneDeep(prevSelectedRows);
+          nextPrevSelectedRows.splice(index, 1);
           return {
             ...prev,
-            selectedRows: prevSelectedRows,
+            selectedRows: nextPrevSelectedRows,
           };
         }
       }

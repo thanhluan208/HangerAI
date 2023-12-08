@@ -1,11 +1,9 @@
-import React, { memo, useCallback } from "react";
+import React, { memo, useCallback, useMemo } from "react";
 import CommonIcons from "../../../CommonIcons";
 import CommonStyles from "../..";
 import { Checkbox } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 import TableHeaderChild from "./TableHeaderChild";
-
-export const headerHeight = 45;
 
 const TableHeader = ({
   sortBy,
@@ -20,6 +18,10 @@ const TableHeader = ({
   tableWidth,
 }) => {
   //! State
+  const headerHeight = useMemo(() => {
+    if (headerLevel === 1) return 67;
+    else return 45;
+  }, [headerLevel]);
 
   //! Function
 

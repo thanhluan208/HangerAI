@@ -11,10 +11,17 @@ import { useAuthentication } from "./providers/AuthenticationProvider";
 import VirtualTryOn from "./screen/VirtualTryOn";
 import Home from "./screen/Home";
 import ProductDescriptionGenerate from "./screen/ProductDescriptionGenerate";
+import io from "socket.io-client";
+import { useSave } from "./stores/useStores";
+import { useEffect } from "react";
+import cachedKeys from "./constants/cachedKeys";
+
+const socket = io("http://localhost:3000");
 
 const App = () => {
   //! State
   const { islogged } = useAuthentication();
+  const save = useSave();
   const router = createBrowserRouter([
     {
       path: "/login",
@@ -60,6 +67,9 @@ const App = () => {
   ]);
 
   //! Function
+  useEffect(() => {
+    save(cachedKeys.socket, socket);
+  }, []);
 
   //! Render
   return <RouterProvider router={router} />;

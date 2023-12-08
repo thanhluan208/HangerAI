@@ -1,6 +1,6 @@
 import { Collapse, Divider, Paper } from "@mui/material";
 import { FastField, Form, Formik, useFormikContext } from "formik";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Dropzone from "./Dropzone";
 import CommonStyles from "../../../components/CommonStyles";
 import CustomFields from "../../../components/CustomFields";
@@ -15,23 +15,23 @@ import productRecomendationServices from "../../../services/productRecomendation
 const writingToneOptions = [
   {
     label: "Funny",
-    value: "Funny",
+    value: "funny",
   },
   {
     label: "Formal",
-    value: "Formal",
+    value: "formal",
   },
   {
     label: "Academic",
-    value: "Academic",
+    value: "academic",
   },
   {
     label: "Luxury",
-    value: "Luxury",
+    value: "luxury",
   },
   {
     label: "Casual",
-    value: "Casual",
+    value: "casual",
   },
 ];
 
@@ -116,13 +116,11 @@ const ListItemFromPic = () => {
   );
 };
 
-const fakeResponse =
-  "Introducing the HangerMiracle shorts, a perfect combination of style and comfort. These symmetrical shorts feature a regular fit, ensuring a flattering and relaxed silhouette. With an above-the-knee length, they offer a trendy and versatile look suitable for various occasions. The fly opening type adds convenience and functionality to the design. Made with high-quality materials, these shorts feature a plain pattern textile, adding a touch of sophistication to your outfit. From casual outings to semi-formal events, the HangerMiracle shorts are a must-have addition to any fashion-forward individual's wardrobe.";
-
 const SetupOptions = () => {
   //! State
   const [open, setOpen] = useState(false);
   const intervalRef = useRef();
+  const socket = useGet(cachedKeys.socket);
   const setValueEditor = useGet(cachedKeys.setValueEditor);
   const productRecommendEditorKey = useGet(
     cachedKeys.productRecommendEditorKey
@@ -131,7 +129,7 @@ const SetupOptions = () => {
     return {
       image: "",
       language: "english",
-      tone: "Funny",
+      tone: "funny",
       template: "advertisement",
       selectedItem: "",
       companyName: "",
@@ -165,6 +163,11 @@ const SetupOptions = () => {
             res();
           }, 1);
         });
+
+        const switchPayload = productRecomendationModel.switchStatus(values);
+        const responseSwitch = await productRecomendationServices.switchStatus(
+          switchPayload
+        );
 
         const payload = productRecomendationModel.generateContent(values);
         const response = await productRecomendationServices.generateContent(

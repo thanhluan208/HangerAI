@@ -27,6 +27,17 @@ class productRecomendationModel {
       infos: payload,
     };
   }
+
+  static switchStatus(body) {
+    const { language, template, tone } = body;
+
+    return {
+      lang: language,
+      task: template,
+      tone: tone,
+      more_options: {},
+    };
+  }
 }
 
 export default productRecomendationModel;

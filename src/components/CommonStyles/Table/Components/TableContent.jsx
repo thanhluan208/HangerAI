@@ -1,9 +1,8 @@
 import { Checkbox } from "@mui/material";
-import React, { Fragment, useCallback, useMemo } from "react";
+import React, { Fragment, memo, useCallback, useEffect, useMemo } from "react";
 import CommonStyles from "../..";
 import { isArray } from "lodash";
 import TableContentItem from "./TableContentItem";
-import { v4 as uuidv4 } from "uuid";
 
 const TableContent = ({
   rowData,
@@ -38,14 +37,12 @@ const TableContent = ({
     return (
       <Fragment>
         {columns.map((column) => {
-          const key = uuidv4();
-
           return (
             <TableContentItem
               item={column}
               data={rowData}
               isOdd={isOdd}
-              key={key}
+              key={`${column?.id}-${rowData?.id}`}
             />
           );
         })}
@@ -63,6 +60,8 @@ const TableContent = ({
         "&:hover": {
           background: "#e7e7e7",
         },
+        borderRadius: "8px",
+        overflow: "hidden",
       }}
     >
       {hasCheckbox && (
@@ -82,4 +81,4 @@ const TableContent = ({
   );
 };
 
-export default TableContent;
+export default memo(TableContent);

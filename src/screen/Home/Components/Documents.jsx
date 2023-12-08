@@ -122,6 +122,64 @@ const columns = [
   },
 ];
 
+const simpleColumns = [
+  {
+    id: "title",
+    title: "Title",
+    width: 400,
+  },
+  {
+    id: "type",
+    title: "Type",
+    renderContent: (props) => {
+      return (
+        <CommonStyles.Box
+          sx={{
+            padding: "5px 15px",
+            borderRadius: "8px",
+            border: "solid .5px #ccc",
+          }}
+        >
+          {props.type}
+        </CommonStyles.Box>
+      );
+    },
+  },
+  {
+    id: "dateCreated",
+    renderTitle: (props) => {
+      return <CommonStyles.Box>Date created</CommonStyles.Box>;
+    },
+    isTextOverFlow: true,
+    sortable: true,
+    width: 500,
+  },
+  {
+    id: "lastEdited",
+    title: "Last edited",
+    isTextOverFlow: true,
+    width: 500,
+    sortable: true,
+  },
+  {
+    id: "wordCount",
+    title: "Word count",
+    renderContent: (props) => {
+      return (
+        <CommonStyles.Box
+          centered
+          sx={{ gap: "10px", justifyContent: "start" }}
+        >
+          <CommonIcons.Stats />
+
+          <CommonStyles.Typography>{props.wordCount}</CommonStyles.Typography>
+        </CommonStyles.Box>
+      );
+    },
+    sortable: true,
+  },
+];
+
 const data = [
   {
     id: Math.random() * 1000000,
@@ -281,6 +339,89 @@ const data = [
   },
 ];
 
+const simpleData = [
+  {
+    id: Math.random() * 1000000,
+    title: "Welcome To The HangerAI",
+    type: "Document",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title: "Welcome To The HangerAI",
+    type: "Document",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title: "Welcome To The HangerAI",
+    type: "Document",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title: "Welcome To The HangerAI",
+    type: "Document",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title: "Welcome To The HangerAI",
+    type: "Document",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title: "Welcome To The HangerAI",
+    type: "Document",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title: "Welcome To The HangerAI",
+    type: "Document",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title: "Welcome To The HangerAI",
+    type: "Document",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title: "Welcome To The HangerAI",
+    type: "Document",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+  {
+    id: Math.random() * 1000000,
+    title: "Welcome To The HangerAI",
+    type: "Document",
+    dateCreated: new Date().toString(),
+    lastEdited: new Date().toString(),
+    wordCount: 435,
+  },
+];
+
 const Documents = () => {
   //! State
 
@@ -318,7 +459,7 @@ const Documents = () => {
         >
           Documents
         </CommonStyles.Typography>
-        {!isEmpty(document) && (
+        {!isEmpty(simpleData) && (
           <CommonStyles.Box
             centered
             sx={{
@@ -328,7 +469,7 @@ const Documents = () => {
               backgroundColor: "#ccc",
             }}
           >
-            {document.length}
+            {simpleData.length}
           </CommonStyles.Box>
         )}
       </CommonStyles.Box>
@@ -404,10 +545,11 @@ const Documents = () => {
           handleChangeSort={handleChangeSort}
           disabledCheckboxHeader
           handleSelectRow={handleSelectRow}
-          tableWidth={2600}
-          data={data}
-          columns={columns}
-          headerLevel={3}
+          tableWidth={2000}
+          data={simpleData}
+          columns={simpleColumns}
+          headerLevel={1}
+          maxWidth="80vw"
         />
       </CommonStyles.Box>
     </CommonStyles.Box>

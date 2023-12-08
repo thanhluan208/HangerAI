@@ -3,7 +3,6 @@ import CommonStyles from "..";
 import PerfectScrollBar from "react-perfect-scrollbar";
 import TableHeader from "./Components/TableHeader";
 import TableContent from "./Components/TableContent";
-import { v4 as uuidv4 } from "uuid";
 
 const Table = ({
   data,
@@ -20,6 +19,7 @@ const Table = ({
 }) => {
   //! State
   const { sortBy, sortDirection, selectedRows } = filters || {};
+
   const calculateTemplate = useMemo(() => {
     let template = hasCheckbox ? "80px" : "";
 
@@ -58,6 +58,7 @@ const Table = ({
       <CommonStyles.Box
         sx={{
           width: !!tableWidth ? tableWidth : "100%",
+          borderRadius: "12px",
         }}
       >
         <CommonStyles.Box
@@ -68,12 +69,14 @@ const Table = ({
             ".ps__thumb-y": {
               display: "none !important",
             },
+            borderRadius: "12px",
           }}
         >
           <PerfectScrollBar
             style={{
               maxHeight: `${maxHeight} `,
               overflow: "unset !important",
+              borderRadius: "12px",
             }}
           >
             <CommonStyles.Box
@@ -82,16 +85,15 @@ const Table = ({
                 flexDirection: "column",
                 boxShadow: "0px 2px 6px rgba(100, 116, 139, 0.12)",
                 border: "1px solid #EAECF0",
+                borderRadius: "12px",
               }}
             >
               {data.map((rowData, index) => {
-                const key = uuidv4();
-
                 return (
                   <TableContent
                     rowData={rowData}
                     calculateTemplate={calculateTemplate}
-                    key={key}
+                    key={rowData.id}
                     columns={columns}
                     hasCheckbox={hasCheckbox}
                     isOdd={index % 2 === 1}

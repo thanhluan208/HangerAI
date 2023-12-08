@@ -1,10 +1,14 @@
 import { isArray } from "lodash";
 import CommonStyles from "../..";
 import { v4 as uuidv4 } from "uuid";
-import { headerHeight } from "./TableHeader";
+import { useMemo } from "react";
 
 const TableHeaderChild = ({ item, currentLevel, totalLevel }) => {
   //! State
+  const headerHeight = useMemo(() => {
+    if (totalLevel === 1) return 67;
+    else return 45;
+  }, [totalLevel]);
 
   //! Function
 

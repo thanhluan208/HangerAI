@@ -4,4 +4,5 @@ export default {
   listItems: "listItems",
   currentSizeSelectedItem: "currentSizeSelectedItem",
   productRecommendEditorKey: "productRecommendEditorKey",
+  socket: "socket",
 };

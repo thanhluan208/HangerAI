@@ -2,7 +2,7 @@ import { memo, useEffect, useMemo } from "react";
 import CommonStyles from "../..";
 import { v4 as uuidv4 } from "uuid";
 
-const TableContentItem = ({ item, data, isOdd, key }) => {
+const TableContentItem = ({ item, data, isOdd }) => {
   //! State
   const stickyStyle = useMemo(() => {
     if (item?.isSticky) {
@@ -29,10 +29,6 @@ const TableContentItem = ({ item, data, isOdd, key }) => {
     return template;
   }, [item]);
   //! Function
-
-  useEffect(() => {
-    console.log("mounted", key);
-  }, []);
 
   //! Render
   if (item?.renderContent)

@@ -1,13 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CommonStyles from "../../components/CommonStyles";
 import SetupOptions from "./Components/SetupOptions";
 import PerfectScrollBar from "react-perfect-scrollbar";
 import ItemsList from "./Components/ItemsList";
 import cachedKeys from "../../constants/cachedKeys";
-import { useSave } from "../../stores/useStores";
+import { useGet, useSave } from "../../stores/useStores";
+import TestSocket from "./Components/TestSocket";
 
 const ProductDescriptionGenerate = () => {
   //! State
+  const socket = useGet(cachedKeys.socket);
 
   //! Function
 
@@ -42,6 +44,8 @@ const ProductDescriptionGenerate = () => {
       <ItemsList type="Example" />
 
       <ItemsList type="Uploaded" />
+
+      <TestSocket />
     </CommonStyles.Box>
   );
 };
