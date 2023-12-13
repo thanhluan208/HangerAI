@@ -12,7 +12,7 @@ import { loginFacebookURL, loginGoogleURL } from "../../constants/api";
 const Login = () => {
   //! State
   const theme = useTheme();
-  const { handleLogin } = useAuthentication();
+  const { handleLoginTest } = useAuthentication();
   const initialValue = useMemo(() => {
     return {
       email: "",
@@ -32,7 +32,7 @@ const Login = () => {
   //! Function
   const onSubmit = useCallback(
     (values, { setSubmitting }) => {
-      handleLogin(values, setSubmitting);
+      handleLoginTest(values, setSubmitting);
     },
     [handleLogin]
   );

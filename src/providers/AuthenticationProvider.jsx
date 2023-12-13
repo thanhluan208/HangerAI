@@ -18,6 +18,7 @@ const AuthenticationContext = createContext({
   handleLogout: () => {},
   handleLoginGoogle: () => {},
   handleLoginFacebook: () => {},
+  handleLoginTest: () => {},
 });
 
 export const useAuthentication = () => {
