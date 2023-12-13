@@ -22,7 +22,6 @@ const SideBar = () => {
         display: "flex",
         height: "calc(100% - 40px)",
         flexDirection: "column",
-        width: open ? "18vw" : "0",
         opacity: open ? "1" : "0",
         padding: "20px 0",
         transition: "all .2s ease-in-out",
@@ -93,7 +92,7 @@ const SideBar = () => {
             width: "90%",
             padding: "10px 0",
             backgroundColor: "#f6f7fb",
-            borderRadius: "12px",
+            borderRadius: "8px",
             // boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.1)",
           }}
         >

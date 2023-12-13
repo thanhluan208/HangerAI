@@ -34,7 +34,8 @@ const DefaultLayout = (props) => {
         width: "100vw",
         background: "#fff",
         position: "relative",
-        display: "flex",
+        display: "grid",
+        gridTemplateColumns: "16% 84%",
         padding: open ? "0" : "0 30px",
       }}
     >
@@ -44,7 +45,6 @@ const DefaultLayout = (props) => {
         sx={{
           position: "relative",
           zIndex: 2,
-          width: "100%",
           height: "calc(100vh - 40px)",
           background: "#f6f7fb",
           margin: "20px 20px 20px 0",
