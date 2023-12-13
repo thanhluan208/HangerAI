@@ -1,18 +1,49 @@
-import React, { useEffect } from "react"
-import CommonStyles from "../../components/CommonStyles"
-import { useTheme } from "@emotion/react"
-import { Field, Form, Formik } from "formik"
-import CustomFields from "../../components/CustomFields"
-import { Link } from "@mui/material"
-import CommonIcons from "../../components/CommonIcons"
-import { useAuthentication } from "../../providers/AuthenticationProvider"
+import React, { useCallback, useEffect, useMemo } from "react";
+import CommonStyles from "../../components/CommonStyles";
+import { useTheme } from "@emotion/react";
+import { Field, Form, Formik } from "formik";
+import CustomFields from "../../components/CustomFields";
+import { Link } from "@mui/material";
+import CommonIcons from "../../components/CommonIcons";
+import { useAuthentication } from "../../providers/AuthenticationProvider";
+import * as Yup from "yup";
+import { loginFacebookURL, loginGoogleURL } from "../../constants/api";
 
 const Login = () => {
   //! State
-  const theme = useTheme()
-  const { handleLogin } = useAuthentication()
+  const theme = useTheme();
+  const { handleLogin } = useAuthentication();
+  const initialValue = useMemo(() => {
+    return {
+      email: "",
+      password: "",
+    };
+  }, []);
+
+  const validationSchema = useMemo(() => {
+    return Yup.object().shape({
+      email: Yup.string()
+        .email("Invalid email")
+        .required("Email is required field"),
+      password: Yup.string().required("Password is required field"),
+    });
+  }, []);
 
   //! Function
+  const onSubmit = useCallback(
+    (values, { setSubmitting }) => {
+      handleLogin(values, setSubmitting);
+    },
+    [handleLogin]
+  );
+
+  const handleLoginGoogle = useCallback(() => {
+    window.open(loginGoogleURL, "_self");
+  }, []);
+
+  const handleLoginFacebook = useCallback(() => {
+    window.open(loginFacebookURL, "_self");
+  }, []);
 
   //! Render
 
@@ -65,8 +96,14 @@ const Login = () => {
           Request an account
         </CommonStyles.Typography>
       </CommonStyles.Button>
-      <Formik>
-        {(formikProps) => {
+      <Formik
+        initialValues={initialValue}
+        validationSchema={validationSchema}
+        validateOnChange
+        validateOnBlur
+        onSubmit={onSubmit}
+      >
+        {({ isSubmitting }) => {
           return (
             <Form>
               <CommonStyles.Box
@@ -91,7 +128,7 @@ const Login = () => {
                   type="body14"
                   sx={{ width: "250px", textAlign: "center" }}
                 >
-                  Hey, Enter you detail to get sign in your account !
+                  Hey, Enter your detail to get sign in your account !
                 </CommonStyles.Typography>
                 <CommonStyles.Box
                   sx={{
@@ -150,7 +187,8 @@ const Login = () => {
                       backgroundColor: theme.colors.primary250,
                     },
                   }}
-                  onClick={handleLogin}
+                  loading={isSubmitting}
+                  type="submit"
                 >
                   Sign in
                 </CommonStyles.Button>
@@ -164,9 +202,7 @@ const Login = () => {
                 <CommonStyles.Box
                   sx={{
                     display: "flex",
-                    justifyContent: "space-between",
                     width: "100%",
-                    gap: "15px",
                     flexWrap: "wrap",
                     flexDirection: "row",
                   }}
@@ -174,6 +210,7 @@ const Login = () => {
                   <CommonStyles.Button
                     variant="outlined"
                     sx={{
+                      width: "100%",
                       color: theme.colors.black,
                       border: `.5px solid ${theme.colors.primary550}`,
                       textTransform: "none",
@@ -186,13 +223,18 @@ const Login = () => {
                       flexDirection: "row",
                       gap: "10px",
                     }}
+                    type="button"
+                    disabled={isSubmitting}
+                    onClick={handleLoginGoogle}
                   >
                     <CommonIcons.Google />
                     Google
                   </CommonStyles.Button>
+
                   <CommonStyles.Button
                     variant="outlined"
                     sx={{
+                      width: "100%",
                       color: theme.colors.black,
                       border: `.5px solid ${theme.colors.primary550}`,
                       textTransform: "none",
@@ -205,25 +247,8 @@ const Login = () => {
                       flexDirection: "row",
                       gap: "10px",
                     }}
-                  >
-                    <CommonIcons.Apple />
-                    Apple ID
-                  </CommonStyles.Button>
-                  <CommonStyles.Button
-                    variant="outlined"
-                    sx={{
-                      color: theme.colors.black,
-                      border: `.5px solid ${theme.colors.primary550}`,
-                      textTransform: "none",
-                      fontWeight: 700,
-                      marginTop: "20px",
-                      "&:hover": {
-                        backgroundColor: theme.colors.primary250,
-                      },
-                      display: "flex",
-                      flexDirection: "row",
-                      gap: "10px",
-                    }}
+                    disabled={isSubmitting}
+                    onClick={handleLoginFacebook}
                   >
                     <CommonIcons.Facebook />
                     Facebook
@@ -262,11 +287,11 @@ const Login = () => {
                 </CommonStyles.Box>
               </CommonStyles.Box>
             </Form>
-          )
+          );
         }}
       </Formik>
     </CommonStyles.Box>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

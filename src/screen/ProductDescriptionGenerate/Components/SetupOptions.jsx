@@ -148,6 +148,9 @@ const SetupOptions = () => {
   //! Function
   const onSubmit = React.useCallback(
     async (values, { setSubmitting }) => {
+      const payload = productRecomendationModel.generateContent(values);
+      console.log("payload", payload);
+      return;
       try {
         setSubmitting(true);
 

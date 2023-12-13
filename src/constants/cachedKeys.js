@@ -5,4 +5,5 @@ export default {
   currentSizeSelectedItem: "currentSizeSelectedItem",
   productRecommendEditorKey: "productRecommendEditorKey",
   socket: "socket",
+  token: "token",
 };

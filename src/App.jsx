@@ -15,14 +15,24 @@ import io from "socket.io-client";
 import { useSave } from "./stores/useStores";
 import { useEffect } from "react";
 import cachedKeys from "./constants/cachedKeys";
+import Callback from "./screen/Callback";
+import FacebookPost from "./screen/FacebookPost";
 
-const socket = io("http://localhost:3000");
+const socket = io("https://5843-118-70-125-152.ngrok-free.app", {
+  retries: 3,
+  reconnectionAttempts: 3,
+});
+// const socket = io("http://localhost:3000");
 
 const App = () => {
   //! State
   const { islogged } = useAuthentication();
   const save = useSave();
   const router = createBrowserRouter([
+    {
+      path: "callback",
+      element: <Callback />,
+    },
     {
       path: "/login",
       element: <Login />,
@@ -34,6 +44,10 @@ const App = () => {
     {
       element: <DefaultLayout />,
       children: [
+        {
+          path: "facebook-post",
+          element: <FacebookPost />,
+        },
         {
           path: "/",
           element: <Home />,

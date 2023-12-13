@@ -6,12 +6,18 @@ import React, {
   useState,
 } from "react";
 import httpService from "../services/httpServices";
+import AuthenticationServices from "../services/authenticationServices";
+import useToast, { useToastPromise } from "../hooks/useToast";
+import cachedKey from "../constants/cachedKeys";
+import FirebaseServices from "../services/firebaseServices";
 
 const AuthenticationContext = createContext({
   islogged: false,
   setIsLogged: () => {},
   handleLogin: () => {},
   handleLogout: () => {},
+  handleLoginGoogle: () => {},
+  handleLoginFacebook: () => {},
 });
 
 export const useAuthentication = () => {
@@ -20,19 +26,68 @@ export const useAuthentication = () => {
 
 const AuthenticationProvider = ({ children }) => {
   //! State
-  const token = httpService.getTokenFromLocalStorage("token");
+  const token = httpService.getTokenFromLocalStorage(cachedKey.token);
   const [islogged, setIsLogged] = useState(!!token);
 
   //! Function
-  const handleLogin = useCallback((payload) => {
-    console.log("payload", payload);
+  const handleLogin = useCallback(async (payload, setSubmitting) => {
+    const onSuccess = (response, toast) => {
+      if (response?.data?.token) {
+        setIsLogged(true);
+        httpService.saveTokenToLocalStorage(response.data.token);
+        httpService.attachTokenToHeader(response.data.token);
+        toast();
+      } else {
+        useToast("Login failed", "error");
+      }
+    };
+
+    const onFail = (err, toast) => {
+      setSubmitting(false);
+      toast();
+    };
+
+    useToastPromise(
+      () => AuthenticationServices.login(payload),
+      {
+        pending: "Logging in...",
+        success: "Logged in successfully",
+        error: "Failed to login",
+      },
+      onSuccess,
+      onFail
+    );
+  }, []);
+
+  const handleLoginTest = useCallback(async (payload, setSubmitting) => {
+    setSubmitting(true);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
     setIsLogged(true);
+    setSubmitting(false);
     httpService.saveTokenToLocalStorage("token");
+  });
+
+  const handleLoginGoogle = useCallback(async (token) => {
+    try {
+      const response = await AuthenticationServices.loginGoolge();
+      console.log("response", response);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const handleLoginFacebook = useCallback(async () => {
+    try {
+      const response = await FirebaseServices.logInWithFacebook();
+      console.log("response", response);
+    } catch (error) {
+      console.log("err", error);
+    }
   }, []);
 
   const handleLogout = useCallback(() => {
     setIsLogged(false);
-    httpService.removeTokenFromLocalStorage("token");
+    httpService.removeTokenFromLocalStorage(cachedKey.token);
   }, []);
 
   //! Render
@@ -42,8 +97,19 @@ const AuthenticationProvider = ({ children }) => {
       setIsLogged,
       handleLogin,
       handleLogout,
+      handleLoginGoogle,
+      handleLoginFacebook,
+      handleLoginTest,
     };
-  }, [islogged, setIsLogged, handleLogin, handleLogout]);
+  }, [
+    islogged,
+    setIsLogged,
+    handleLogin,
+    handleLogout,
+    handleLoginGoogle,
+    handleLoginFacebook,
+    handleLoginTest,
+  ]);
 
   return (
     <AuthenticationContext.Provider value={value}>

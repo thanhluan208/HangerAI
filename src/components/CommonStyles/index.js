@@ -1,12 +1,13 @@
-import Avatar from "./Avatar"
-import Box from "./Box"
-import BrandLogo from "./BrandLogo"
-import Button from "./Button"
-import Chip from "./Chip"
-import Dialog from "./Dialog"
-import Editor from "./Editor"
-import Table from "./Table"
-import Typography from "./Typography"
+import Avatar from "./Avatar";
+import Box from "./Box";
+import BrandLogo from "./BrandLogo";
+import Button from "./Button";
+import Chip from "./Chip";
+import Dialog from "./Dialog";
+import Editor from "./Editor";
+import Table from "./Table";
+import Tooltip from "./Tooltip";
+import Typography from "./Typography";
 
 const CommonStyles = {
   Box: Box,
@@ -18,6 +19,7 @@ const CommonStyles = {
   Chip: Chip,
   Editor: Editor,
   Table: Table,
-}
+  Tooltip: Tooltip,
+};
 
-export default CommonStyles
+export default CommonStyles;
