@@ -34,7 +34,7 @@ const Login = () => {
     (values, { setSubmitting }) => {
       handleLoginTest(values, setSubmitting);
     },
-    [handleLogin]
+    [handleLoginTest]
   );
 
   const handleLoginGoogle = useCallback(() => {
