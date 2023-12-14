@@ -20,11 +20,12 @@ const SideBar = () => {
         position: "relative",
         zIndex: 2,
         display: "flex",
-        height: "calc(100% - 40px)",
+        height: "calc(100% )",
         flexDirection: "column",
         opacity: open ? "1" : "0",
         padding: "20px 0",
         transition: "all .2s ease-in-out",
+
         [theme.breakpoints.down("md")]: {
           display: "none",
         },
@@ -59,7 +60,7 @@ const SideBar = () => {
           justifyContent: "start",
           position: "relative",
           flexDirection: "column",
-          paddingTop: "70px",
+          paddingTop: "20px",
           ".ps__rail-y": {
             zIndex: 10000000,
           },
@@ -71,7 +72,7 @@ const SideBar = () => {
             flexDirection: "column",
             alignItems: "end",
             gap: "25px",
-            maxHeight: "55vh",
+            maxHeight: "60vh",
           }}
         >
           {userNav.map((item, index) => {

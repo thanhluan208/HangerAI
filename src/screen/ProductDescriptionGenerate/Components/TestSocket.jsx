@@ -12,7 +12,7 @@ const infos = {
     sleeve: ["wrist-length", "dropped-shoulder sleeve"],
     hood: [],
   },
-  Company: "Miracle Hanger",
+  Company: "Miracle Hanger Luan",
 };
 
 const TestSocket = () => {
@@ -22,8 +22,17 @@ const TestSocket = () => {
 
   //! Function
   const testSocket = () => {
-    console.log("emit process", infos);
-    socket.emit("start_process", infos);
+    console.log("infos", socket);
+    // socket.emit("switch", {
+    //   lang: "en",
+    //   task: "advertisement",
+    //   tone: "funny",
+    //   more_options: {
+    //     emoji: true,
+    //   },
+    // });
+
+    socket.emit("message", "hello world");
   };
 
   useEffect(() => {
@@ -45,6 +54,18 @@ const TestSocket = () => {
       //     }
       //   }, 100);
       // }
+    });
+
+    socket.on("switch", (socket) => {
+      console.log("connected", socket);
+    });
+
+    socket.on("generated content", (data) => {
+      console.log("data", data);
+    });
+
+    socket.on("connect", (data) => {
+      console.log("data", data);
     });
   }, [socket]);
 

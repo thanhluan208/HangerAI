@@ -61,7 +61,7 @@ const SettingTab = ({ icon, title, subTitle, sxContainer }) => {
 
 const User = () => {
   //! State
-  const { handleLogout } = useAuthentication(0);
+  const { handleLogout } = useAuthentication();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   //! Function
@@ -188,6 +188,7 @@ const User = () => {
               color: "unset",
               textTransform: "none",
             }}
+            onClick={handleLogout}
           >
             <CommonIcons.LogoutIcon />
             <CommonStyles.Box sx={{ display: "flex" }}>

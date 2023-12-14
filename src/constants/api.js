@@ -1,5 +1,5 @@
-const baseURLTaggin = "https://db82-14-232-166-121.ngrok-free.app";
-const baseContentUrl = "https://0a5f-42-112-110-118.ngrok-free.app";
+const baseURLTaggin = "https://6239-42-112-110-3.ngrok-free.app";
+const baseContentUrl = "https://43c9-42-112-110-3.ngrok-free.app";
 const baseNestUrl = "http://localhost:3000/api/v1";
 
 export const extractItemFromImage =

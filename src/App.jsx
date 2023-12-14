@@ -18,7 +18,7 @@ import cachedKeys from "./constants/cachedKeys";
 import Callback from "./screen/Callback";
 import FacebookPost from "./screen/FacebookPost";
 
-const socket = io("https://5843-118-70-125-152.ngrok-free.app", {
+const socket = io("https://8e2c-118-70-125-152.ngrok-free.app", {
   retries: 3,
   reconnectionAttempts: 3,
 });
