@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import cachedKeys from "./constants/cachedKeys";
 import Callback from "./screen/Callback";
 import FacebookPost from "./screen/FacebookPost";
+import UserProfile from "./screen/UserProfile";
 
 const socket = io("https://8e2c-118-70-125-152.ngrok-free.app", {
   retries: 3,
@@ -44,6 +45,10 @@ const App = () => {
     {
       element: <DefaultLayout />,
       children: [
+        {
+          path: "user-profile",
+          element: <UserProfile />,
+        },
         {
           path: "facebook-post",
           element: <FacebookPost />,

@@ -4,6 +4,7 @@ import { isEmpty } from "lodash";
 import { Paper } from "@mui/material";
 import CommonIcons from "../../../components/CommonIcons";
 import useFilter from "../../../hooks/useFilter";
+import { useTheme } from "@emotion/react";
 
 const columns = [
   {
@@ -424,7 +425,7 @@ const simpleData = [
 
 const Documents = () => {
   //! State
-
+  const theme = useTheme();
   const { filters, handleChangeSort, handleSelectRow } = useFilter({
     sortBy: "wordCount",
     sortDirection: "asc",
@@ -485,6 +486,12 @@ const Documents = () => {
           display: "grid",
           gridTemplateColumns: "repeat(4, 1fr)",
           gridGap: "8px",
+          [theme.breakpoints.down("md")]: {
+            gridTemplateColumns: "1fr 1fr",
+          },
+          [theme.breakpoints.down("xlg")]: {
+            gridTemplateColumns: "repeat(3, 1fr)",
+          },
         }}
       >
         <Paper
@@ -549,7 +556,6 @@ const Documents = () => {
           data={simpleData}
           columns={simpleColumns}
           headerLevel={1}
-          maxWidth="80vw"
         />
       </CommonStyles.Box>
     </CommonStyles.Box>

@@ -4,8 +4,18 @@ import { Divider, Link, Popover } from "@mui/material";
 import { useAuthentication } from "../../../providers/AuthenticationProvider";
 import CommonIcons from "../../CommonIcons";
 import { useTheme } from "@emotion/react";
+import { useNavigate } from "react-router-dom";
 
-const SettingTab = ({ icon, title, subTitle, sxContainer }) => {
+const SettingTab = ({ icon, title, subTitle, sxContainer, destination }) => {
+  //! State
+  const navigate = useNavigate();
+
+  //! Function
+  const handleNavigate = useCallback(() => {
+    navigate(destination);
+  }, [destination]);
+
+  //! Render
   return (
     <CommonStyles.Button
       variant="text"
@@ -18,6 +28,7 @@ const SettingTab = ({ icon, title, subTitle, sxContainer }) => {
         padding: "5px 20px",
         ...sxContainer,
       }}
+      onClick={handleNavigate}
     >
       <CommonStyles.Box
         sx={{
@@ -147,6 +158,7 @@ const User = () => {
             icon={<CommonIcons.User style={{ fontSize: "1rem" }} />}
             title="Personal setting"
             subTitle="Edit account profile"
+            destination={"/user-profile"}
           />
 
           <Divider

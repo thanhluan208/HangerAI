@@ -36,9 +36,9 @@ export const useToastPromise = async (
         autoClose: 3000,
       });
     } else {
-      onSuccess(response, () =>
+      onSuccess(response, (message) =>
         toast.update(id, {
-          render: statusMessage?.success || "Success!",
+          render: message || statusMessage?.success || "Success!",
           type: "success",
           isLoading: false,
           autoClose: 3000,
@@ -46,6 +46,7 @@ export const useToastPromise = async (
       );
     }
   } catch (error) {
+    console.log("use toast error", error);
     if (!onFail) {
       toast.update(id, {
         render: error?.response?.data?.message || "Error!",
@@ -54,9 +55,9 @@ export const useToastPromise = async (
         autoClose: 5000,
       });
     } else {
-      onFail(error, () =>
+      onFail(error, (errMessage) =>
         toast.update(id, {
-          render: error?.response?.data?.message || "Error!",
+          render: errMessage || error?.response?.data?.message || "Error!",
           type: "error",
           isLoading: false,
           autoClose: 5000,

@@ -96,7 +96,7 @@ const ModelsList = () => {
     >
       <PerfectScrollbar
         style={{
-          maxWidth: "calc(100vw - 300px - 40px)",
+          maxWidth: "100vw",
         }}
       >
         <CommonStyles.Box

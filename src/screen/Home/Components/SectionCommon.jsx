@@ -1,13 +1,13 @@
-import React from "react"
-import CommonStyles from "../../../components/CommonStyles"
-import { useTheme } from "@emotion/react"
-import CommonIcons from "../../../components/CommonIcons"
-import ToolCard from "./ToolCard"
-import { Divider } from "@mui/material"
+import React from "react";
+import CommonStyles from "../../../components/CommonStyles";
+import { useTheme } from "@emotion/react";
+import CommonIcons from "../../../components/CommonIcons";
+import ToolCard from "./ToolCard";
+import { Divider } from "@mui/material";
 
 const VirtualSection = ({ sectionName, subtitle, tools }) => {
   //! State
-  const theme = useTheme()
+  const theme = useTheme();
   //! Function
 
   //! Render
@@ -51,15 +51,18 @@ const VirtualSection = ({ sectionName, subtitle, tools }) => {
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
             gridGap: "20px",
+            [theme.breakpoints.down("md")]: {
+              gridTemplateColumns: "1fr",
+            },
           }}
         >
           {tools.map((item) => {
-            return <ToolCard key={item.id} item={item} />
+            return <ToolCard key={item.id} item={item} />;
           })}
         </CommonStyles.Box>
       </CommonStyles.Box>
     </CommonStyles.Box>
-  )
-}
+  );
+};
 
-export default VirtualSection
+export default VirtualSection;
