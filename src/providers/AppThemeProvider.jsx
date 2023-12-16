@@ -42,13 +42,11 @@ const lightTheme = createTheme({
   },
   colors: {
     custom: {
-      textGrey: grey["textGrey"],
-      textGreyDark: grey["textGreyDark"],
-      textBlack: black["textBlack"],
-      textGreyLighter: grey["textGreyLighter"],
-      greyBackground: grey["greyBackground"],
-      textRedErrors: red["textRedErrors"],
-      greyBorder: grey["greyBorder"],
+      background: "#f5f5f5",
+      backgroundSecondary: "#eaeaea",
+      text: "#171717",
+      switchTheme: "#f3d28a",
+      textPrimary: "#5c3883",
     },
     client: {
       cardDark: client["cardDark"],
@@ -508,19 +506,29 @@ const lightTheme = createTheme({
 });
 
 const darkTheme = createTheme({
-  typography: {
-    // fontFamily: ['Epilogue,  sans-serif'].join(','),
-    fontFamily: "Plus Jakarta Sans",
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1024,
+      xl: 1600,
+      xxl: 1920,
+    },
+  },
+  palette: {
+    mode: "dark",
+    primary: {
+      main: "#5c3883",
+    },
   },
   colors: {
     custom: {
-      textGrey: grey["textGrey"],
-      textGreyDark: grey["textGreyDark"],
-      textBlack: black["textBlack"],
-      textGreyLighter: grey["textGreyLighter"],
-      greyBackground: grey["greyBackground"],
-      textRedErrors: red["textRedErrors"],
-      greyBorder: grey["greyBorder"],
+      background: "#2a2b2f",
+      backgroundSecondary: "#191919",
+      text: "#f9f9f9",
+      switchTheme: "#b9cff3",
+      textPrimary: "#5c3883",
     },
     client: {
       cardDark: client["cardDark"],
@@ -1009,7 +1017,7 @@ export default function AppThemeProvider(props) {
   }, [save, toggleTheme]);
 
   return (
-    <ThemeProvider theme={switchTheme[theme] || lightTheme}>
+    <ThemeProvider theme={switchTheme[theme] || darkTheme}>
       <CssBaseline />
       <GlobalStyles
         styles={{

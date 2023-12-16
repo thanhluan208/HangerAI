@@ -1,8 +1,9 @@
-import React, { useCallback } from "react";
+import React, { Fragment, useCallback } from "react";
 import CommonStyles from "../../CommonStyles";
 import { Divider, Link, Popover } from "@mui/material";
 import { useAuthentication } from "../../../providers/AuthenticationProvider";
 import CommonIcons from "../../CommonIcons";
+import { useTheme } from "@emotion/react";
 
 const SettingTab = ({ icon, title, subTitle, sxContainer }) => {
   return (
@@ -62,6 +63,7 @@ const SettingTab = ({ icon, title, subTitle, sxContainer }) => {
 const User = () => {
   //! State
   const { handleLogout } = useAuthentication();
+  const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   //! Function
@@ -71,28 +73,26 @@ const User = () => {
 
   //! Render
   return (
-    <div>
-      <CommonStyles.Button
-        variant="text"
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "10px",
-          position: "absolute",
-          padding: "5px 10px",
-          top: "10px",
-          right: "15px",
-          cursor: "pointer",
-          textTransform: "none",
-        }}
-        onClick={handleOpen}
-      >
-        <CommonStyles.Avatar src="https://lh3.googleusercontent.com/ogw/AKPQZvyASBUcpQgfbJFtlWST2R3jgHPG-CdGKfsicVCI=s32-c-mo" />
-        <CommonStyles.Typography type="boldText">
-          Thanh Luan
-        </CommonStyles.Typography>
+    <Fragment>
+      <CommonStyles.Button variant="text">
+        <CommonStyles.Box
+          variant="text"
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px",
+            padding: "5px 10px",
+            top: "10px",
+            right: "15px",
+            cursor: "pointer",
+            textTransform: "none",
+          }}
+          onClick={handleOpen}
+        >
+          <CommonStyles.Avatar src="https://lh3.googleusercontent.com/ogw/AKPQZvyASBUcpQgfbJFtlWST2R3jgHPG-CdGKfsicVCI=s32-c-mo" />
+        </CommonStyles.Box>
       </CommonStyles.Button>
       <Popover
         open={Boolean(anchorEl)}
@@ -104,6 +104,7 @@ const User = () => {
         }}
         sx={{
           marginTop: "10px",
+          overflow: "hidden",
         }}
       >
         <CommonStyles.Box
@@ -113,9 +114,13 @@ const User = () => {
             padding: "10px 0",
             paddingTop: "20px",
             flexDirection: "column",
+            background: theme.colors.custom.background,
           }}
         >
-          <CommonStyles.Box centered sx={{ flexDirection: "column" }}>
+          <CommonStyles.Box
+            centered
+            sx={{ flexDirection: "column", color: theme.colors.white }}
+          >
             <CommonStyles.Avatar
               sx={{ borderRadius: "8px" }}
               src="https://lh3.googleusercontent.com/ogw/AKPQZvyASBUcpQgfbJFtlWST2R3jgHPG-CdGKfsicVCI=s32-c-mo"
@@ -217,7 +222,7 @@ const User = () => {
           </CommonStyles.Typography>
         </CommonStyles.Box>
       </Popover>
-    </div>
+    </Fragment>
   );
 };
 

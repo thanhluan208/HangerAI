@@ -87,65 +87,7 @@ const SideBar = () => {
           })}
         </PerfectScrollbar>
       </CommonStyles.Box>
-      <CommonStyles.Box centered sx={{ flex: 1 }}>
-        <CommonStyles.Box
-          sx={{
-            width: "90%",
-            padding: "10px 0",
-            backgroundColor: "#f6f7fb",
-            borderRadius: "8px",
-            // boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.1)",
-          }}
-        >
-          <CommonStyles.Box centered>
-            <CommonStyles.Typography
-              sx={{
-                color: "#5c3883",
-              }}
-            >
-              Free plan
-            </CommonStyles.Typography>
-            <CommonStyles.Tooltip
-              title={"Free plan account allows you to create 1 project"}
-              placement="top"
-            >
-              <IconButton>
-                <CommonIcons.Info
-                  style={{ fontSize: "1.2rem", color: "#5c3883" }}
-                />
-              </IconButton>
-            </CommonStyles.Tooltip>
-          </CommonStyles.Box>
-          <Divider />
-
-          <CommonStyles.Box
-            centered
-            sx={{
-              padding: "0 10px",
-              textAlign: "center",
-              margin: "10px 0",
-              flexDirection: "column",
-              gap: "10px",
-            }}
-          >
-            <CommonStyles.Typography sx={{ fontSize: ".9rem", opacity: 0.7 }}>
-              Upgrade to{" "}
-              <CommonStyles.Typography
-                type="boldText14"
-                component="span"
-                sx={{ textTransform: "uppercase" }}
-              >
-                premium
-              </CommonStyles.Typography>{" "}
-              to create unlimited projects
-            </CommonStyles.Typography>
-
-            <CommonStyles.Button sx={{ width: "100%" }}>
-              Upgrade
-            </CommonStyles.Button>
-          </CommonStyles.Box>
-        </CommonStyles.Box>
-      </CommonStyles.Box>
+      <CommonStyles.Box centered sx={{ flex: 1 }}></CommonStyles.Box>
     </CommonStyles.Box>
   );
 };

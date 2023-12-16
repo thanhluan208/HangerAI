@@ -1,6 +1,7 @@
 import React from "react";
 import CommonStyles from "../../../components/CommonStyles";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import { useTheme } from "@emotion/react";
 
 const modelLists = [
   {
@@ -61,6 +62,7 @@ const modelLists = [
 ];
 
 const ModelsList = () => {
+  const theme = useTheme();
   return (
     <CommonStyles.Box
       sx={{
@@ -71,22 +73,24 @@ const ModelsList = () => {
           position: "absolute",
           width: "100%",
           height: "85px",
-          background: "#f6f7fb",
+          background: theme.colors.custom.background,
           left: "0",
           top: "-43px",
           zIndex: "2",
           borderRadius: "50%",
+          transition: "all .5s ease-in-out",
         },
         "&:after": {
           content: '""',
           position: "absolute",
           width: "100%",
           height: "85px",
-          background: "#f6f7fb",
+          background: theme.colors.custom.background,
           left: "0",
           bottom: "-40px",
           zIndex: "2",
           borderRadius: "50%",
+          transition: "all .5s ease-in-out",
         },
       }}
     >

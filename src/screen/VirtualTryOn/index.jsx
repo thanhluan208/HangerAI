@@ -134,7 +134,7 @@ const VirtualTryOn = () => {
                 >
                   <CommonStyles.Typography
                     type="boldText"
-                    sx={{ color: isActive ? "#fff" : "#000" }}
+                    sx={{ color: isActive ? "#fff" : theme.colors.custom.text }}
                   >
                     {elm}
                   </CommonStyles.Typography>
@@ -145,8 +145,9 @@ const VirtualTryOn = () => {
           <CommonStyles.Box
             centered
             sx={{
-              background: "#fff",
+              background: theme.colors.custom.background,
               borderRadius: "8px",
+              transition: "all .5s ease-in-out",
             }}
           >
             <CommonStyles.Button

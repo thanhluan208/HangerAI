@@ -4,6 +4,7 @@ import CommonStyles from "../..";
 import { Checkbox } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 import TableHeaderChild from "./TableHeaderChild";
+import { useTheme } from "@emotion/react";
 
 const TableHeader = ({
   sortBy,
@@ -18,6 +19,7 @@ const TableHeader = ({
   tableWidth,
 }) => {
   //! State
+  const theme = useTheme();
   const headerHeight = useMemo(() => {
     if (headerLevel === 1) return 67;
     else return 45;
@@ -63,7 +65,7 @@ const TableHeader = ({
               sx={{
                 padding: "0",
                 height: `${headerLevel * headerHeight}px`,
-                borderBottom: "1px solid #EAECF0",
+                borderBottom: `1px solid ${theme.palette.divider}`,
                 borderRadius: "0",
               }}
             />
@@ -83,8 +85,8 @@ const TableHeader = ({
         borderRadius: "8px",
         marginBottom: "15px",
         boxShadow: "0px 2px 6px rgba(100, 116, 139, 0.12)",
-        border: "1px solid #EAECF0",
-        background: "#fff",
+        border: `1px solid ${theme.palette.divider}`,
+        background: theme.colors.custom.background,
         width: !!tableWidth ? tableWidth : "100%",
       }}
     >
@@ -105,7 +107,7 @@ const TableHeader = ({
                 cursor: item?.sortable ? "pointer" : "",
                 position: item?.isSticky ? "sticky" : "relative",
                 left: item?.isSticky ? 0 : "",
-                background: "#fff",
+                background: theme.colors.custom.background,
                 zIndex: item?.isSticky ? 101 : "",
                 "&:after": {
                   content: '""',
@@ -114,7 +116,7 @@ const TableHeader = ({
                   right: "0",
                   height: "66%",
                   width: "2px",
-                  background: "#EAECF0",
+                  background: theme.colors.custom.background,
                   transform: "translateY(-50%)",
                 },
               }}
@@ -130,7 +132,9 @@ const TableHeader = ({
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  borderBottom: item?.childrens ? "1px solid #EAECF0 " : " ",
+                  borderBottom: item?.childrens
+                    ? `1px solid ${theme.palette.divider}`
+                    : " ",
                   height: item?.childrens
                     ? `${headerHeight}px`
                     : `${headerLevel * headerHeight}px`,

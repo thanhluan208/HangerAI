@@ -3,6 +3,7 @@ import React, { Fragment, memo, useCallback, useEffect, useMemo } from "react";
 import CommonStyles from "../..";
 import { isArray } from "lodash";
 import TableContentItem from "./TableContentItem";
+import { useTheme } from "@emotion/react";
 
 const TableContent = ({
   rowData,
@@ -14,7 +15,7 @@ const TableContent = ({
   handleSelectRow,
 }) => {
   //! State
-
+  const theme = useTheme();
   const isSelected = useMemo(() => {
     if (!selectedRows) return false;
 
@@ -58,7 +59,7 @@ const TableContent = ({
         cursor: "pointer",
         transition: "all .3s ease-in-out",
         "&:hover": {
-          background: "#e7e7e7",
+          background: theme.colors.custom.background,
         },
         borderRadius: "8px",
         overflow: "hidden",
@@ -67,7 +68,12 @@ const TableContent = ({
       {hasCheckbox && (
         <CommonStyles.Box
           centered
-          sx={{ padding: "16px", background: isOdd ? "#f2f4f7" : "#fff" }}
+          sx={{
+            padding: "16px",
+            background: isOdd
+              ? theme.colors.custom.backgroundSecondary
+              : theme.colors.custom.background,
+          }}
         >
           <Checkbox
             sx={{ padding: "0" }}

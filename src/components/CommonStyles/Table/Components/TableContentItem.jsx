@@ -1,9 +1,11 @@
 import { memo, useEffect, useMemo } from "react";
 import CommonStyles from "../..";
 import { v4 as uuidv4 } from "uuid";
+import { useTheme } from "@emotion/react";
 
 const TableContentItem = ({ item, data, isOdd }) => {
   //! State
+  const theme = useTheme();
   const stickyStyle = useMemo(() => {
     if (item?.isSticky) {
       return {
@@ -40,7 +42,9 @@ const TableContentItem = ({ item, data, isOdd }) => {
           alignItems: "center",
           display: "flex",
           maxHeight: "64px",
-          background: isOdd ? "#f2f4f7" : "#fff",
+          background: isOdd
+            ? theme.colors.custom.backgroundSecondary
+            : theme.colors.custom.background,
           ...stickyStyle,
         }}
       >
@@ -83,7 +87,9 @@ const TableContentItem = ({ item, data, isOdd }) => {
         maxHeight: "64px",
         alignItems: "center",
         display: item?.isTextOverFlow ? "unset" : "flex",
-        background: isOdd ? "#f2f4f7" : "#fff",
+        background: isOdd
+          ? theme.colors.custom.backgroundSecondary
+          : theme.colors.custom.background,
         whiteSpace: "nowrap",
         overflow: "hidden",
         textOverflow: "ellipsis",

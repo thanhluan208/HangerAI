@@ -26,7 +26,6 @@ const ItemsList = ({ type = "Example" }) => {
       sx={{
         marginTop: "25px",
         padding: "10px 20px",
-        backgroundColor: theme.colors.white,
         display: "flex",
         flexDirection: "column",
       }}

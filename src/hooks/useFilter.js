@@ -40,7 +40,6 @@ const useFilter = (initialFilter) => {
   }, []);
 
   const handleSelectRow = useCallback((row) => {
-    console.log("asdasd", row);
     setFilters((prev) => {
       const prevSelectedRows = prev?.selectedRows;
       if (!prevSelectedRows || !isArray(prevSelectedRows)) {

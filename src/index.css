@@ -18,6 +18,11 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: #212123;
+}
+
+html {
+  background-color: #212123;
 }
 
 .tox-statusbar__branding a {

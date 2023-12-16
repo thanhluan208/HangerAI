@@ -161,8 +161,6 @@ const Table = ({
 
   //! Function
 
-  console.log("colums", flattenColumns);
-
   //! Render
 
   return (

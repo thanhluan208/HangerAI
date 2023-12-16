@@ -3,6 +3,7 @@ import CommonStyles from "..";
 import PerfectScrollBar from "react-perfect-scrollbar";
 import TableHeader from "./Components/TableHeader";
 import TableContent from "./Components/TableContent";
+import { useTheme } from "@emotion/react";
 
 const Table = ({
   data,
@@ -19,7 +20,7 @@ const Table = ({
 }) => {
   //! State
   const { sortBy, sortDirection, selectedRows } = filters || {};
-
+  const theme = useTheme();
   const calculateTemplate = useMemo(() => {
     let template = hasCheckbox ? "80px" : "";
 
@@ -84,7 +85,7 @@ const Table = ({
                 display: "flex",
                 flexDirection: "column",
                 boxShadow: "0px 2px 6px rgba(100, 116, 139, 0.12)",
-                border: "1px solid #EAECF0",
+                border: `1px solid ${theme.palette.divider}`,
                 borderRadius: "12px",
               }}
             >
