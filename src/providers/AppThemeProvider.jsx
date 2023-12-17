@@ -38,16 +38,16 @@ const lightTheme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#5c3883",
+      main: "#6904e9",
     },
   },
   colors: {
     custom: {
-      background: "#f5f5f5",
-      backgroundSecondary: "#eaeaea",
+      backgroundSecondary: "#f5f5f5",
+      background: "#eaeaea",
       text: "#171717",
       switchTheme: "#f3d28a",
-      textPrimary: "#5c3883",
+      textPrimary: "#6904e9",
     },
     client: {
       cardDark: client["cardDark"],
@@ -521,7 +521,7 @@ const darkTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#5c3883",
+      main: "#6904e9",
     },
   },
   colors: {
@@ -530,7 +530,7 @@ const darkTheme = createTheme({
       backgroundSecondary: "#191919",
       text: "#f9f9f9",
       switchTheme: "#b9cff3",
-      textPrimary: "#5c3883",
+      textPrimary: "#6904e9",
     },
     client: {
       cardDark: client["cardDark"],

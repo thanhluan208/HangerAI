@@ -36,7 +36,7 @@ const SwitchTheme = () => {
         style={{
           fontSize: "1.5rem",
           color: "#f3d28a",
-          opacity: mode === "light" ? 1 : 0.2,
+          opacity: mode === "light" ? 1 : 0.6,
         }}
       />
       <Switch
@@ -48,7 +48,7 @@ const SwitchTheme = () => {
         style={{
           fontSize: "1.5rem",
           color: "#b9cff3",
-          opacity: mode === "dark" ? 1 : 0.2,
+          opacity: mode === "dark" ? 1 : 0.9,
         }}
       />
     </CommonStyles.Box>

@@ -14,7 +14,7 @@ const SideBarTool = ({ title, listContent }) => {
     >
       <CommonStyles.Box
         sx={{
-          padding: "0 30px",
+          padding: "0 40px",
           marginBottom: "20px",
         }}
       >

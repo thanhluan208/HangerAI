@@ -61,7 +61,6 @@ const TableContent = ({
         "&:hover": {
           background: theme.colors.custom.background,
         },
-        borderRadius: "8px",
         overflow: "hidden",
       }}
     >

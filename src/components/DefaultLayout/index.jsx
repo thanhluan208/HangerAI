@@ -19,7 +19,6 @@ const DefaultLayout = (props) => {
   const [open, setOpen] = useState(true);
 
   //! Function
-  console.log("open", open);
 
   //! Render
   return (
@@ -55,7 +54,7 @@ const DefaultLayout = (props) => {
             maxHeight: "100vh",
             width: open ? "335px" : "0vw",
             transition: "width 0.5s ease-in-out",
-            borderRight: `1px solid ${theme.palette.divider}`,
+            borderRight: `2px solid ${theme.palette.divider}`,
           }}
         >
           <CommonStyles.Box
@@ -79,7 +78,6 @@ const DefaultLayout = (props) => {
                 backdropFilter: "blur(100px)",
                 zIndex: 10000,
                 padding: "20px",
-                boxShadow: "0 5px 5px 0 rgb(0 0 0 / 20%)",
                 top: 0,
                 cursor: "pointer",
               }}
@@ -210,7 +208,11 @@ const DefaultLayout = (props) => {
           sx={{
             height: headerHeight,
             padding: "20px",
-            boxShadow: "0 5px 5px 0 rgb(0 0 0 / 20%)",
+            width: "90%",
+            margin: "20px auto 0 auto",
+            background: theme.colors.custom.backgroundSecondary,
+            borderRadius: "8px",
+            boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.4)",
           }}
         >
           <CommonStyles.Box
