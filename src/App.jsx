@@ -25,9 +25,6 @@ const socket = io("https://7440-123-25-21-211.ngrok-free.app", {
   reconnectionDelay: 50000,
   // rememberUpgrade: true,
   // transports: ["websocket"],
-  extraHeaders: {
-    "ngrok-skip-browser-warning": "true",
-  },
 });
 
 socket.on("connect", (data) => {
