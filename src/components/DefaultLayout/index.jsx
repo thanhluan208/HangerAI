@@ -3,12 +3,13 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import { useTheme } from "@emotion/react";
 import { nav } from "../../constants/navigation";
 import SideBarTool from "./Components/SideBarTool";
-import { ClickAwayListener, Divider, IconButton } from "@mui/material";
+import { IconButton, TextField } from "@mui/material";
 import CommonIcons from "../CommonIcons";
 import { Outlet, useNavigate } from "react-router-dom";
 import User from "./Components/User";
 import { useState } from "react";
 import SwitchTheme from "./Components/SwitchTheme";
+import BottomItem from "./Components/BottomItem";
 
 const headerHeight = "80px";
 
@@ -33,6 +34,7 @@ const DefaultLayout = (props) => {
       }}
     >
       <CommonStyles.Box
+        className="click-away"
         sx={{
           [theme.breakpoints.down("xlg")]: {
             position: "absolute",
@@ -46,7 +48,7 @@ const DefaultLayout = (props) => {
           },
         }}
         onClick={(e) => {
-          if (e.clientX > 335) setOpen(false);
+          if (e.target.classList.contains("click-away")) setOpen(false);
         }}
       >
         <PerfectScrollbar
@@ -112,82 +114,7 @@ const DefaultLayout = (props) => {
                 flex: 1,
               }}
             >
-              <CommonStyles.Box
-                sx={{
-                  width: "100%",
-                  padding: "10px 0",
-                  backgroundColor: theme.colors.custom.backgroundSecondary,
-                  borderRadius: "8px",
-                  boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.1)",
-                  opacity: open ? 1 : 0,
-                  transition: `all 0.5s `,
-                }}
-              >
-                <CommonStyles.Box centered>
-                  <CommonStyles.Typography
-                    sx={{
-                      color: theme.colors.custom.textPrimary,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Free plan
-                  </CommonStyles.Typography>
-                  <CommonStyles.Tooltip
-                    title={"Free plan account allows you to create 1 project"}
-                    placement="top"
-                  >
-                    <IconButton>
-                      <CommonIcons.Info
-                        style={{
-                          fontSize: "1.2rem",
-                          color: theme.colors.custom.textPrimary,
-                        }}
-                      />
-                    </IconButton>
-                  </CommonStyles.Tooltip>
-                </CommonStyles.Box>
-                <Divider />
-
-                <CommonStyles.Box
-                  centered
-                  sx={{
-                    padding: "0 10px",
-                    textAlign: "center",
-                    margin: "10px 0",
-                    flexDirection: "column",
-                    gap: "10px",
-                    textWrap: "wrap",
-                  }}
-                >
-                  <CommonStyles.Typography
-                    sx={{
-                      fontSize: ".9rem",
-                      opacity: 0.7,
-                      color: theme.colors.custom.text,
-                    }}
-                  >
-                    Upgrade to{" "}
-                    <CommonStyles.Typography
-                      type="boldText14"
-                      component="span"
-                      sx={{
-                        textTransform: "uppercase",
-                        color: theme.colors.custom.text,
-                        opacity: 1,
-                        letterSpacing: "0.175rem",
-                        margin: "0 5px",
-                      }}
-                    >
-                      premium
-                    </CommonStyles.Typography>{" "}
-                    to create unlimited projects
-                  </CommonStyles.Typography>
-
-                  <CommonStyles.Button sx={{ width: "100%" }}>
-                    Upgrade
-                  </CommonStyles.Button>
-                </CommonStyles.Box>
-              </CommonStyles.Box>
+              <BottomItem />
             </CommonStyles.Box>
           </CommonStyles.Box>
         </PerfectScrollbar>
@@ -206,8 +133,7 @@ const DefaultLayout = (props) => {
       >
         <CommonStyles.Box
           sx={{
-            height: headerHeight,
-            padding: "20px",
+            padding: "0px 20px",
             width: "90%",
             margin: "20px auto 0 auto",
             background: theme.colors.custom.backgroundSecondary,
@@ -225,7 +151,7 @@ const DefaultLayout = (props) => {
             <CommonStyles.Box
               sx={{
                 display: "flex",
-                gap: "10px",
+                gap: "30px",
                 alignItems: "center",
                 svg: {
                   color: theme.colors.custom.text,
@@ -244,7 +170,25 @@ const DefaultLayout = (props) => {
                   }}
                 />
               </IconButton>
+              <CommonStyles.Box
+                centered
+                sx={{
+                  input: {
+                    padding: "0 12px !important",
+                    height: "40px",
+                    width: "600px",
+                    background: theme.colors.custom.background,
+                    borderRadius: "10px !important",
+                  },
+                  fieldset: {
+                    border: "none !important",
+                  },
+                }}
+              >
+                <TextField placeholder="Search for a project, tools, projects, etc..." />
+              </CommonStyles.Box>
             </CommonStyles.Box>
+
             <CommonStyles.Box centered>
               <SwitchTheme />
               <User />

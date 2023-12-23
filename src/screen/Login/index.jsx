@@ -179,7 +179,6 @@ const Login = () => {
                   sx={{
                     width: "100%",
                     backgroundColor: theme.colors.primary250,
-                    color: theme.colors.black,
                     textTransform: "none",
                     fontWeight: 700,
                     marginTop: "20px",

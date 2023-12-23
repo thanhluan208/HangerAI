@@ -32,6 +32,7 @@ import {
 import { CiSettings } from "react-icons/ci";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { LuSun, LuMoon } from "react-icons/lu";
+import { FaWandMagicSparkles } from "react-icons/fa6";
 
 const CommonIcons = {
   LogoutIcon,
@@ -68,6 +69,7 @@ const CommonIcons = {
   Info: AiOutlineInfoCircle,
   Sun: LuSun,
   Moon: LuMoon,
+  Wand: FaWandMagicSparkles,
 };
 
 export default CommonIcons;

@@ -19,11 +19,31 @@ import Callback from "./screen/Callback";
 import FacebookPost from "./screen/FacebookPost";
 import UserProfile from "./screen/UserProfile";
 
-const socket = io("https://8e2c-118-70-125-152.ngrok-free.app", {
+const socket = io("https://7440-123-25-21-211.ngrok-free.app", {
   retries: 3,
   reconnectionAttempts: 3,
+  reconnectionDelay: 50000,
+  // rememberUpgrade: true,
+  // transports: ["websocket"],
+  extraHeaders: {
+    "ngrok-skip-browser-warning": "true",
+  },
 });
-// const socket = io("http://localhost:3000");
+
+socket.on("connect", (data) => {
+  console.log("data", data);
+});
+socket.on("connect_error", (err) => {
+  console.log(`connect_error due to ${err.message}`);
+});
+
+// const socket = io("http://localhost:3000", {
+//   // extraHeaders: {
+//   //   "ngrok-skip-browser-warning": true,
+//   // },
+// }).on("connection", (data) => {
+//   console.log("data", data);
+// });
 
 const App = () => {
   //! State
@@ -86,9 +106,14 @@ const App = () => {
   ]);
 
   //! Function
-  useEffect(() => {
-    save(cachedKeys.socket, socket);
-  }, []);
+  // useEffect(() => {
+  //   save(cachedKeys.socket, socket);
+  //   socket.on("connect", (data) => {
+  //     console.log("connect", data);
+  //   });
+
+  //
+  // }, []);
 
   //! Render
   return <RouterProvider router={router} />;

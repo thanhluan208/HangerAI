@@ -32,6 +32,7 @@ export default function Dialog(props) {
   const handleClose = () => {
     !disableClickOutside && toggle();
   };
+
   return (
     <>
       <DialogMui
@@ -42,7 +43,12 @@ export default function Dialog(props) {
         aria-labelledby="responsive-dialog-title"
         className={className}
         style={style}
-        sx={sx}
+        sx={{
+          ".MuiDialog-paper": {
+            maxWidth: maxWidth,
+          },
+          ...sx,
+        }}
       >
         {showCloseIcon && (
           <IconButton
