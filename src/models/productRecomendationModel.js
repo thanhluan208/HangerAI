@@ -29,13 +29,15 @@ class productRecomendationModel {
   }
 
   static switchStatus(body) {
-    const { language, template, tone } = body;
+    const { language, template, tone, emoji } = body;
 
     return {
       lang: language,
       task: template,
       tone: tone,
-      more_options: {},
+      more_options: {
+        emoji: emoji,
+      },
     };
   }
 }

@@ -42,6 +42,9 @@ const Editor = ({ init, editorKey, ...otherProps }) => {
       }}
       value={value}
       onEditorChange={onChange}
+      onInit={(evt, editor) => {
+        save(cachedKeys.editorDom, editor.dom);
+      }}
       {...otherProps}
     />
   );

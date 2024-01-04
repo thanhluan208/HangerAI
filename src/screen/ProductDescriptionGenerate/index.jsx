@@ -45,7 +45,7 @@ const ProductDescriptionGenerate = () => {
 
       <ItemsList type="Uploaded" />
 
-      <TestSocket />
+      {/* <TestSocket /> */}
     </CommonStyles.Box>
   );
 };

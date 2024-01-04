@@ -6,4 +6,5 @@ export default {
   productRecommendEditorKey: "productRecommendEditorKey",
   socket: "socket",
   token: "token",
+  editorDom: "editorDom",
 };

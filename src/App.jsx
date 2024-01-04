@@ -18,29 +18,22 @@ import cachedKeys from "./constants/cachedKeys";
 import Callback from "./screen/Callback";
 import FacebookPost from "./screen/FacebookPost";
 import UserProfile from "./screen/UserProfile";
+import VirtualPhotoshoot from "./screen/VirtualPhotoshoot";
 
-const socket = io("https://7440-123-25-21-211.ngrok-free.app", {
-  retries: 3,
+const socket = io("https://a512-123-25-21-211.ngrok-free.app", {
+  retries: 0,
   reconnectionAttempts: 3,
-  reconnectionDelay: 50000,
-  // rememberUpgrade: true,
-  // transports: ["websocket"],
+  extraHeaders: {
+    "ngrok-skip-browser-warning": "true",
+  },
 });
 
-socket.on("connect", (data) => {
+socket.on("connect_success", (data) => {
   console.log("data", data);
 });
 socket.on("connect_error", (err) => {
   console.log(`connect_error due to ${err.message}`);
 });
-
-// const socket = io("http://localhost:3000", {
-//   // extraHeaders: {
-//   //   "ngrok-skip-browser-warning": true,
-//   // },
-// }).on("connection", (data) => {
-//   console.log("data", data);
-// });
 
 const App = () => {
   //! State
@@ -62,6 +55,10 @@ const App = () => {
     {
       element: <DefaultLayout />,
       children: [
+        {
+          path: "virtual-photoshoot-studio/photoshoot",
+          element: <VirtualPhotoshoot />,
+        },
         {
           path: "user-profile",
           element: <UserProfile />,
@@ -103,14 +100,9 @@ const App = () => {
   ]);
 
   //! Function
-  // useEffect(() => {
-  //   save(cachedKeys.socket, socket);
-  //   socket.on("connect", (data) => {
-  //     console.log("connect", data);
-  //   });
-
-  //
-  // }, []);
+  useEffect(() => {
+    save(cachedKeys.socket, socket);
+  }, []);
 
   //! Render
   return <RouterProvider router={router} />;

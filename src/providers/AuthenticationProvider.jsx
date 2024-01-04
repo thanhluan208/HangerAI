@@ -48,7 +48,7 @@ const AuthenticationProvider = ({ children }) => {
       toast();
     };
 
-    useToastPromise(
+    await useToastPromise(
       () => AuthenticationServices.login(payload),
       {
         pending: "Logging in...",

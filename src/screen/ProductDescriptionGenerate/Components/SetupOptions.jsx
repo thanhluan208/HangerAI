@@ -53,11 +53,11 @@ const templateOptions = [
 const languageOptions = [
   {
     label: "English 🇬🇧",
-    value: "english",
+    value: "en",
   },
   {
     label: "Vietnamese 🇻🇳",
-    value: "vietnamese",
+    value: "vi",
   },
 ];
 
@@ -119,16 +119,18 @@ const ListItemFromPic = () => {
 const SetupOptions = () => {
   //! State
   const [open, setOpen] = useState(false);
+  const [currentTag, setCurrentTag] = useState(null);
   const intervalRef = useRef();
   const socket = useGet(cachedKeys.socket);
   const setValueEditor = useGet(cachedKeys.setValueEditor);
-  const productRecommendEditorKey = useGet(
-    cachedKeys.productRecommendEditorKey
-  );
+  const formikRef = useRef(null);
+
+  const editorDom = useGet(cachedKeys.editorDom);
   const initialValues = React.useMemo(() => {
     return {
       image: "",
-      language: "english",
+      emoji: false,
+      language: "en",
       tone: "funny",
       template: "advertisement",
       selectedItem: "",
@@ -148,56 +150,73 @@ const SetupOptions = () => {
   //! Function
   const onSubmit = React.useCallback(
     async (values, { setSubmitting }) => {
-      const payload = productRecomendationModel.generateContent(values);
-      console.log("payload", payload);
-      return;
+      setSubmitting(true);
       try {
-        setSubmitting(true);
-
         const uuid = Math.random() * 100000000;
-        setValueEditor((prev) => prev + `<p id="content_${uuid}"></p>`);
-
-        let contentContainer;
-        await new Promise((res) => {
+        setValueEditor(
+          (prev) =>
+            prev + `<p id="content_${uuid}" style="white-space:pre-line"></p>`
+        );
+        let currentTag;
+        currentTag = await new Promise((res) => {
           setTimeout(() => {
-            contentContainer = productRecommendEditorKey.current.editor.dom.get(
-              `content_${uuid}`
-            );
-            res();
+            res(editorDom.get(`content_${uuid}`));
           }, 1);
         });
+        console.log("currentTag", currentTag);
+        setCurrentTag(currentTag);
 
         const switchPayload = productRecomendationModel.switchStatus(values);
-        const responseSwitch = await productRecomendationServices.switchStatus(
-          switchPayload
-        );
-
-        const payload = productRecomendationModel.generateContent(values);
-        const response = await productRecomendationServices.generateContent(
-          payload
-        );
-
-        const content = response?.data?.content;
-
-        if (intervalRef?.current) {
-          clearInterval(intervalRef.current);
-        }
-
-        contentContainer.innerHTML = content[0];
-        let count = 1;
-        intervalRef.current = setInterval(() => {
-          contentContainer.innerHTML += content[count++];
-          if (count >= content.length) {
-            clearInterval(intervalRef.current);
-            setSubmitting(false);
-          }
-        }, 20);
+        socket.emit("switch", switchPayload);
       } catch (error) {
         console.log("err", error);
+        setSubmitting(false);
       }
     },
-    [setValueEditor, intervalRef, productRecommendEditorKey]
+    [setValueEditor, intervalRef, editorDom]
   );
+
+  useEffect(() => {
+    if (currentTag) {
+      let generatedContent = "";
+      let count = 0;
+      let interval;
+      const { setSubmitting } = formikRef.current;
+
+      socket.on("chunk_retrieve", (data) => {
+        console.log("data", data);
+        if (data.toLowerCase().includes("eos")) {
+          console.log("end of sentence");
+          setSubmitting(false);
+          return;
+        }
+        generatedContent += ` ${data}`;
+        if (!interval) {
+          console.log("go here");
+          interval = setInterval(() => {
+            currentTag.innerHTML = generatedContent.slice(0, count);
+            count++;
+            if (count > generatedContent.length) {
+              clearInterval(interval);
+              interval = null;
+            }
+          }, 10);
+        }
+      });
+    }
+  }, [currentTag]);
+
+  useEffect(() => {
+    socket.on("switch", (data) => {
+      const { values, setSubmitting } = formikRef.current;
+      try {
+        const payload = productRecomendationModel.generateContent(values);
+        socket.emit("start_process", payload.infos);
+      } catch (error) {
+        setSubmitting(false);
+      }
+    });
+  }, []);
 
   //! Render
 
@@ -210,15 +229,19 @@ const SetupOptions = () => {
     >
       <Formik
         initialValues={initialValues}
-        onSubmit={onSubmit}
-        validationSchema={validationSchema}
+        onSubmit={(values, { setSubmitting }) => {
+          onSubmit(values, { setSubmitting });
+        }}
+        innerRef={formikRef}
+        // validationSchema={validationSchema}
         validateOnBlur
         validateOnChange
       >
-        {({ values, errors, isSubmitting }) => {
+        {({ values, isSubmitting }) => {
           const { image, selectedItem } = values;
           const disabledGenerateContent = !image || !selectedItem;
 
+          console.log("isSubmitting", isSubmitting);
           return (
             <Form>
               <CommonStyles.Box
@@ -274,19 +297,15 @@ const SetupOptions = () => {
                 />
               </CommonStyles.Box>
 
-              {/* <CommonStyles.Box
-                centered
-                sx={{
-                  margin: "20px 0",
-                }}
+              <CommonStyles.Box
+                sx={{ padding: "0 10px", marginBottom: "20px" }}
               >
-                <CommonStyles.Button
-                  type="button"
-                  disabled={disabledTagGenerate}
-                >
-                  Tag and Description
-                </CommonStyles.Button>
-              </CommonStyles.Box> */}
+                <FastField
+                  name="emoji"
+                  label="Emoji"
+                  component={CustomFields.SwitchField}
+                />
+              </CommonStyles.Box>
 
               <Divider />
 
@@ -363,7 +382,7 @@ const SetupOptions = () => {
               <CommonStyles.Box centered sx={{ margin: "20px 0" }}>
                 <CommonStyles.Button
                   type="submit"
-                  disabled={disabledGenerateContent}
+                  // disabled={disabledGenerateContent}
                   loading={isSubmitting}
                 >
                   Generate

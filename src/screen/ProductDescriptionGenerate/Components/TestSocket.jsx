@@ -22,41 +22,49 @@ const TestSocket = () => {
   const [content, setContent] = useState("");
 
   //! Function
-  const testSocket = () => {};
+  const testSocket = () => {
+    console.log("emit switch");
+    socket.emit("start_process", {
+      "item category": "hoodie",
+      "attributes informations": {
+        silhouette: ["symmetrical", "regular (fit)", "loose (fit)"],
+        length: ["above-the-hip (length)"],
+        "textile pattern": ["plain (pattern)"],
+        sleeve: ["wrist-length", "dropped-shoulder sleeve"],
+        hood: [],
+      },
+      Company: "Miracle Hanger Luan",
+    });
+  };
 
-  // useEffect(() => {
-  //   let generatedContent = "";
-  //   let count = 0;
-  //   let interval;
-  //   console.log("listening to chunk_retrieve");
-  //   socket.on("chunk_retrieve", (data) => {
-  //     console.log("data", data);
-  //     // generatedContent += ` ${data}`;
-  //     // if (!interval) {
-  //     //   console.log("go here");
-  //     //   interval = setInterval(() => {
-  //     //     setContent(generatedContent.slice(0, count));
-  //     //     count++;
-  //     //     if (count > generatedContent.length) {
-  //     //       clearInterval(interval);
-  //     //       interval = null;
-  //     //     }
-  //     //   }, 100);
-  //     // }
-  //   });
+  useEffect(() => {
+    let generatedContent = "";
+    let count = 0;
+    let interval;
+    socket.on("chunk_retrieve", (data) => {
+      console.log("received chunk", data);
+      generatedContent += ` ${data}`;
+      if (!interval) {
+        console.log("go here");
+        interval = setInterval(() => {
+          setContent(generatedContent.slice(0, count));
+          count++;
+          if (count > generatedContent.length) {
+            clearInterval(interval);
+            interval = null;
+          }
+        }, 100);
+      }
+    });
 
-  //   socket.on("switch", (socket) => {
-  //     console.log("connected", socket);
-  //   });
+    // socket.on("generated content", (data) => {
+    //   console.log("data", data);
+    // });
 
-  //   socket.on("generated content", (data) => {
-  //     console.log("data", data);
-  //   });
-
-  //   socket.on("connect", (data) => {
-  //     console.log("data", data);
-  //   });
-  // }, [socket]);
+    // socket.on("connect", (data) => {
+    //   console.log("data", data);
+    // });
+  }, [socket]);
 
   //! Render
   return (

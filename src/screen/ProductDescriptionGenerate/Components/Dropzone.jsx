@@ -6,7 +6,6 @@ import { useGet, useSave } from "../../../stores/useStores";
 import cachedKeys from "../../../constants/cachedKeys";
 import ItemImage from "./ItemImage";
 import productRecomendationServices from "../../../services/productRecomendationServices";
-import axios from "axios";
 
 const response = {
   image: [

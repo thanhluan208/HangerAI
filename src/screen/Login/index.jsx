@@ -12,7 +12,7 @@ import { loginFacebookURL, loginGoogleURL } from "../../constants/api";
 const Login = () => {
   //! State
   const theme = useTheme();
-  const { handleLoginTest } = useAuthentication();
+  const { handleLoginTest, handleLogin } = useAuthentication();
   const initialValue = useMemo(() => {
     return {
       email: "",
@@ -51,7 +51,7 @@ const Login = () => {
     <CommonStyles.Box
       centered
       sx={{
-        background: "linear-gradient(135deg, #f2fdff, #7ee8fa)",
+        background: theme.colors.custom.background,
         backgroundSize: "400% 400%",
         animation: "gradientTransform 5s linear infinite",
         width: "100vw",
@@ -86,10 +86,7 @@ const Login = () => {
           top: "30px",
           right: "60px",
           padding: "5px 25px",
-          backgroundColor: theme.colors.primary250,
-          "&:hover": {
-            backgroundColor: theme.colors.primary250,
-          },
+          textTransform: "none",
         }}
       >
         <CommonStyles.Typography type="boldText14">
@@ -110,7 +107,7 @@ const Login = () => {
                 centered
                 sx={{
                   padding: "20px 40px",
-                  background: "rgba(255, 255, 255, 0.4)",
+                  background: theme.colors.custom.backgroundSecondary,
                   borderRadius: "8px",
                   boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                   minWidth: "400px",
@@ -178,13 +175,9 @@ const Login = () => {
                 <CommonStyles.Button
                   sx={{
                     width: "100%",
-                    backgroundColor: theme.colors.primary250,
                     textTransform: "none",
                     fontWeight: 700,
                     marginTop: "20px",
-                    "&:hover": {
-                      backgroundColor: theme.colors.primary250,
-                    },
                   }}
                   loading={isSubmitting}
                   type="submit"
@@ -210,47 +203,54 @@ const Login = () => {
                     variant="outlined"
                     sx={{
                       width: "100%",
-                      color: theme.colors.black,
-                      border: `.5px solid ${theme.colors.primary550}`,
                       textTransform: "none",
-                      fontWeight: 700,
                       marginTop: "20px",
-                      "&:hover": {
-                        backgroundColor: theme.colors.primary250,
-                      },
                       display: "flex",
                       flexDirection: "row",
-                      gap: "10px",
                     }}
                     type="button"
                     disabled={isSubmitting}
                     onClick={handleLoginGoogle}
                   >
-                    <CommonIcons.Google />
-                    Google
+                    <CommonStyles.Typography
+                      type="boldText14"
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "5px",
+                      }}
+                    >
+                      <CommonIcons.Google />
+                      Google
+                    </CommonStyles.Typography>
                   </CommonStyles.Button>
 
                   <CommonStyles.Button
                     variant="outlined"
                     sx={{
                       width: "100%",
-                      color: theme.colors.black,
-                      border: `.5px solid ${theme.colors.primary550}`,
                       textTransform: "none",
-                      fontWeight: 700,
                       marginTop: "20px",
-                      "&:hover": {
-                        backgroundColor: theme.colors.primary250,
-                      },
                       display: "flex",
                       flexDirection: "row",
-                      gap: "10px",
                     }}
+                    type="button"
                     disabled={isSubmitting}
-                    onClick={handleLoginFacebook}
+                    onClick={handleLoginGoogle}
                   >
-                    <CommonIcons.Facebook />
-                    Facebook
+                    <CommonStyles.Typography
+                      type="boldText14"
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "5px",
+                      }}
+                    >
+                      <CommonIcons.Facebook />
+                      Facebook
+                    </CommonStyles.Typography>
                   </CommonStyles.Button>
                 </CommonStyles.Box>
 

@@ -1,18 +1,18 @@
-import React, { useMemo } from "react"
-import CommonStyles from ".."
-import { useTheme } from "@emotion/react"
+import React, { useMemo } from "react";
+import CommonStyles from "..";
+import { useTheme } from "@emotion/react";
 
 const Chip = ({ content, active, onClick, activeBackground }) => {
   //! State
-  const theme = useTheme()
+  const theme = useTheme();
   const background = useMemo(() => {
     if (active) {
-      if (activeBackground) return activeBackground
-      return "#bc82fd"
+      if (activeBackground) return activeBackground;
+      return "#bc82fd";
     }
 
-    return theme.colors.white
-  }, [activeBackground, active, theme])
+    return theme.colors.custom.backgroundSecondary;
+  }, [activeBackground, active, theme]);
 
   return (
     <CommonStyles.Box
@@ -33,7 +33,7 @@ const Chip = ({ content, active, onClick, activeBackground }) => {
         {content}
       </CommonStyles.Typography>
     </CommonStyles.Box>
-  )
-}
+  );
+};
 
-export default Chip
+export default Chip;
