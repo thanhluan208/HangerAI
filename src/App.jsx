@@ -19,6 +19,7 @@ import Callback from "./screen/Callback";
 import FacebookPost from "./screen/FacebookPost";
 import UserProfile from "./screen/UserProfile";
 import VirtualPhotoshoot from "./screen/VirtualPhotoshoot";
+import VirtualDressingRoom from "./screen/VirtualDressingRoom";
 
 const socket = io("https://a512-123-25-21-211.ngrok-free.app", {
   retries: 0,
@@ -59,6 +60,11 @@ const App = () => {
           path: "virtual-photoshoot-studio/photoshoot",
           element: <VirtualPhotoshoot />,
         },
+        {
+          path: "virtual-dressing-room/dressing",
+          element: <VirtualDressingRoom />,
+        },
+        
         {
           path: "user-profile",
           element: <UserProfile />,

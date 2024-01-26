@@ -1,6 +1,6 @@
 const baseURLTaggin = "https://4dad-123-25-21-211.ngrok-free.app";
 const baseContentUrl = "https://43c9-42-112-110-3.ngrok-free.app";
-const baseNestUrl = "https://hangerai-be.onrender.com/api/v1";
+const baseNestUrl = "http://localhost:5000/api/v1";
 
 export const extractItemFromImage =
   baseURLTaggin + "/tagging/extract_from_image";

@@ -8,81 +8,90 @@ export const nav = [
         title: "Virtual Dressing Room",
         id: Math.random().toString(),
         path: "virtual-dressing-room",
-        children: [
-          {
-            title: "Virtual",
-            id: Math.random().toString(),
-            path: "virtual-dressing-room/virtual",
-            children: [
-              {
-                title: "Virt",
-                id: Math.random().toString(),
-                path: "virtual-dressing-room/virtual/virt",
-              },
-            ],
-          },
-          {
-            title: "Dressing",
-            id: Math.random().toString(),
-            path: "virtual-dressing-room/dressing",
-          },
-          {
-            title: "Room",
-            id: Math.random().toString(),
-            path: "virtual-dressing-room/room",
-          },
-        ],
+        
       },
       {
-        title: "Virtual Photoshoot Studio",
+        title: "AI Photoshoots Studio Design",
         id: Math.random().toString(),
 
         path: "virtual-photoshoot-studio",
         children: [
           {
-            title: "Virtual",
+            title: "Virtual Try-on",
             id: Math.random().toString(),
 
             path: "virtual-photoshoot-studio/virtual",
           },
           {
-            title: "Photoshoot",
+            title: "Upscale Image",
             id: Math.random().toString(),
 
             path: "virtual-photoshoot-studio/photoshoot",
           },
           {
-            title: "Studio",
+            title: "Background Generator",
+            id: Math.random().toString(),
+
+            path: "virtual-photoshoot-studio/studio",
+          },
+          {
+            title: "Image Recolor",
+            id: Math.random().toString(),
+
+            path: "virtual-photoshoot-studio/studio",
+          },
+          {
+            title: "Image Inpainting",
+            id: Math.random().toString(),
+
+            path: "virtual-photoshoot-studio/studio",
+          },
+          {
+            title: "Magic Eraser",
             id: Math.random().toString(),
 
             path: "virtual-photoshoot-studio/studio",
           },
         ],
       },
+      
       {
-        title: "Product Recommendation",
-        id: Math.random().toString(),
-
-        path: "product-recommendation",
-      },
-      {
-        title: "Product Tagging",
+        title: "AI Content Writing",
         id: Math.random().toString(),
 
         path: "product-tagging",
         children: [
           {
-            title: "Product",
+            title: "AI Product Descriptions",
             id: Math.random().toString(),
 
-            path: "product-tagging/product",
+            path: "product-recommendation",
           },
           {
-            title: "Tagging",
+            title: "Product Tagging",
             id: Math.random().toString(),
 
             path: "product-tagging/tagging",
           },
+          {
+            title: "Website/SEO",
+            id: Math.random().toString(),
+
+            path: "product-tagging/tagging",
+          },
+          {
+            title: "Communications",
+            id: Math.random().toString(),
+
+            path: "product-tagging/tagging",
+          },
+          {
+            title: "Social Media Marketing",
+            id: Math.random().toString(),
+
+            path: "product-tagging/tagging",
+          },
+
         ],
       },
     ],
