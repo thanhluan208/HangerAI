@@ -86,9 +86,9 @@ const SideBarToolItem = ({ content, level }) => {
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
-                    [theme.breakpoints.down("xl")]: {
-                      maxWidth: `calc(170px / 1496 * ${windowWidth})`,
-                    },
+                    // [theme.breakpoints.down("xl")]: {
+                    //   maxWidth: `calc(170px / 1496 * ${windowWidth})`,
+                    // },
                   }}
                 >
                   {title}

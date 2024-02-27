@@ -8,105 +8,93 @@ export const nav = [
         title: "Virtual Dressing Room",
         id: Math.random().toString(),
         path: "virtual-dressing-room",
-        
+
       },
       {
-        title: "AI Photoshoots Studio Design",
+        title: "Virtual Model",
+        id: Math.random().toString(),
+        path: "virtual-model",
+
+      },
+      {
+        title: "Virtual Try On (Coming)",
+        id: Math.random().toString(),
+        path: "virtual-try-on",
+
+      },
+      {
+        title: "Image Editing",
         id: Math.random().toString(),
 
-        path: "virtual-photoshoot-studio",
+        path: "image-editing",
         children: [
-          {
-            title: "Virtual Try-on",
-            id: Math.random().toString(),
-
-            path: "virtual-photoshoot-studio/virtual",
-          },
-          {
-            title: "Upscale Image",
-            id: Math.random().toString(),
-
-            path: "virtual-photoshoot-studio/photoshoot",
-          },
           {
             title: "Background Generator",
             id: Math.random().toString(),
 
-            path: "virtual-photoshoot-studio/studio",
-          },
-          {
-            title: "Image Recolor",
-            id: Math.random().toString(),
-
-            path: "virtual-photoshoot-studio/studio",
+            path: "image-editing/background-generator",
           },
           {
             title: "Image Inpainting",
             id: Math.random().toString(),
 
-            path: "virtual-photoshoot-studio/studio",
+            path: "image-editing/image-inpainting",
           },
           {
-            title: "Magic Eraser",
+            title: "Image Recolor (Coming)",
             id: Math.random().toString(),
 
-            path: "virtual-photoshoot-studio/studio",
+            path: "image-editing/image-recolor",
+          },
+          {
+            title: "Magic Eraser (Coming)",
+            id: Math.random().toString(),
+
+            path: "image-editing/magic-eraser",
+          },
+          {
+            title: "Upscale Image (Coming)",
+            id: Math.random().toString(),
+
+            path: "image-editing/upscale-image",
           },
         ],
       },
-      
+
       {
-        title: "AI Content Writing",
+        title: "Image Content Writing",
         id: Math.random().toString(),
 
-        path: "product-tagging",
+        path: "image-content-writing",
         children: [
           {
-            title: "AI Product Descriptions",
+            title: "Image Product Descriptions",
             id: Math.random().toString(),
 
-            path: "product-recommendation",
-          },
-          {
-            title: "Product Tagging",
-            id: Math.random().toString(),
-
-            path: "product-tagging/tagging",
-          },
-          {
-            title: "Website/SEO",
-            id: Math.random().toString(),
-
-            path: "product-tagging/tagging",
-          },
-          {
-            title: "Communications",
-            id: Math.random().toString(),
-
-            path: "product-tagging/tagging",
+            path: "image-content-writing/product-descriptions",
           },
           {
             title: "Social Media Marketing",
             id: Math.random().toString(),
 
-            path: "product-tagging/tagging",
+            path: "image-content-writing/social-media-marketing",
           },
+          {
+            title: "Website/SEO",
+            id: Math.random().toString(),
 
+            path: "image-content-writing/website-seo",
+          },
         ],
+      },
+      {
+        title: "Product Tagging",
+        id: Math.random().toString(),
+        path: "product-tagging",
+
       },
     ],
     id: Math.random().toString(),
   },
-  {
-    title: "Workspace",
-    id: Math.random().toString(),
-  },
-  {
-    title: "Account",
-    id: Math.random().toString(),
-  },
-  {
-    title: "Help",
-    id: Math.random().toString(),
-  },
+  
 ];

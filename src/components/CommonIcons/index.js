@@ -28,6 +28,8 @@ import {
   FaMoneyBill,
   FaUserGroup,
   FaLock,
+  FaChevronRight,
+  FaRegCopy,
 } from "react-icons/fa6";
 import { CiSettings } from "react-icons/ci";
 import { AiOutlineInfoCircle } from "react-icons/ai";
@@ -60,6 +62,7 @@ const CommonIcons = {
   Add: MdOutlineAdd,
   Stats: IoIosStats,
   LeftArrow: FaChevronLeft,
+  RightArrow: FaChevronRight,
   User: FaUser,
   Facebook: FaFacebookF,
   Setting: CiSettings,
@@ -70,6 +73,7 @@ const CommonIcons = {
   Sun: LuSun,
   Moon: LuMoon,
   Wand: FaWandMagicSparkles,
+  Copy: FaRegCopy,
 };
 
 export default CommonIcons;

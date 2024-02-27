@@ -20,6 +20,7 @@ import FacebookPost from "./screen/FacebookPost";
 import UserProfile from "./screen/UserProfile";
 import VirtualPhotoshoot from "./screen/VirtualPhotoshoot";
 import VirtualDressingRoom from "./screen/VirtualDressingRoom";
+import VirtualModel from "./screen/VirtualModel";
 
 const socket = io("https://a512-123-25-21-211.ngrok-free.app", {
   retries: 0,
@@ -57,14 +58,18 @@ const App = () => {
       element: <DefaultLayout />,
       children: [
         {
-          path: "virtual-photoshoot-studio/photoshoot",
+          path: "/virtual-photoshoot-studio/background-generator",
           element: <VirtualPhotoshoot />,
+        },
+        {
+          path: "/virtual-model",
+          element: <VirtualModel />,
         },
         {
           path: "virtual-dressing-room/dressing",
           element: <VirtualDressingRoom />,
         },
-        
+
         {
           path: "user-profile",
           element: <UserProfile />,
@@ -78,9 +83,18 @@ const App = () => {
           element: <Home />,
         },
         {
-          path: "/product-recommendation",
+          path: "/image-content-writing/product-descriptions",
           element: <ProductDescriptionGenerate />,
         },
+        {
+          path: "/image-content-writing/social-media-marketing",
+          element: <ProductDescriptionGenerate />,
+        },
+        {
+          path: "/image-content-writing/website-seo",
+          element: <ProductDescriptionGenerate />,
+        },
+
         {
           path: "*",
           element: <VirtualTryOn />,

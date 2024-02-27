@@ -8,6 +8,7 @@ import BrandLogo from "../../../../components/CommonStyles/BrandLogo";
 import { MdClose } from "react-icons/md";
 import PerfectScrollBar from "react-perfect-scrollbar";
 import SidebarChat from "./SidebarChat";
+import CommonIcons from "../../../../components/CommonIcons";
 
 const ChatImage = () => {
     // State
@@ -48,15 +49,16 @@ const ChatImage = () => {
     const scrollbarRef = useRef(null);
     const handleSendMessage = async (values, { resetForm, setSubmitting }) => {
         setSubmitting(true)
-        setMessages(prev => [...prev, { type: "sender", message: values.message }])
-        resetForm()
+        setMessages(prev => [...prev, { type: "sender", message: values.message, image: imagePreview }])
+        resetForm();
+        setImagePreview(null)
         setSubmitting(false)
-        
+
 
     }
     useLayoutEffect(() => {
-        scrollEl?.scrollTo(0,scrollEl.scrollHeight);
-    },[messages])
+        scrollEl?.scrollTo(0, scrollEl.scrollHeight);
+    }, [messages])
     const validate = (values) => {
         const errors = {};
 
@@ -83,9 +85,6 @@ const ChatImage = () => {
 
                 }}
             >
-
-
-
                 <CommonStyles.Box
 
                     sx={{
@@ -122,7 +121,7 @@ const ChatImage = () => {
 
                                 sx={{
                                     padding: "20px",
-                                    height: "50vh",
+                                    height: "40vh",
                                     margin: "20px 0"
                                 }}
                             >
@@ -145,7 +144,7 @@ const ChatImage = () => {
                                 </CommonStyles.Box>)}
                                 {messages.map((message, index) => (
                                     <div key={index}>
-                                        <Message type="sender" message={message.message} />
+                                        <Message type="sender" message={message.message} image={message.image} />
                                         <Message type="receiver" message={message.message} />
                                     </div>
 
@@ -164,17 +163,6 @@ const ChatImage = () => {
                             }}
                         >
                             <Form>
-                                {imagePreview === null && (<CommonStyles.Box
-                                    centered
-                                    sx={{
-                                        margin: "20px 0"
-                                    }}
-                                >
-                                    <CommonStyles.Button>
-                                        <label htmlFor="fileImage" >Upload Image</label>
-                                    </CommonStyles.Button>
-                                    <Field id="fileImage" name="file" type="file" hidden onChange={handleFileChange} />
-                                </CommonStyles.Box>)}
                                 {imagePreview && (<CommonStyles.Box
                                     sx={{
                                         display: "flex",
@@ -211,9 +199,29 @@ const ChatImage = () => {
                                     sx={{
                                         display: "flex",
                                         gap: "10px",
-                                        alignItems: "center"
+                                        alignItems: "center",
+                                        pt:3
                                     }}
                                 >
+                                    {imagePreview === null && (<CommonStyles.Box
+                                        centered
+                                        sx={{
+                                            margin: "20px 0"
+                                        }}
+                                    >
+                                        <CommonStyles.Button
+                                            sx={{
+                                                borderRadius: "50%",
+                                                p:1,
+                                                minWidth: "unset",
+                                                
+                                            }}
+                                        >
+                                            <label htmlFor="fileImage" style={{height:"19px"}}><CommonIcons.Add/></label>
+                                            
+                                        </CommonStyles.Button>
+                                        <Field id="fileImage" name="file" type="file" hidden onChange={handleFileChange} />
+                                    </CommonStyles.Box>)}
                                     <Field
                                         name="message"
                                         label="Enter Your Message"
@@ -227,21 +235,12 @@ const ChatImage = () => {
                                                 submitForm()
                                             }
                                         }}
-                                        disabled={imagePreview === null ? true : false}
                                         onBlur={() => {
                                             const { setFieldError } = formikRef.current;
                                             setFieldError("message", null)
                                         }}
 
                                     ></Field>
-
-
-                                    <CommonStyles.Button
-                                        type="submit"
-                                        disabled={imagePreview === null ? true : false}
-                                    >
-                                        Send
-                                    </CommonStyles.Button>
                                 </CommonStyles.Box>
                             </Form>
                         </Formik>
