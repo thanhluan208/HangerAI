@@ -21,6 +21,7 @@ import UserProfile from "./screen/UserProfile";
 import VirtualPhotoshoot from "./screen/VirtualPhotoshoot";
 import VirtualDressingRoom from "./screen/VirtualDressingRoom";
 import VirtualModel from "./screen/VirtualModel";
+import ChatImage from "./screen/ProductImageChat"
 
 const socket = io("https://a512-123-25-21-211.ngrok-free.app", {
   retries: 0,
@@ -58,7 +59,7 @@ const App = () => {
       element: <DefaultLayout />,
       children: [
         {
-          path: "/virtual-photoshoot-studio/background-generator",
+          path: "/product-images-editing/background-generator",
           element: <VirtualPhotoshoot />,
         },
         {
@@ -66,7 +67,7 @@ const App = () => {
           element: <VirtualModel />,
         },
         {
-          path: "virtual-dressing-room/dressing",
+          path: "/virtual-dressing-room",
           element: <VirtualDressingRoom />,
         },
 
@@ -83,18 +84,21 @@ const App = () => {
           element: <Home />,
         },
         {
-          path: "/image-content-writing/product-descriptions",
+          path: "/product-content-writing/product-descriptions",
           element: <ProductDescriptionGenerate />,
         },
         {
-          path: "/image-content-writing/social-media-marketing",
+          path: "/product-content-writing/image-social-media-marketing",
           element: <ProductDescriptionGenerate />,
         },
         {
-          path: "/image-content-writing/website-seo",
+          path: "/product-content-writing/image-website-seo",
           element: <ProductDescriptionGenerate />,
         },
-
+        {
+          path: "/product-image-chat",
+          element: <ChatImage />,
+        },
         {
           path: "*",
           element: <VirtualTryOn />,

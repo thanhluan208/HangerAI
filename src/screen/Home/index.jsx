@@ -4,7 +4,7 @@ import SectionCommon from "./Components/SectionCommon"
 import { Divider } from "@mui/material"
 import Documents from "./Components/Documents"
 import useFilter from "../../hooks/useFilter"
-import ChatImage from "./Components/Chat/ChatImages"
+import ChatImage from "../ProductImageChat"
 
 const section = [
   {
@@ -93,8 +93,8 @@ const section = [
         isPremium: true,
         isNew: true,
       },
-      
-      
+
+
     ],
   },
   {
@@ -145,7 +145,7 @@ const section = [
       },
     ],
   },
-  
+
 ]
 
 const Home = () => {
@@ -172,7 +172,7 @@ const Home = () => {
           flexDirection: "column",
         }}
       >
-        <ChatImage/>
+        {/* <Banner /> */}
         {section.map((item) => {
           return (
             <SectionCommon
@@ -184,8 +184,6 @@ const Home = () => {
           )
         })}
       </CommonStyles.Box>
-
-      <Documents />
     </CommonStyles.Box>
   )
 }

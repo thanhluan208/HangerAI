@@ -1,14 +1,14 @@
 import { FastField, Field, Form, Formik } from "formik";
-import CommonStyles from "../../../../components/CommonStyles";
+import CommonStyles from "../../components/CommonStyles";
 import { useTheme } from "@emotion/react";
-import CustomFields from "../../../../components/CustomFields";
+import CustomFields from "../../components/CustomFields";
 import React, { useEffect, useLayoutEffect, useRef } from "react";
-import Message from "./Message";
-import BrandLogo from "../../../../components/CommonStyles/BrandLogo";
+import Message from "../Home/Components/Chat/Message";
+import BrandLogo from "../../components/CommonStyles/BrandLogo";
 import { MdClose } from "react-icons/md";
 import PerfectScrollBar from "react-perfect-scrollbar";
-import SidebarChat from "./SidebarChat";
-import CommonIcons from "../../../../components/CommonIcons";
+import SidebarChat from "../Home/Components/Chat/SidebarChat";
+import CommonIcons from "../../components/CommonIcons";
 
 const ChatImage = () => {
     // State
@@ -200,7 +200,7 @@ const ChatImage = () => {
                                         display: "flex",
                                         gap: "10px",
                                         alignItems: "center",
-                                        pt:3
+                                        pt: 3
                                     }}
                                 >
                                     {imagePreview === null && (<CommonStyles.Box
@@ -212,13 +212,13 @@ const ChatImage = () => {
                                         <CommonStyles.Button
                                             sx={{
                                                 borderRadius: "50%",
-                                                p:1,
+                                                p: 1,
                                                 minWidth: "unset",
-                                                
+
                                             }}
                                         >
-                                            <label htmlFor="fileImage" style={{height:"19px"}}><CommonIcons.Add/></label>
-                                            
+                                            <label htmlFor="fileImage" style={{ height: "19px" }}><CommonIcons.Add /></label>
+
                                         </CommonStyles.Button>
                                         <Field id="fileImage" name="file" type="file" hidden onChange={handleFileChange} />
                                     </CommonStyles.Box>)}
