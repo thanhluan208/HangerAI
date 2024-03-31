@@ -4,14 +4,15 @@ import CommonIcons from "../../../components/CommonIcons";
 import { Paper } from "@mui/material";
 import { isEmpty } from "lodash";
 import { useTheme } from "@emotion/react";
+import {  useNavigate } from "react-router-dom";
 
 const ToolCard = ({ item }) => {
   //! State
   const theme = useTheme();
-  const { tag, title, description, imgSrc, isPremium, isNew } = item;
+  const navigate = useNavigate();
+  const { tag, title, description, imgSrc, isPremium, isNew ,href} = item;
 
   //! Function
-
   //! Render
   return (
     <CommonStyles.Box
@@ -22,15 +23,20 @@ const ToolCard = ({ item }) => {
         flexDirection: "column",
         justifyContent: "space-between",
         position: "relative",
-        background: theme.colors.custom.backgroundSecondary,
+        // background: theme.colors.custom.backgroundSecondary,
+        background: `url(${imgSrc})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
+        backgroundRepeat: "no-repeat",
         borderRadius: "10px",
         transition: "all .3s ease",
         "&:hover": {
           boxShadow: "5px 3px 5px rgba(0, 0, 0, 0.25)",
         },
       }}
+      onClick= {() => navigate(`/${href}`)}
     >
-      <CommonStyles.Box
+      {/* <CommonStyles.Box
         centered
         sx={{
           position: "absolute",
@@ -104,36 +110,46 @@ const ToolCard = ({ item }) => {
             }}
           />
         </CommonStyles.Box>
-      </CommonStyles.Box>
+      </CommonStyles.Box> */}
       <CommonStyles.Box>
         <CommonStyles.Box
           centered
           sx={{
-            gap: "15px",
-            justifyContent: "start",
+            // gap: "15px",
+            justifyContent: "space-between",
             flexWrap: "wrap",
-            paddingLeft: "80px",
+            // paddingLeft: "80px",
           }}
         >
           <CommonStyles.Typography type="boldText">
             {title}
           </CommonStyles.Typography>
+        
 
-          {isPremium && (
-            <CommonStyles.Chip
-              content="Premium"
-              activeBackground="#f7bb6a"
-              active
-            />
-          )}
+          <CommonStyles.Box
+            centered
+            sx={{
+              gap: "15px",
+              justifyContent: "space-around",
+              flexWrap: "wrap",
+              // paddingLeft: "80px",
+            }}>
+            {isPremium && (
+              <CommonStyles.Chip
+                content="Premium"
+                activeBackground="#f7bb6a"
+                active
+              />
+            )}
 
-          {isNew && (
-            <CommonStyles.Chip
-              content="New"
-              activeBackground="#4edffd"
-              active
-            />
-          )}
+            {isNew && (
+              <CommonStyles.Chip
+                content="New"
+                activeBackground="#4edffd"
+                active
+              />
+            )}
+          </CommonStyles.Box>
         </CommonStyles.Box>
 
         <CommonStyles.Box

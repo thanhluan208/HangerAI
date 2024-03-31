@@ -216,7 +216,8 @@ const ChatImage = () => {
                     alignItems: "center",
                     pt: 3,
                     position: "fixed",
-                    bottom: 38,
+                    bottom: 38, 
+                    width: "100%",
                   }}
                 >
                   {imagePreview === null && (
@@ -253,7 +254,7 @@ const ChatImage = () => {
                     fullWidth
                     multiline
                     placeholder="Message Hanger AI"
-                    style={{ width: "800px" }}
+                    style={{ width: "50%" }}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" && !e.shiftKey) {
                         e.preventDefault();

@@ -54,7 +54,7 @@ const DefaultLayout = (props) => {
         <PerfectScrollbar
           style={{
             maxHeight: "100vh",
-            width: open ? "335px" : "0vw",
+            width: open ? "260px" : "0vw",
             transition: "width 0.5s ease-in-out",
             borderRight: `2px solid ${theme.palette.divider}`,
           }}
@@ -83,7 +83,7 @@ const DefaultLayout = (props) => {
                 top: 0,
                 cursor: "pointer",
               }}
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/home")}
             >
               <CommonStyles.Typography
                 sx={{
@@ -122,7 +122,7 @@ const DefaultLayout = (props) => {
 
       <CommonStyles.Box
         sx={{
-          width: !open ? "100%" : "calc(100% - 335px)",
+          width: !open ? "100%" : "calc(100% - 260px)",
           display: "flex",
           flexDirection: "column",
           transition: "all 0.5s ease-in-out",
@@ -134,8 +134,8 @@ const DefaultLayout = (props) => {
         <CommonStyles.Box
           sx={{
             padding: "0px 20px",
-            width: "90%",
-            margin: "20px auto 0 auto",
+            width: "95%",
+            margin: "10px auto 10px auto",
             background: theme.colors.custom.backgroundSecondary,
             borderRadius: "8px",
             boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.4)",
@@ -153,6 +153,7 @@ const DefaultLayout = (props) => {
                 display: "flex",
                 gap: "30px",
                 alignItems: "center",
+                width: "100%",
                 svg: {
                   color: theme.colors.custom.text,
                   fontSize: "1.25rem",
@@ -170,23 +171,21 @@ const DefaultLayout = (props) => {
                   }}
                 />
               </IconButton>
-              <CommonStyles.Box
-                centered
+              <TextField
                 sx={{
+                  maxWidth: "600px",
+                  width: "100%",
                   input: {
                     padding: "0 12px !important",
                     height: "40px",
-                    width: "600px",
+                    width: "100%",
                     background: theme.colors.custom.background,
                     borderRadius: "10px !important",
                   },
                   fieldset: {
                     border: "none !important",
                   },
-                }}
-              >
-                <TextField placeholder="Search for a project, tools, projects, etc..." />
-              </CommonStyles.Box>
+                }} placeholder="Search for a project, tools, projects, etc..." />
             </CommonStyles.Box>
 
             <CommonStyles.Box centered>
