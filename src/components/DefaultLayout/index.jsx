@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useRef } from "react";
 import CommonStyles from "../CommonStyles";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { useTheme } from "@emotion/react";
@@ -7,9 +8,10 @@ import { IconButton, TextField } from "@mui/material";
 import CommonIcons from "../CommonIcons";
 import { Outlet, useNavigate } from "react-router-dom";
 import User from "./Components/User";
-import { useState } from "react";
 import SwitchTheme from "./Components/SwitchTheme";
 import BottomItem from "./Components/BottomItem";
+import TextUpgrade from "./Components/TextUpgrade";
+import PopUpgrade from "./Components/PopUpgrade";
 
 const headerHeight = "80px";
 
@@ -18,10 +20,26 @@ const DefaultLayout = (props) => {
   const theme = useTheme();
   const navigate = useNavigate();
   const [open, setOpen] = useState(true);
+  const [popUp, setPopUp] = useState(false);
 
-  //! Function
+  //! Effect
+  useEffect(() => {
+    const handleClickOutside = (event) => {
 
+      const popup = document.querySelector(".popup-money");
+      console.log("kt pop", popup.contains(event.target));
+      if (popup && !popup.contains(event.target)) {
+        setPopUp(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
   //! Render
+  console.log('lala', popUp);
   return (
     <CommonStyles.Box
       sx={{
@@ -106,6 +124,7 @@ const DefaultLayout = (props) => {
               })}
             </CommonStyles.Box>
             <CommonStyles.Box
+              className="popup-money"
               sx={{
                 display: "flex",
                 padding: "0px 15px 30px 15px",
@@ -114,7 +133,10 @@ const DefaultLayout = (props) => {
                 flex: 1,
               }}
             >
-              <BottomItem />
+              <BottomItem setPopUp={setPopUp} />
+              {popUp && (
+                <PopUpgrade setPopUp={setPopUp}/>
+              )}
             </CommonStyles.Box>
           </CommonStyles.Box>
         </PerfectScrollbar>
@@ -185,7 +207,9 @@ const DefaultLayout = (props) => {
                   fieldset: {
                     border: "none !important",
                   },
-                }} placeholder="Search for a project, tools, projects, etc..." />
+                }}
+                placeholder="Search for a project, tools, projects, etc..."
+              />
             </CommonStyles.Box>
 
             <CommonStyles.Box centered>
@@ -198,6 +222,8 @@ const DefaultLayout = (props) => {
           <Outlet />
         </PerfectScrollbar>
       </CommonStyles.Box>
+
+
     </CommonStyles.Box>
   );
 };

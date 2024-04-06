@@ -56,6 +56,10 @@ const App = () => {
       },
     },
     {
+      path: "/product-image-chat",
+      element: <ChatImage />,
+    },
+    {
       element: <DefaultLayout />,
       children: [
         {

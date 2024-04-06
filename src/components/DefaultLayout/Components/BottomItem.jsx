@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 import { Divider, IconButton } from "@mui/material";
 import EditImageButton from "./EditImageButton";
 
-const BottomItem = () => {
+const BottomItem = ({setPopUp}) => {
   //! State
   const pathName = useLocation().pathname;
   const theme = useTheme();
@@ -16,6 +16,10 @@ const BottomItem = () => {
   //! Render
   if (pathName.includes("product-recommendation")) {
     return <EditImageButton />;
+  }
+
+  const hanldeClick =() =>{
+    setPopUp(true)
   }
 
   return (
@@ -90,7 +94,7 @@ const BottomItem = () => {
           to create unlimited projects
         </CommonStyles.Typography>
 
-        <CommonStyles.Button sx={{ width: "100%" }}>
+        <CommonStyles.Button sx={{ width: "100%" }} onClick={hanldeClick}>
           Upgrade
         </CommonStyles.Button>
       </CommonStyles.Box>
