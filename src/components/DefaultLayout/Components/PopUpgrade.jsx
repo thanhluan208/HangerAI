@@ -71,16 +71,17 @@ const PopUpgrade = ({ setPopUp }) => {
             sx={{
                 backgroundColor: "#FFFFFF",
                 position: "fixed",
-                top: "10%",
                 zIndex: 10000000,
                 borderRadius: "6px",
                 '@media(min-width: 768px)': {
-                    left: "5%",
-                    right: "5%",
+                    left: "3%",
+                    right: "3%",
+                    top:"12%"
                     // Thêm các thuộc tính tại đây cho màn hình có độ rộng lớn hơn hoặc bằng 768px
                 },
                 '@media(min-width: 1025px)': {
                     left: "18%",
+                    top:"10%",
                     right: "18%",
                     // Thêm các thuộc tính tại đây cho màn hình có độ rộng lớn hơn hoặc bằng 768px
                 },

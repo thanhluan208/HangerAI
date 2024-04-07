@@ -9,7 +9,7 @@ const TextUpgrade = ({ items }) => { // Destructuring props here
         <CommonStyles.Box
             sx={{
                 display: "flex",
-                width:"27%",
+               
                 borderRadius: "6px",
                 marginLeft: "15px",
                 border: "1px solid rgb(214, 214, 214)",
@@ -18,6 +18,14 @@ const TextUpgrade = ({ items }) => { // Destructuring props here
                 '@media(max-width: 767px)':{
                     width:"94%",
                     marginBottom:"6px",
+                },
+                '@media(min-width: 768px)':{
+                    width:"33%",
+                    
+                },
+                '@media(min-width: 1025px)':{
+                    width:"27%",
+                    
                 }
             }}
         >
