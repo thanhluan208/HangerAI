@@ -54,7 +54,7 @@ const TextUpgrade = ({ items }) => { // Destructuring props here
                 {items.benefit}
             </CommonStyles.Typography>
             <div style={{ height: "1px", backgroundColor: "rgb(214, 214, 214)", width: "calc(100% + 32px)", marginLeft: "-16px" }}></div>
-            <ul style={{ color: "#000000", fontSize: "14px", padding: "0 0 0 20px" ,maxHeight:"300px", minHeight:"300px", overflowY: "auto"}}>
+            <ul style={{ color: "#000000", fontSize: "14px", fontFamily:"Roboto,Helvetica,Arial,sans-serif", padding: "0 0 0 20px" ,maxHeight:"300px", minHeight:"300px", overflowY: "auto"}}>
                 {items.description.map((desc, index) => (
                     <li key={index}>{desc}</li>
                 ))}

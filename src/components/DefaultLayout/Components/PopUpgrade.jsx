@@ -1,5 +1,6 @@
 
 import React from "react";
+import Modal from '@mui/material/Modal';
 import TextUpgrade from "./TextUpgrade"
 import CommonStyles from "../../CommonStyles";
 import CloseIcon from '@mui/icons-material/Close';
@@ -66,110 +67,114 @@ const PopUpgrade = ({ setPopUp }) => {
     return (
 
 
-        <CommonStyles.Box
-
-            sx={{
-                backgroundColor: "#FFFFFF",
-                position: "fixed",
-                zIndex: 10000000,
-                borderRadius: "6px",
-                '@media(min-width: 768px)': {
-                    left: "3%",
-                    right: "3%",
-                    top:"12%"
-                    // Thêm các thuộc tính tại đây cho màn hình có độ rộng lớn hơn hoặc bằng 768px
-                },
-                '@media(min-width: 1025px)': {
-                    left: "18%",
-                    top:"10%",
-                    right: "18%",
-                    // Thêm các thuộc tính tại đây cho màn hình có độ rộng lớn hơn hoặc bằng 768px
-                },
-                '@media(max-width: 767px)': {
-                    top:"1%",
-                    left: "1%",
-                    right: "1%",
-                    bottom:"1%",
-                    maxHeight:"100vh-2%",
-                    overflowY:"auto",
-                    // Thêm các thuộc tính tại đây cho màn hình có độ rộng lớn hơn hoặc bằng 768px
-                }
-
-
-            }}
-        >
+        <Modal
+            open={setPopUp}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description">
             <CommonStyles.Box
-                sx={{ backgroundColor: "#8A2EFF", padding: "12px", borderRadius: "6px 6px 0 0" }}
+                sx={{
+                    backgroundColor: "#FFFFFF",
+                    position: "fixed",
+                    zIndex: 10000000,
+                    borderRadius: "6px",
+                    '@media(min-width: 768px)': {
+                        left: "3%",
+                        right: "3%",
+                        top: "12%",
+                        // Thêm các thuộc tính tại đây cho màn hình có độ rộng lớn hơn hoặc bằng 768px
+                    },
+                    '@media(min-width: 1025px)': {
+                        left: "15%",
+                        top: "10%",
+                        right: "15%",
+                        // Thêm các thuộc tính tại đây cho màn hình có độ rộng lớn hơn hoặc bằng 768px
+                    },
+                    '@media(max-width: 767px)': {
+                        top: "1%",
+                        left: "1%",
+                        right: "1%",
+                        bottom: "1%",
+                        maxHeight: "100vh-2%",
+                        overflowY: "auto",
+                        // Thêm các thuộc tính tại đây cho màn hình có độ rộng lớn hơn hoặc bằng 768px
+                    }
+
+
+                }}
             >
-                <CommonStyles.Typography
-                    sx={{
-                        textAlign: "center",
-                        color: "#1A152E",
-                        fontSize: "12px"
-                    }}>
-                    Try Gen-2 today with special introductory pricing + 400 bonus credits when you upgrade
-                </CommonStyles.Typography>
-            </CommonStyles.Box>
-            <CommonStyles.Box sx={{ padding: "16px 26px 16px 16px", position: "relative" }}>
-                <CommonStyles.Typography
-                    sx={{
-                        textAlign: "center",
-                        color: "#2A2C3A",
-                        fontSize: "24px"
-                    }}>
-                    Choose a plan for B19DCCN459-Vũ Quang Ninh workspace
-                </CommonStyles.Typography>
-                <CloseIcon onClick={handleClick} sx={{ color: "#7C839C", position: "absolute", right: "10px", top: "10px" }} />
-
-                <CommonStyles.Box centered sx={{ padding: "16px" }}>
-                    <CommonStyles.Box centered
-                        sx={{ backgroundColor: "rgb(241, 241, 244)", width: "auto", borderRadius: "40px", }}
-                    >
-                        <CommonStyles.Button
-                            sx={{
-                                backgroundColor: "#15161A",
-                                borderRadius: "40px",
-                                minWidth: "110px",
-                                textAlign: "center",
-                                color: "#7C839C",
-                                fontSize: "11px"
-                            }}>
-                            Month
-                        </CommonStyles.Button>
-                        <CommonStyles.Button
-                            sx={{
-                                backgroundColor: "rgb(241, 241, 244)",
-                                textAlign: "center",
-                                borderRadius: "40px",
-                                minWidth: "110px",
-                                border: "0 !important",
-                                color: "#7C839C",
-                                fontSize: "11px"
-                            }}>
-                            Yearly-20% of
-                        </CommonStyles.Button>
-                    </CommonStyles.Box>
-
-                </CommonStyles.Box>
                 <CommonStyles.Box
-                    centered 
-                    sx={{
-                        '@media (max-width: 767px)':{   
-                            display:"block",
-                        }
-                    }}>
-                    {packages.map((item) => (
-                        <TextUpgrade items={item} />
-                    ))}
-                    <TextUpgrade />
-                </CommonStyles.Box>
-                <CommonStyles.Typography
-                    sx={{ color: "#7C839C", textAlign: "center", paddingTop: "10px" }}
+                    sx={{ backgroundColor: "#8A2EFF", padding: "12px", borderRadius: "6px 6px 0 0" }}
                 >
-                    Don't see what you need?
-                </CommonStyles.Typography>
+                    <CommonStyles.Typography
+                        sx={{
+                            textAlign: "center",
+                            color: "#1A152E",
+                            fontSize: "12px"
+                        }}>
+                        Try Gen-2 today with special introductory pricing + 400 bonus credits when you upgrade
+                    </CommonStyles.Typography>
+                </CommonStyles.Box>
+                <CommonStyles.Box sx={{ padding: "16px 26px 16px 16px", position: "relative" }}>
+                    <CommonStyles.Typography
+                        sx={{
+                            textAlign: "center",
+                            color: "#2A2C3A",
+                            fontSize: "24px"
+                        }}>
+                        Choose a plan for B19DCCN459-Vũ Quang Ninh workspace
+                    </CommonStyles.Typography>
+                    <CloseIcon onClick={handleClick} sx={{ color: "#7C839C", position: "absolute", right: "10px", top: "10px" }} />
+
+                    <CommonStyles.Box centered sx={{ padding: "16px" }}>
+                        <CommonStyles.Box centered
+                            sx={{ backgroundColor: "rgb(241, 241, 244)", width: "auto", borderRadius: "40px", }}
+                        >
+                            <CommonStyles.Button
+                                sx={{
+                                    backgroundColor: "#15161A",
+                                    borderRadius: "40px",
+                                    minWidth: "110px",
+                                    textAlign: "center",
+                                    color: "#7C839C",
+                                    fontSize: "11px"
+                                }}>
+                                Month
+                            </CommonStyles.Button>
+                            <CommonStyles.Button
+                                sx={{
+                                    backgroundColor: "rgb(241, 241, 244)",
+                                    textAlign: "center",
+                                    borderRadius: "40px",
+                                    minWidth: "110px",
+                                    border: "0 !important",
+                                    color: "#7C839C",
+                                    fontSize: "11px"
+                                }}>
+                                Yearly-20% of
+                            </CommonStyles.Button>
+                        </CommonStyles.Box>
+
+                    </CommonStyles.Box>
+                    <CommonStyles.Box
+                        centered
+                        sx={{
+                            '@media (max-width: 767px)': {
+                                display: "block",
+                            }
+                        }}>
+                        {packages.map((item) => (
+                            <TextUpgrade items={item} />
+                        ))}
+                        <TextUpgrade />
+                    </CommonStyles.Box>
+                    <CommonStyles.Typography
+                        sx={{ color: "#7C839C", textAlign: "center", paddingTop: "10px",fontSize:"12px" }}
+                    >
+                        Don't see what you need?
+                    </CommonStyles.Typography>
+                </CommonStyles.Box>
             </CommonStyles.Box>
-        </CommonStyles.Box>
+        </Modal>
 
 
     )

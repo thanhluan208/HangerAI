@@ -27,7 +27,6 @@ const DefaultLayout = (props) => {
     const handleClickOutside = (event) => {
 
       const popup = document.querySelector(".popup-money");
-      console.log("kt pop", popup.contains(event.target));
       if (popup && !popup.contains(event.target)) {
         setPopUp(false);
       }

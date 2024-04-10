@@ -103,7 +103,7 @@ const Output = () => {
         setValue(newValue);
     };
     const [show, setShow] = useState(false);
-    console.log("show" + show);
+    console.log("show " + show);
     const handleShow = (data) => {
         setShow(data)
     }
@@ -139,7 +139,7 @@ const Output = () => {
                         </Tabs>
                     </CommonStyles.Box>
 
-                    <CustomTabPanel value={value} index={0} images={savedImages}>
+                    <CustomTabPanel value={value} index={0} images={savedImages} handleOpen={handleOpen}>
                         Saved Images
                     </CustomTabPanel>
                     <CustomTabPanel value={value} index={1} images={bestExampleImages} handleOpen={handleOpen}>
