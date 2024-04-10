@@ -2,6 +2,18 @@ import CommonIcons from "../components/CommonIcons";
 
 export const nav = [
   {
+    title: "",
+    listContent: [
+      {
+        title: "Home",
+        id: Math.random().toString(),
+        path: "home",
+
+      },
+    ],
+    id: Math.random().toString()
+  },
+  {
     title: "Assets",
     listContent: [
       {

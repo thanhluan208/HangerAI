@@ -51,9 +51,13 @@ const App = () => {
       path: "/login",
       element: <Login />,
       loader: () => {
-        if (islogged) return redirect("/");
+        if (islogged) return redirect("/home");
         return null;
       },
+    },
+    {
+      path: "/product-image-chat",
+      element: <ChatImage />,
     },
     {
       element: <DefaultLayout />,
@@ -80,7 +84,7 @@ const App = () => {
           element: <FacebookPost />,
         },
         {
-          path: "/",
+          path: "/home",
           element: <Home />,
         },
         {

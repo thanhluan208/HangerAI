@@ -16,8 +16,9 @@ const section = [
         description:
           "lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
         tag: ["Customer support"],
-        imgSrc:
-          "https://app.hypotenuse.ai/static/media/instagram_new.4e71cb6e.svg",
+        imgSrc: "virtualmodel.png",
+        href: "virtual-dressing-room",
+
       },
       {
         title: "Visual Models",
@@ -25,9 +26,10 @@ const section = [
           "lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
         tag: ["Indentify"],
         imgSrc:
-          "https://app.hypotenuse.ai/static/media/instagram_new.4e71cb6e.svg",
+          "virtualmodel.png",
         isPremium: true,
         isNew: true,
+        href: "virtual-model",
       },
     ],
   },
@@ -41,7 +43,8 @@ const section = [
           "Try on clothes online and see how different outfits look on you.",
         tag: ["Customer support"],
         imgSrc:
-          "https://app.hypotenuse.ai/static/media/instagram_new.4e71cb6e.svg",
+          "virtualmodel.png",
+        href: "virtual-try-on",
       },
       {
         title: "Upscale Image",
@@ -49,9 +52,10 @@ const section = [
           "Boost resolution for pixel-perfect close-ups and model shots.",
         tag: ["Indentify"],
         imgSrc:
-          "https://app.hypotenuse.ai/static/media/instagram_new.4e71cb6e.svg",
+          "virtualmodel.png",
         isPremium: true,
         isNew: true,
+        href: "image-editing/upscale-image",
       },
       {
         title: "Background Generator",
@@ -59,9 +63,10 @@ const section = [
           "Generate custom backgrounds that complement the product",
         tag: ["Indentify"],
         imgSrc:
-          "https://app.hypotenuse.ai/static/media/instagram_new.4e71cb6e.svg",
+          "virtualmodel.png",
         isPremium: true,
         isNew: true,
+        href: "image-editing/background-generator",
       },
       {
         title: "Image Recolor",
@@ -69,9 +74,10 @@ const section = [
           "Find the perfect shade for your product.",
         tag: ["Indentify"],
         imgSrc:
-          "https://app.hypotenuse.ai/static/media/instagram_new.4e71cb6e.svg",
+          "virtualmodel.png",
         isPremium: true,
         isNew: true,
+        href: "image-editing/image-recolor",
       },
       {
         title: "Image Inpainting",
@@ -79,9 +85,10 @@ const section = [
           "Retouch image, remove and/or generate patterns on product.",
         tag: ["Indentify"],
         imgSrc:
-          "https://app.hypotenuse.ai/static/media/instagram_new.4e71cb6e.svg",
+          "virtualmodel.png",
         isPremium: true,
         isNew: true,
+        href: "image-editing/image-inpainting",
       },
       {
         title: "Magic Eraser",
@@ -89,9 +96,10 @@ const section = [
           "Remove distractions and unwanted objects.",
         tag: ["Indentify"],
         imgSrc:
-          "https://app.hypotenuse.ai/static/media/instagram_new.4e71cb6e.svg",
+          "virtualmodel.png",
         isPremium: true,
         isNew: true,
+        href: "image-editing/magic-eraser",
       },
 
 
@@ -107,8 +115,9 @@ const section = [
           "Automate product descriptions, enrich product catalog.",
         tag: ["Customer support"],
         imgSrc:
-          "https://app.hypotenuse.ai/static/media/instagram_new.4e71cb6e.svg",
+          "ProductDescription.png",
         isNew: true,
+        href: "image-content-writing/product-descriptions",
       },
       {
         title: "Product Tagging",
@@ -116,7 +125,8 @@ const section = [
           "Tame the inventories with smart tags for better shopping experience.",
         tag: ["Customer support"],
         imgSrc:
-          "https://app.hypotenuse.ai/static/media/instagram_new.4e71cb6e.svg",
+          "AutomaticTagging.png",
+        href: "product-tagging",
       },
       {
         title: "Website/SEO",
@@ -124,7 +134,8 @@ const section = [
           "Craft impactful copywriting & keywords for skyrocketing search visibility.",
         tag: ["Customer support"],
         imgSrc:
-          "https://app.hypotenuse.ai/static/media/instagram_new.4e71cb6e.svg",
+          "virtualmodel.png",
+        href: "image-content-writing/website-seo",
       },
       {
         title: "Communications",
@@ -132,7 +143,8 @@ const section = [
           "Make compelling emails, memos, and more.",
         tag: ["Customer support"],
         imgSrc:
-          "https://app.hypotenuse.ai/static/media/instagram_new.4e71cb6e.svg",
+          "virtualmodel.png",
+        href: "virtual-try-on",
       },
       {
         title: "Social Media Marketing",
@@ -140,8 +152,9 @@ const section = [
           "Transform product images into descriptive Facebook posts, ad copy,..",
         tag: ["Customer support"],
         imgSrc:
-          "https://app.hypotenuse.ai/static/media/instagram_new.4e71cb6e.svg",
+          "virtualmodel.png",
         isPremium: true,
+        href: "image-content-writing/social-media-marketing",
       },
     ],
   },
@@ -172,6 +185,56 @@ const Home = () => {
           flexDirection: "column",
         }}
       >
+        <CommonStyles.Box 
+          sx={{width:"100%", paddingLeft:"20px" }}
+        >
+          <CommonStyles.Typography
+            variant="h5"
+            component="h5"
+            sx={{
+              fontWeight: "bold",
+            }}
+          >
+            Home
+          </CommonStyles.Typography>
+        </CommonStyles.Box>
+        <CommonStyles.Box
+          sx={{
+            textAlign: "center",
+            padding: "60px 20px",
+            borderRadius: "10px",
+            width: "97%",
+            minHeight: '332px',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "space-around",
+            background: `url('virtualmodel.png')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center center",
+            backgroundRepeat: "no-repeat",
+
+          }}
+        >
+          <CommonStyles.Typography
+            variant="h4"
+            component="h4"
+            sx={{
+              fontWeight: "bold",
+            }}>
+            Bring your image to life with Gen‑2
+          </CommonStyles.Typography>
+          <CommonStyles.Typography type="boldText">
+            Generate video using text, image, or both
+          </CommonStyles.Typography>
+          <CommonStyles.ChipTwo
+            content="Start Generating"
+            activeBackground="#E52C69"
+            borderRadius="24px !important"
+            active
+          />
+
+        </CommonStyles.Box>
         {/* <Banner /> */}
         {section.map((item) => {
           return (

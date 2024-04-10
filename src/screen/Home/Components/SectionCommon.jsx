@@ -45,7 +45,6 @@ const VirtualSection = ({ sectionName, subtitle, tools }) => {
         >
           <Divider />
         </CommonStyles.Box>
-
         <CommonStyles.Box
           sx={{
             display: "grid",
@@ -54,6 +53,7 @@ const VirtualSection = ({ sectionName, subtitle, tools }) => {
             [theme.breakpoints.down("md")]: {
               gridTemplateColumns: "1fr",
             },
+            
           }}
         >
           {tools.map((item) => {
