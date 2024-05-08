@@ -64,29 +64,42 @@ const PopUpgrade = ({ setPopUp }) => {
         console.log('clkk');
         setPopUp(false)
     }
+    const handleClose =()=> (setPopUp(false))
     return (
 
 
         <Modal
+
             open={setPopUp}
+            onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description">
+
             <CommonStyles.Box
+                className="modal-popup"
+                onClick={(e) => {
+                    if (e.target.classList.contains("modal-popup")) {
+                        console.log('ky',e.target.classList.contains("modal-popup"));
+                        setPopUp(false)
+                    };
+                }}
                 sx={{
                     backgroundColor: "#FFFFFF",
                     position: "fixed",
-                    zIndex: 10000000,
+                    zIndex: 10000,
                     borderRadius: "6px",
                     '@media(min-width: 768px)': {
                         left: "3%",
                         right: "3%",
                         top: "12%",
+                        bottom: "12%",
                         // Thêm các thuộc tính tại đây cho màn hình có độ rộng lớn hơn hoặc bằng 768px
                     },
                     '@media(min-width: 1025px)': {
                         left: "15%",
-                        top: "10%",
+                        top: "2%",
                         right: "15%",
+                        bottom: "2%"
                         // Thêm các thuộc tính tại đây cho màn hình có độ rộng lớn hơn hoặc bằng 768px
                     },
                     '@media(max-width: 767px)': {
@@ -124,7 +137,7 @@ const PopUpgrade = ({ setPopUp }) => {
                         Choose a plan for B19DCCN459-Vũ Quang Ninh workspace
                     </CommonStyles.Typography>
                     <CloseIcon onClick={handleClick} sx={{ color: "#7C839C", position: "absolute", right: "10px", top: "10px" }} />
-
+{/* 
                     <CommonStyles.Box centered sx={{ padding: "16px" }}>
                         <CommonStyles.Box centered
                             sx={{ backgroundColor: "rgb(241, 241, 244)", width: "auto", borderRadius: "40px", }}
@@ -154,7 +167,7 @@ const PopUpgrade = ({ setPopUp }) => {
                             </CommonStyles.Button>
                         </CommonStyles.Box>
 
-                    </CommonStyles.Box>
+                    </CommonStyles.Box> */}
                     <CommonStyles.Box
                         centered
                         sx={{
@@ -168,7 +181,7 @@ const PopUpgrade = ({ setPopUp }) => {
                         <TextUpgrade />
                     </CommonStyles.Box>
                     <CommonStyles.Typography
-                        sx={{ color: "#7C839C", textAlign: "center", paddingTop: "10px",fontSize:"12px" }}
+                        sx={{ color: "#7C839C", textAlign: "center", paddingTop: "10px", fontSize: "12px" }}
                     >
                         Don't see what you need?
                     </CommonStyles.Typography>

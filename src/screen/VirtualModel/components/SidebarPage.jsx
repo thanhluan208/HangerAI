@@ -324,7 +324,7 @@ const SidebarPage = ({handleShow}) => {
 
                     }}
                 >
-                    <SidebarActive/>
+                     <SidebarActive/>
                 </CommonStyles.Box>
                 <CommonStyles.Box
                     sx={{

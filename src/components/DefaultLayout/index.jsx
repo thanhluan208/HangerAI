@@ -23,22 +23,22 @@ const DefaultLayout = (props) => {
   const [popUp, setPopUp] = useState(false);
 
   //! Effect
-  useEffect(() => {
-    const handleClickOutside = (event) => {
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
 
-      const popup = document.querySelector(".popup-money");
-      if (popup && !popup.contains(event.target)) {
-        setPopUp(false);
-      }
-    };
+  //     const popup = document.querySelector(".popup-money");
+  //     if (popup && !popup.contains(event.target)) {
+  //       setPopUp(false);
+  //     }
+  //   };
 
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-  //! Render
-  console.log('lala', popUp);
+  //   document.addEventListener("click", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("click", handleClickOutside);
+  //   };
+  // }, []);
+  // //! Render
+  // console.log('lala', popUp);
   return (
     <CommonStyles.Box
       sx={{
@@ -65,7 +65,10 @@ const DefaultLayout = (props) => {
           },
         }}
         onClick={(e) => {
-          if (e.target.classList.contains("click-away")) setOpen(false);
+          if (e.target.classList.contains("click-away")) {
+            console.log("kt click", e.target.classList.contains("click-away") );
+            setOpen(false)
+          };
         }}
       >
         <PerfectScrollbar
@@ -95,7 +98,7 @@ const DefaultLayout = (props) => {
                 maxHeight: headerHeight,
                 position: "sticky",
                 backdropFilter: "blur(100px)",
-                zIndex: 10000,
+                zIndex: 10,
                 padding: "20px",
                 top: 0,
                 cursor: "pointer",

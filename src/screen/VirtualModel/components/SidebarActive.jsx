@@ -106,7 +106,9 @@ const SidebarActive = () => {
     };
     const onDrop = useCallback(acceptedFiles => {
         const file = acceptedFiles[0];
+        console.log("kt file", file);
         const imagePreviewURL = URL.createObjectURL(file);
+        console.log("kt, file", imagePreviewURL);
         setImagePreview(imagePreviewURL);
 
     }, [])
