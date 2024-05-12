@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import CommonStyles from "../../../components/CommonStyles";
 import PerfectScrollBar from "react-perfect-scrollbar";
 import axios from 'axios';
+import { useDropzone } from "react-dropzone";
+import CommonIcons from "../../../components/CommonIcons";
 
 
 const listImages = [
@@ -162,26 +164,47 @@ const ImageBox = ({ isActive, imageModal }) => {
     const filteredImages = listImages.filter(image => image.id === isActive);
     const [data, setData] = useState(null);
     const [newData, setNewData] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null);
 
     const handleClick = (e) => {
         setNewData(e.target.src)
     }
-    console.log(newData, 'lll');
+    const onDrop = useCallback(acceptedFiles => {
+        const file = acceptedFiles[0];
+        // const imagePreviewURL = URL.createObjectURL(file);
+        setImagePreview(file);
+
+    }, [])
+    const { getRootProps, getInputProps } = useDropzone({ onDrop })
+    // useEffect(() => {
+    //     const bodyData = {
+    //         human_image: { imageModal },
+    //         cloth_image: { newData }
+    //     }
+
+    //     const bodyString = JSON.stringify(bodyData);
+    //     const headers = {
+    //         'Content-Type': 'application/json',
+    //         'Authorization': "Bearer " + localStorage.getItem("token"),
+    //     };
+    //     if (newData === null) return;
+    //     axios.post('https://api.runpod.ai/v2/hkr2lke3wootls/runsync', bodyString, { headers: headers })
+    //         .then(response => {
+    //             setData(response.output.results);
+    //             console.log('Data updated successfully');
+    //         })
+    //         .catch(error => {
+    //             console.error('Error updating data: ', error);
+    //         });
+    // }, [newData, imageModal]);
 
     useEffect(() => {
-        const bodyData={
-            human_image:{imageModal},
-            cloth_image:{newData}
-        }
-        
-        const bodyString = JSON.stringify(bodyData);
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': "Bearer "+ localStorage.getItem("token"),
+            'Authorization': "Bearer " + localStorage.getItem("token"),
         };
-        if(newData === null) return;
-
-        axios.post('https://api.runpod.ai/v2/hkr2lke3wootls/runsync', bodyString, { headers: headers })
+        // if (newData === null) return;
+        axios.post('https://api.runpod.ai/v2/hkr2lke3wootls/runsync', imagePreview, { headers: headers })
             .then(response => {
                 setData(response.output.results);
                 console.log('Data updated successfully');
@@ -189,7 +212,7 @@ const ImageBox = ({ isActive, imageModal }) => {
             .catch(error => {
                 console.error('Error updating data: ', error);
             });
-    }, [newData,imageModal]);
+    }, [imagePreview]);
 
     return (
         <PerfectScrollBar
@@ -205,6 +228,35 @@ const ImageBox = ({ isActive, imageModal }) => {
                     gap: "5px",
                 }}
             >
+                <CommonStyles.Box
+                    centered
+                    sx={{
+                        width: "100%",
+                        borderRadius: "8px",
+                        height: '200px',
+                        border: "1px dashed #7530fe",
+
+
+                    }}
+                    {...getRootProps()}
+                >
+                    <input {...getInputProps()} />
+                    {
+                        imagePreview ? ((<img src={imagePreview} alt="" width="100%" height="200px" style={{
+                            objectFit: "contain"
+                        }} />))
+                            :
+                            <CommonStyles.Box
+                                centered
+                            >
+                                <CommonIcons.Image fontSize="4rem" />
+                            </CommonStyles.Box>
+                    }
+
+
+
+
+                </CommonStyles.Box>
                 {filteredImages.map((image, index) => (
                     <div key={index}>
                         <img

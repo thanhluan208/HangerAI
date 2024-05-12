@@ -118,7 +118,7 @@ const VirtualDressingRoom = () => {
                     centered
                     sx={{height:"94%"}}
                     >
-                        <img src={imageModal} width={ openModal ===true ? "38%": "30%"} height="98%" style={{borderRadius:"6px"}} />
+                        <img src={imageModal} width="400rem" height="98%" style={{borderRadius:"6px"}} />
                     </CommonStyles.Box>
                 </CommonStyles.Box>
                 <CommonStyles.Box
@@ -195,8 +195,8 @@ const VirtualDressingRoom = () => {
                                             <CommonStyles.Typography
                                                 sx={{
                                                     textAlign: "center",
-                                                    fontSize: "10px",
-                                                    fontWeight: "700"
+                                                    fontSize: "12px",
+                                                    fontWeight: "500"
                                                 }}
                                             >
                                                 {item.title}
@@ -233,7 +233,7 @@ const VirtualDressingRoom = () => {
                                         width: "83%",
                                         input: {
                                             padding: "0 4px !important",
-                                            fontSize:"13px",
+                                            fontSize:"12px",
                                         },
                                         fieldset: {
                                             border: "none !important",
