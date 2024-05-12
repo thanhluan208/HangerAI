@@ -199,12 +199,13 @@ const ImageBox = ({ isActive, imageModal }) => {
     // }, [newData, imageModal]);
 
     useEffect(() => {
+
         const headers = {
             'Content-Type': 'application/json',
             'Authorization': "Bearer " + localStorage.getItem("token"),
         };
         // if (newData === null) return;
-        axios.post('https://api.runpod.ai/v2/hkr2lke3wootls/runsync', imagePreview, { headers: headers })
+        axios.post('https://api.runpod.ai/v2/hkr2lke3wootls/runsync', imagePreview, isActive,{ headers: headers })
             .then(response => {
                 setData(response.output.results);
                 console.log('Data updated successfully');
