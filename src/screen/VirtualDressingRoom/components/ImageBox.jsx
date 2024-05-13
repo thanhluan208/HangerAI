@@ -161,20 +161,25 @@ const listImages = [
 
 ]
 const ImageBox = ({ isActive, imageModal }) => {
-    const filteredImages = listImages.filter(image => image.id === isActive);
+    const [listImages, setListImage] = useState([])
     const [data, setData] = useState(null);
-    const [newData, setNewData] = useState(null);
+    const [newData, setNewData] = useState([]);
+    const [allData, setAllData] = useState([]);
     const [imagePreview, setImagePreview] = useState(null);
+    const filteredImages = allData.filter(image => image.type === isActive);
 
     const handleClick = (e) => {
         setNewData(e.target.src)
     }
     const onDrop = useCallback(acceptedFiles => {
         const file = acceptedFiles[0];
-        // const imagePreviewURL = URL.createObjectURL(file);
         setImagePreview(file);
 
     }, [])
+    const mockFunction = (inputURL) => {
+        let convertedURL = inputURL.replace(/^https:\/\/localhost:7238:/, 'http://26.105.105.31:8081');
+        return convertedURL;
+    }
     const { getRootProps, getInputProps } = useDropzone({ onDrop })
     // useEffect(() => {
     //     const bodyData = {
@@ -197,18 +202,35 @@ const ImageBox = ({ isActive, imageModal }) => {
     //             console.error('Error updating data: ', error);
     //         });
     // }, [newData, imageModal]);
+    useEffect(() => {
+        var jwtCode = 
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ1c2VyQGV4YW1wbGUuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImV4cCI6MTcxNTYxMzk0NywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzIzOCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcyMzgvIn0.Ex1Amfm7cljIckMdpbqRH-Cnu4WzP-mr61MxuTlDtrc";
+        const headers = {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': "Bearer " + jwtCode,
+        };
+        const formData= new FormData();
+        formData.append('File', imagePreview);
+        formData.append('Type', isActive);
+
+        if (imagePreview=== null) return;
+        axios.post('http://26.105.105.31:8081/api/Images/Upload', formData,{ headers: headers })
+            .then(response => {
+                setData(response);
+                console.log('Data updated successfully');
+            })
+            .catch(error => {
+                console.error('Error updating data: ', error);
+            });
+    }, [imagePreview]);
+
+
 
     useEffect(() => {
-
-        const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': "Bearer " + localStorage.getItem("token"),
-        };
-        // if (newData === null) return;
-        axios.post('https://api.runpod.ai/v2/hkr2lke3wootls/runsync', imagePreview, isActive,{ headers: headers })
+        axios.get('http://26.105.105.31:8081/api/Images/GetAlls')
             .then(response => {
-                setData(response.output.results);
-                console.log('Data updated successfully');
+                setAllData(response.data);
+                // console.log('Data updated successfully');
             })
             .catch(error => {
                 console.error('Error updating data: ', error);
@@ -262,13 +284,13 @@ const ImageBox = ({ isActive, imageModal }) => {
                     <div key={index}>
                         <img
                             onClick={(e) => handleClick(e)}
-                            src={image.path}
+                            src={mockFunction(image.filePath)}
                             alt={`image-${index}`}
                             width='100%'
                             height='200px'
                             style={{ borderRadius: "8px", cursor: "pointer" }} // Khoảng cách dưới của mỗi hình ảnh
                         />
-                        <CommonStyles.Typography sx={{ textAlign: " center", fontSize: "12px" }} >{image.name}</CommonStyles.Typography>
+                        <CommonStyles.Typography sx={{ textAlign: " center", fontSize: "12px" }} >{image.id}</CommonStyles.Typography>
                     </div>
                 ))}
             </CommonStyles.Box>
