@@ -66,7 +66,7 @@ const VirtualDressingRoom = () => {
     }
 
 
-    return (<>
+    return (
 
         <CommonStyles.Box
             centered
@@ -281,8 +281,7 @@ const VirtualDressingRoom = () => {
             </CommonStyles.Box>
 
         </CommonStyles.Box>
-
-    </>);
+    );
 }
 
 export default VirtualDressingRoom;
