@@ -68,7 +68,7 @@ const TextField = ({
         },
         "& label": {},
         "& input": {
-          padding:'10px 15px'
+          padding: "10px 15px",
         },
         ...sx,
       }}

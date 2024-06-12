@@ -45,7 +45,6 @@ const VirtualSection = ({ sectionName, subtitle, tools }) => {
         >
           <Divider />
         </CommonStyles.Box>
-
         <CommonStyles.Box
           sx={{
             display: "grid",

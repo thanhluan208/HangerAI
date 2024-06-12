@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useRef } from "react";
 import CommonStyles from "../CommonStyles";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { useTheme } from "@emotion/react";
@@ -7,9 +8,10 @@ import { IconButton, TextField } from "@mui/material";
 import CommonIcons from "../CommonIcons";
 import { Outlet, useNavigate } from "react-router-dom";
 import User from "./Components/User";
-import { useState } from "react";
 import SwitchTheme from "./Components/SwitchTheme";
 import BottomItem from "./Components/BottomItem";
+import TextUpgrade from "./Components/TextUpgrade";
+import PopUpgrade from "./Components/PopUpgrade";
 
 const headerHeight = "80px";
 
@@ -18,10 +20,26 @@ const DefaultLayout = (props) => {
   const theme = useTheme();
   const navigate = useNavigate();
   const [open, setOpen] = useState(true);
+  const [popUp, setPopUp] = useState(false);
 
-  //! Function
+  //! Effect
+  useEffect(() => {
+    const handleClickOutside = (event) => {
 
+      const popup = document.querySelector(".popup-money");
+      console.log("kt pop", popup.contains(event.target));
+      if (popup && !popup.contains(event.target)) {
+        setPopUp(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
   //! Render
+  console.log('lala', popUp);
   return (
     <CommonStyles.Box
       sx={{
@@ -54,7 +72,7 @@ const DefaultLayout = (props) => {
         <PerfectScrollbar
           style={{
             maxHeight: "100vh",
-            width: open ? "335px" : "0vw",
+            width: open ? "260px" : "0vw",
             transition: "width 0.5s ease-in-out",
             borderRight: `2px solid ${theme.palette.divider}`,
           }}
@@ -83,7 +101,7 @@ const DefaultLayout = (props) => {
                 top: 0,
                 cursor: "pointer",
               }}
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/home")}
             >
               <CommonStyles.Typography
                 sx={{
@@ -106,6 +124,7 @@ const DefaultLayout = (props) => {
               })}
             </CommonStyles.Box>
             <CommonStyles.Box
+              className="popup-money"
               sx={{
                 display: "flex",
                 padding: "0px 15px 30px 15px",
@@ -114,7 +133,10 @@ const DefaultLayout = (props) => {
                 flex: 1,
               }}
             >
-              <BottomItem />
+              <BottomItem setPopUp={setPopUp} />
+              {popUp && (
+                <PopUpgrade setPopUp={setPopUp}/>
+              )}
             </CommonStyles.Box>
           </CommonStyles.Box>
         </PerfectScrollbar>
@@ -122,7 +144,7 @@ const DefaultLayout = (props) => {
 
       <CommonStyles.Box
         sx={{
-          width: !open ? "100%" : "calc(100% - 335px)",
+          width: !open ? "100%" : "calc(100% - 260px)",
           display: "flex",
           flexDirection: "column",
           transition: "all 0.5s ease-in-out",
@@ -134,8 +156,8 @@ const DefaultLayout = (props) => {
         <CommonStyles.Box
           sx={{
             padding: "0px 20px",
-            width: "90%",
-            margin: "20px auto 0 auto",
+            width: "95%",
+            margin: "10px auto 10px auto",
             background: theme.colors.custom.backgroundSecondary,
             borderRadius: "8px",
             boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.4)",
@@ -153,6 +175,7 @@ const DefaultLayout = (props) => {
                 display: "flex",
                 gap: "30px",
                 alignItems: "center",
+                width: "100%",
                 svg: {
                   color: theme.colors.custom.text,
                   fontSize: "1.25rem",
@@ -170,13 +193,14 @@ const DefaultLayout = (props) => {
                   }}
                 />
               </IconButton>
-              <CommonStyles.Box
-                centered
+              <TextField
                 sx={{
+                  maxWidth: "600px",
+                  width: "100%",
                   input: {
                     padding: "0 12px !important",
                     height: "40px",
-                    width: "600px",
+                    width: "100%",
                     background: theme.colors.custom.background,
                     borderRadius: "10px !important",
                   },
@@ -184,9 +208,8 @@ const DefaultLayout = (props) => {
                     border: "none !important",
                   },
                 }}
-              >
-                <TextField placeholder="Search for a project, tools, projects, etc..." />
-              </CommonStyles.Box>
+                placeholder="Search for a project, tools, projects, etc..."
+              />
             </CommonStyles.Box>
 
             <CommonStyles.Box centered>
@@ -199,6 +222,8 @@ const DefaultLayout = (props) => {
           <Outlet />
         </PerfectScrollbar>
       </CommonStyles.Box>
+
+
     </CommonStyles.Box>
   );
 };
